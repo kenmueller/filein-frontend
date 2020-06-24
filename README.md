@@ -1,6 +1,8 @@
 # filein
 
-> Scaffolded by [next-firebase](https://www.npmjs.com/package/next-firebase)
+> Super fast file hosting, one drag away
+
+<https://file-in.web.app>
 
 ## Run dev server
 
