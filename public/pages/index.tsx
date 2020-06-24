@@ -37,8 +37,14 @@ const Home = () => {
 		setIsLoading(true)
 		
 		try {
-			copy(await uploadFile(file))
-			toast.success('Copied URL to clipboard')
+			const url = await uploadFile(file)
+			copy(url)
+			
+			toast.success(
+				<p onClick={() => window.open(url)}>
+					Copied URL to clipboard
+				</p>
+			)
 		} catch {
 			toast.error('Files must be under 10 GB')
 		}
