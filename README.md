@@ -4,14 +4,13 @@
 
 <https://file-in.web.app>
 
-## Run dev server
+## API
 
-```bash
-npm start
-```
+`POST https://file-in.web.app`
 
-## Deploy
+The request body should contain raw binary data (for example, a `Buffer` in Node.js).
 
-```bash
-npm run deploy
-```
+The MIME type is automatically detected, but as a fallback,
+you can pass in a `Content-Type` header if the MIME type couldn't be detected for some reason.
+
+The response is the file URL.
