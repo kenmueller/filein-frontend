@@ -1,0 +1,25 @@
+@use 'react-toastify/dist/ReactToastify';
+
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+body {
+	overflow: hidden;
+}
+
+body,
+.Toastify__toast-body {
+	font-family: Muli, Arial, Helvetica, sans-serif;
+}
+
+.Toastify__toast {
+	font-weight: bold;
+	padding-left: 16px;
+	border-radius: 5px;
+}

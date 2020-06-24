@@ -1,0 +1,18 @@
+$dimension: 40px;
+$border-width: 6px;
+
+.root {
+	width: $dimension;
+	height: $dimension;
+	border: $border-width solid transparent;
+	border-top: $border-width solid white;
+	border-right: $border-width solid white;
+	border-radius: 50%;
+	animation: load 0.3s linear infinite;
+}
+
+@keyframes load {
+	to {
+		transform: rotate(1turn);
+	}
+}

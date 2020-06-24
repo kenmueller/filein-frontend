@@ -1,0 +1,11 @@
+{
+	"name": "filein",
+	"scripts": {
+		"clean": "rm -rf public/.next public/out",
+		"predeploy": "npm run clean && npm run build -C public",
+		"deploy": "firebase deploy",
+		"postdeploy": "npm run clean",
+		"start": "npm run dev -C public"
+	},
+	"private": true
+}
