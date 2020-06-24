@@ -26,24 +26,28 @@ app.use(bodyParser.raw({
 }))
 
 app.post('/', async ({ body, headers }, res) => {
-	if (!(body instanceof Buffer)) {
-		res.status(400).send('The request body must be raw data')
-		return
-	}
-	
-	const id = nanoid(ID_LENGTH)
-	
-	await storage.file(`files/${id}`).save(body, {
-		public: true,
-		contentType: (await FileType.fromBuffer(body))?.mime ?? headers['content-type'],
-		metadata: {
-			cacheControl: 'public, max-age=31536000, s-maxage=31536000',
-			metadata: {
-				firebaseStorageDownloadTokens: uuid(),
-				size: body.length
-			}
+	try {
+		if (!(body instanceof Buffer)) {
+			res.status(400).send('The request body must be raw data')
+			return
 		}
-	})
-	
-	res.send(`https://firebasestorage.googleapis.com/v0/b/file-in.appspot.com/o/files%2F${id}?alt=media`)
+		
+		const id = nanoid(ID_LENGTH)
+		
+		await storage.file(`files/${id}`).save(body, {
+			public: true,
+			contentType: (await FileType.fromBuffer(body))?.mime ?? headers['content-type'],
+			metadata: {
+				cacheControl: 'public, max-age=31536000, s-maxage=31536000',
+				metadata: {
+					firebaseStorageDownloadTokens: uuid(),
+					size: body.length
+				}
+			}
+		})
+		
+		res.send(`https://firebasestorage.googleapis.com/v0/b/file-in.appspot.com/o/files%2F${id}?alt=media`)
+	} catch (error) {
+		res.status(500).json(error)
+	}
 })
