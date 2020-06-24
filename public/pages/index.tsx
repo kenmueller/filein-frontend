@@ -64,7 +64,7 @@ const Home = () => {
 				<meta
 					key="description"
 					name="description"
-					content="Upload your files with ease"
+					content="Super fast file hosting, one drag away"
 				/>
 				<title key="title">
 					Filein
