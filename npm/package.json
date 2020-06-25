@@ -6,10 +6,17 @@
 	"types": "types/index.d.ts",
 	"scripts": {
 		"build": "tsc",
+		"test": "jest --verbose tests",
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
 		"node-fetch": "^2.6.0"
+	},
+	"devDependencies": {
+		"@types/node": "^14.0.14",
+		"@types/node-fetch": "^2.5.7",
+		"jest": "^26.1.0",
+		"typescript": "^3.9.5"
 	},
 	"keywords": [
 		"filein",
@@ -18,10 +25,5 @@
 		"api"
 	],
 	"author": "Ken Mueller",
-	"license": "MIT",
-	"devDependencies": {
-		"@types/node": "^14.0.14",
-		"@types/node-fetch": "^2.5.7",
-		"typescript": "^3.9.5"
-	}
+	"license": "MIT"
 }

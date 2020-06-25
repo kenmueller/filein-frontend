@@ -22,7 +22,7 @@
 		],
 		"rewrites": [
 			{
-				"source": "**",
+				"source": "/upload",
 				"function": "app"
 			}
 		],

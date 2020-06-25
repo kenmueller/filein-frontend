@@ -1,15 +1,15 @@
 import fetch from 'node-fetch'
 
-import * as Filein from '../types'
+import type * as Filein from '../types'
 
 const URL_REGEX = /^https:\/\/storage\.googleapis\.com\/file\-in\.appspot\.com\/files\/([^\s\/]+)$/
 
-export const upload = async (
+const upload = async (
 	data: Buffer,
 	contentType?: string | null | undefined
 ): Promise<Filein.File> => {
 	const url = await (
-		await fetch('https://file-in.web.app', {
+		await fetch('https://file-in.web.app/upload', {
 			method: 'POST',
 			body: data,
 			headers: contentType
@@ -21,12 +21,12 @@ export const upload = async (
 	const id = urlToId(url)
 	
 	if (!id)
-		throw new Error('Unable to parse the file ID from the file URL')
+		throw new Error(`Unable to parse the file ID from the file URL "${url}"`)
 	
 	return { id, url, data }
 }
 
-export const download = async (id: string): Promise<Filein.File> => {
+const download = async (id: string): Promise<Filein.File> => {
 	const url = idToUrl(id)
 	
 	return {
@@ -36,10 +36,15 @@ export const download = async (id: string): Promise<Filein.File> => {
 	}
 }
 
-export const idToUrl = (id: string) =>
+const idToUrl = (id: string) =>
 	`https://storage.googleapis.com/file-in.appspot.com/files/${id}`
 
-export const urlToId = (url: string) =>
-	url.match(URL_REGEX)?.[1] ?? null
+const urlToId = (url: string) =>
+	url.match(URL_REGEX)?.[1] || null
 
 module.exports = upload
+
+module.exports.upload = upload
+module.exports.download = download
+module.exports.idToUrl = idToUrl
+module.exports.urlToId = urlToId

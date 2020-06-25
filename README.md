@@ -6,7 +6,7 @@
 
 ## API
 
-`POST https://file-in.web.app`
+`POST https://file-in.web.app/upload`
 
 The request body should contain raw binary data (for example, a `Buffer` in Node.js).
 

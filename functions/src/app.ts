@@ -25,7 +25,7 @@ app.use(bodyParser.raw({
 	limit: 10 * 1024 * 1024 * 1024 // 10 GB limit
 }))
 
-app.post('/', async ({ body, headers }, res) => {
+app.post('/upload', async ({ body, headers }, res) => {
 	try {
 		if (!(body instanceof Buffer)) {
 			res.status(400).send('The request body must be raw data')
