@@ -12,7 +12,7 @@ const newId = () =>
 	nanoid(ID_LENGTH)
 
 const fileUrl = (id: string) =>
-	`https://firebasestorage.googleapis.com/v0/b/file-in.appspot.com/o/files%2F${id}?alt=media`
+	`https://storage.googleapis.com/file-in.appspot.com/files/${id}`
 
 export default async (file: File) => {
 	const id = newId()

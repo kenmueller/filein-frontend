@@ -46,7 +46,7 @@ app.post('/', async ({ body, headers }, res) => {
 			}
 		})
 		
-		res.send(`https://firebasestorage.googleapis.com/v0/b/file-in.appspot.com/o/files%2F${id}?alt=media`)
+		res.send(`https://storage.googleapis.com/file-in.appspot.com/files/${id}`)
 	} catch (error) {
 		res.status(500).json(error)
 	}
