@@ -1,0 +1,27 @@
+{
+	"name": "filein",
+	"version": "1.0.0",
+	"description": "API for https://file-in.web.app",
+	"main": "src/index.js",
+	"types": "types/index.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"prepublishOnly": "npm run build"
+	},
+	"dependencies": {
+		"node-fetch": "^2.6.0"
+	},
+	"keywords": [
+		"filein",
+		"file",
+		"in",
+		"api"
+	],
+	"author": "Ken Mueller",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^14.0.14",
+		"@types/node-fetch": "^2.5.7",
+		"typescript": "^3.9.5"
+	}
+}

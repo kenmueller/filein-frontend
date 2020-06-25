@@ -1,0 +1,8 @@
+**/*.DS_Store
+node_modules/
+src/
+lib/**/*.map
+lib/tsconfig.tsbuildinfo
+.gitignore
+.npmignore
+README.md
