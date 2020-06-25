@@ -6,6 +6,12 @@
 
 ## API
 
+<https://www.npmjs.com/package/filein>
+
+```bash
+npm i filein
+```
+
 `POST https://file-in.web.app/upload`
 
 The request body should contain raw binary data (for example, a `Buffer` in Node.js).
