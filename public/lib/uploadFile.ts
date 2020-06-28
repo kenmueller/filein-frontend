@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid'
+import { getExtension } from 'mime'
 
 import firebase from './firebase'
 
@@ -15,14 +16,16 @@ const fileUrl = (id: string) =>
 	`https://storage.googleapis.com/file-in.appspot.com/files/${id}`
 
 export default async (file: File) => {
-	const id = newId()
+	const { name, type, size } = file
+	
+	const id = `${newId()}.${getExtension(type)}`
 	
 	await storage.child(`files/${id}`).put(file, {
-		contentType: file.type,
+		contentType: type,
 		cacheControl: 'public, max-age=31536000, s-maxage=31536000',
 		customMetadata: {
-			name: file.name,
-			size: file.size.toString()
+			name,
+			size: size.toString()
 		}
 	})
 	
