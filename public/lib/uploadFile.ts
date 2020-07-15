@@ -18,7 +18,12 @@ const fileUrl = (id: string) =>
 export default async (file: File) => {
 	const { name, type, size } = file
 	
-	const id = `${newId()}.${getExtension(type)}`
+	const indexOfDot = name.lastIndexOf('.')
+	const id = `${newId()}.${
+		~indexOfDot
+			? name.slice(indexOfDot + 1)
+			: getExtension(type)
+	}`
 	
 	await storage.child(`files/${id}`).put(file, {
 		contentType: type,
