@@ -1,11 +1,16 @@
-.root {
-	
-}
-
 .icon {
-	$dimension: 30px;
+	$dimension: 50px;
 	
 	width: $dimension;
 	height: $dimension;
 	border-radius: 5px;
+}
+
+.noImage {
+	background: transparentize(white, 0.9);
+}
+
+.name {
+	font-weight: 900;
+	color: white;
 }
