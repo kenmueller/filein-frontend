@@ -1,0 +1,29 @@
+.root {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px;
+	background: transparentize(white, 0.9);
+}
+
+.title {
+	font-weight: 900;
+	color: white;
+}
+
+.files {
+	padding: 8px 16px;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: 900;
+	color: white;
+	background: #051e34;
+	border-radius: 8px;
+	transition: color 0.3s, background 0.3s;
+	
+	&:hover,
+	&:focus {
+		color: #051e34;
+		background: white;
+	}
+}

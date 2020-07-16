@@ -6,17 +6,9 @@ $swap-y-offset: 80px;
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
-	padding: 30px;
 	cursor: default;
 	background: linear-gradient(to bottom, #a548e2, #5893eb);
 	outline: none;
-}
-
-.title {
-	height: 0;
-	font-size: 40px;
-	font-weight: 900;
-	color: white;
 }
 
 .content {

@@ -3,7 +3,7 @@ rules_version = '2'
 service firebase.storage {
 	match /b/{bucket}/o {
 		match /files/{file} {
-			allow read
+			allow read, delete
 			allow create: if request.resource.size <= 10 * 1024 * 1024 * 1024 // 10 GB limit
 		}
 	}
