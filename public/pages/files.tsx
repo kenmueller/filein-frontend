@@ -1,13 +1,13 @@
 import Head from 'next/head'
 
-import useFileCount from 'hooks/useFileCount'
+import useFiles from 'hooks/useFiles'
 import Navbar from 'components/Navbar'
 import FileList from 'components/FileList'
 
 import styles from 'styles/files.module.scss'
 
 const Files = () => {
-	const [fileCount, setFileCount] = useFileCount()
+	const [files, setFiles] = useFiles()
 	
 	return (
 		<>
@@ -25,9 +25,9 @@ const Files = () => {
 				<Navbar fileCount={null} />
 				<div className={styles.content}>
 					<h1 className={styles.title}>
-						My Files ({fileCount})
+						My Files ({files.length})
 					</h1>
-					<FileList />
+					<FileList files={files} setFiles={setFiles} />
 				</div>
 			</div>
 		</>

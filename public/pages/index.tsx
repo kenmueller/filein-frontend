@@ -7,7 +7,7 @@ import cx from 'classnames'
 
 import sleep from 'lib/sleep'
 import uploadFile from 'lib/uploadFile'
-import useFileCount from 'hooks/useFileCount'
+import useFiles from 'hooks/useFiles'
 import Navbar from 'components/Navbar'
 import Loader from 'components/Loader'
 import DropIcon from 'components/DropIcon'
@@ -17,7 +17,7 @@ import styles from 'styles/index.module.scss'
 const SWAP_ANIMATION_DURATION = 400
 
 const Home = () => {
-	const [fileCount, setFileCount] = useFileCount()
+	const [files, setFiles] = useFiles()
 	
 	const [isSwapping, setIsSwapping] = useState(false)
 	const [isLoading, _setIsLoading] = useState(false)
@@ -41,10 +41,15 @@ const Home = () => {
 		setIsLoading(true)
 		
 		try {
-			const url = await uploadFile(file)
+			const { id, url, image } = await uploadFile(file)
 			
 			copy(url)
-			setFileCount(count => count + 1)
+			setFiles(files => [{
+				id,
+				name: file.name,
+				url,
+				image
+			}, ...files])
 			
 			toast.success(
 				<p onClick={() => window.open(url)}>
@@ -78,7 +83,7 @@ const Home = () => {
 			</Head>
 			<div {...getRootProps()} className={styles.root}>
 				<input {...getInputProps({ multiple: false })} />
-				<Navbar fileCount={fileCount} />
+				<Navbar fileCount={files.length} />
 				<div className={cx(styles.content, {
 					[styles.contentSwapping]: isSwapping,
 					[styles.contentReady]: !isLoading

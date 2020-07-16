@@ -34,5 +34,9 @@ export default async (file: File) => {
 		}
 	})
 	
-	return fileUrl(id)
+	return {
+		id,
+		url: fileUrl(id),
+		image: type.startsWith('image/')
+	}
 }
