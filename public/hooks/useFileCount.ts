@@ -20,7 +20,8 @@ export default () => {
 				? count(oldCount)
 				: count
 			
-			localStorage.setItem(KEY, newCount.toString())
+			if (process.browser)
+				localStorage.setItem(KEY, newCount.toString())
 			
 			return newCount
 		})

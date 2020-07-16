@@ -1,0 +1,19 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background: linear-gradient(to bottom, #a548e2, #5893eb);
+}
+
+.content {
+	flex-grow: 1;
+	margin: 30px;
+	padding: 30px;
+	background: #051e34;
+	border-radius: 15px;
+}
+
+.title {
+	font-weight: 900;
+	color: white;
+}

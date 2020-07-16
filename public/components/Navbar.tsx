@@ -6,14 +6,19 @@ import styles from 'styles/Navbar.module.scss'
 const stopPropagation = (event: MouseEvent) =>
 	event.stopPropagation()
 
-const Navbar = ({ fileCount }: { fileCount: number }) => (
+const Navbar = ({ fileCount }: { fileCount: number | null }) => (
 	<div className={styles.root}>
-		<h1 className={styles.title}>
-			Filein
-		</h1>
-		<Link href="/files">
-			<a className={styles.files} onClick={stopPropagation}>
-				My Files ({fileCount})
+		<Link href="/">
+			<a className={styles.title} onClick={stopPropagation}>
+				Filein
+			</a>
+		</Link>
+		<Link href={fileCount === null ? '/' : '/files'}>
+			<a className={styles.action} onClick={stopPropagation}>
+				{fileCount === null
+					? 'Go Back'
+					: `My Files (${fileCount})`
+				}
 			</a>
 		</Link>
 	</div>
