@@ -52,9 +52,13 @@ const Home = () => {
 			}, ...files])
 			
 			toast.success(
-				<p onClick={() => window.open(url)}>
+				<a
+					className={styles.notificationLink}
+					href={url}
+					target="_blank"
+				>
 					Copied URL to clipboard
-				</p>
+				</a>
 			)
 		} catch {
 			toast.error('Files must be under 10 GB')
