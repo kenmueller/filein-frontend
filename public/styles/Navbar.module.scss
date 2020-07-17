@@ -1,3 +1,5 @@
+@use 'transitions';
+
 .root {
 	flex-shrink: 0;
 	display: flex;
@@ -23,6 +25,8 @@
 }
 
 .action {
+	@include transitions.lower-on-active;
+	
 	flex-shrink: 0;
 	padding: 8px 16px;
 	text-decoration: none;
@@ -31,7 +35,7 @@
 	color: white;
 	background: #051e34;
 	border-radius: 8px;
-	transition: color 0.3s, background 0.3s;
+	transition: color 0.3s, background 0.3s, transform 0.3s;
 	
 	&:hover,
 	&:focus {

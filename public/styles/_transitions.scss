@@ -1,0 +1,5 @@
+@mixin lower-on-active($amount: 2px) {
+	&:active {
+		transform: translateY($amount);
+	}
+}

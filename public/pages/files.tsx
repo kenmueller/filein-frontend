@@ -28,7 +28,11 @@ const Files = () => {
 					<h1 className={styles.title}>
 						My Files ({files.length})
 					</h1>
-					<FileList files={files} setFiles={setFiles} />
+					<FileList
+						className={styles.files}
+						files={files}
+						setFiles={setFiles}
+					/>
 				</div>
 			</div>
 			<ToastContainer className="toast" />
