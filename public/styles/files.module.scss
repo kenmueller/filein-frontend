@@ -11,9 +11,11 @@
 	padding: 30px;
 	background: #051e34;
 	border-radius: 15px;
+	overflow-y: auto;
 }
 
 .title {
+	margin-bottom: 30px;
 	font-weight: 900;
 	color: white;
 }

@@ -1,0 +1,36 @@
+.root {
+	position: relative;
+}
+
+.icon,
+.input {
+	color: white;
+}
+
+.icon {
+	position: absolute;
+	top: 11px;
+	left: 12px;
+}
+
+.input {
+	$vertical-padding: 10px;
+	
+	width: 100%;
+	padding: $vertical-padding 12px $vertical-padding 42px;
+	font-size: 18px;
+	font-weight: bold;
+	background: transparentize(white, 0.9);
+	border-radius: 8px;
+	outline: none;
+	transition: background 0.3s;
+	
+	&::placeholder {
+		color: transparentize(white, 0.5);
+	}
+	
+	&:hover,
+	&:focus {
+		background: transparentize(white, 0.8);
+	}
+}

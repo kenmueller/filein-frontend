@@ -28,7 +28,7 @@
 
 .name {
 	flex-grow: 1;
-	margin: 0 12px;
+	margin-left: 12px;
 }
 
 .nameInput {
@@ -61,15 +61,15 @@
 	align-items: center;
 	width: $dimension;
 	height: $dimension;
+	margin-left: 12px;
 	color: white;
 	border-radius: 8px;
 	outline: none;
 	transition: color 0.3s, background 0.3s;
-}
-
-.copyUrlButton,
-.downloadButton {
-	margin-right: 12px;
+	
+	@media (max-width: 400px) {
+		display: none;
+	}
 }
 
 .copyUrlButton {
