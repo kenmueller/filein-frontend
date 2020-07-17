@@ -20,7 +20,7 @@
 	flex-shrink: 0;
 	width: $dimension;
 	height: $dimension;
-	background-size: contain;
+	background-size: cover;
 	border-radius: 8px;
 	transition: opacity 0.3s, transform 0.3s;
 	
