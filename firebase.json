@@ -24,6 +24,10 @@
 			{
 				"source": "/upload",
 				"function": "app"
+			},
+			{
+				"source": "/download/*",
+				"function": "app"
 			}
 		],
 		"headers": [

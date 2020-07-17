@@ -25,9 +25,24 @@ app.use(bodyParser.raw({
 	limit: 10 * 1024 * 1024 * 1024 // 10 GB limit
 }))
 
-app.get('/download/:id', async ({ params: { id } }, res) =>
-	res.redirect(`https://storage.googleapis.com/file-in.appspot.com/files/${id}`)
-)
+app.get('/download/:id', async ({ params: { id } }, res) => {
+	try {
+		const file = storage.file(`files/${id}`)
+		
+		const [[{ contentType }], [data]] =
+			await Promise.all([
+				file.getMetadata(),
+				file.download()
+			])
+		
+		res
+			.header('Content-Type', contentType)
+			.send(data)
+	} catch (error) {
+		console.error(error)
+		res.status(500).json(error)
+	}
+})
 
 app.post('/upload', async ({ body, headers }, res) => {
 	try {
