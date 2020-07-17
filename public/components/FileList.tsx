@@ -11,17 +11,15 @@ export interface FileListProps {
 }
 
 const FileList = ({ files, setFiles }: FileListProps) => (
-	<table className={styles.root}>
-		<tbody>
-			{files.map(file => (
-				<FileRow
-					key={file.id}
-					file={file}
-					setFiles={setFiles}
-				/>
-			))}
-		</tbody>
-	</table>
+	<div className={styles.root}>
+		{files.map(file => (
+			<FileRow
+				key={file.id}
+				file={file}
+				setFiles={setFiles}
+			/>
+		))}
+	</div>
 )
 
 export default FileList

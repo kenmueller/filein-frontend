@@ -1,9 +1,25 @@
+.root {
+	display: flex;
+	align-items: center;
+	
+	&:not(:last-child) {
+		margin-bottom: 20px;
+	}
+}
+
 .icon {
 	$dimension: 50px;
 	
+	flex-shrink: 0;
 	width: $dimension;
 	height: $dimension;
-	border-radius: 5px;
+	background-size: contain;
+	border-radius: 8px;
+	transition: opacity 0.3s;
+	
+	&:hover {
+		opacity: 0.8;
+	}
 }
 
 .noImage {
@@ -11,6 +27,77 @@
 }
 
 .name {
-	font-weight: 900;
+	flex-grow: 1;
+	margin: 0 12px;
+}
+
+.nameInput {
+	width: 100%;
+	padding: 6px 10px;
+	font-size: 18px;
+	font-weight: bold;
 	color: white;
+	background: none;
+	border-radius: 5px;
+	outline: none;
+	transition: background 0.3s;
+	
+	&::placeholder {
+		color: tranpsarentize(white, 0.5);
+	}
+	
+	&:hover,
+	&:focus {
+		background: transparentize(white, 0.9);
+	}
+}
+
+.action {
+	$dimension: 40px;
+	
+	flex-shrink: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: $dimension;
+	height: $dimension;
+	color: white;
+	border-radius: 8px;
+	outline: none;
+	transition: color 0.3s, background 0.3s;
+}
+
+.copyUrlButton,
+.downloadButton {
+	margin-right: 12px;
+}
+
+.copyUrlButton {
+	background: #42c374;
+	
+	&:hover,
+	&:focus {
+		color: #42c374;
+		background: white;
+	}
+}
+
+.downloadButton {
+	background: #4355f9;
+	
+	&:hover,
+	&:focus {
+		color: #4355f9;
+		background: white;
+	}
+}
+
+.deleteButton {
+	background: #e53e3e;
+	
+	&:hover,
+	&:focus {
+		color: #e53e3e;
+		background: white;
+	}
 }

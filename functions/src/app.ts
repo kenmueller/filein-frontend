@@ -25,6 +25,10 @@ app.use(bodyParser.raw({
 	limit: 10 * 1024 * 1024 * 1024 // 10 GB limit
 }))
 
+app.get('/download/:id', async ({ params: { id } }, res) =>
+	res.redirect(`https://storage.googleapis.com/file-in.appspot.com/files/${id}`)
+)
+
 app.post('/upload', async ({ body, headers }, res) => {
 	try {
 		if (!(body instanceof Buffer)) {

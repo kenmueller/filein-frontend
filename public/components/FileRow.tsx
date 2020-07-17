@@ -1,6 +1,11 @@
 import { SetStateAction, useState, useCallback, ChangeEvent, FormEvent, useRef } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faDownload, faLink } from '@fortawesome/free-solid-svg-icons'
+import copy from 'copy-to-clipboard'
+import { toast } from 'react-toastify'
 import cx from 'classnames'
 
+import deleteFileFromStorage from 'lib/deleteFile'
 import { File } from 'hooks/useFiles'
 
 import styles from 'styles/FileRow.module.scss'
@@ -22,6 +27,9 @@ const FileRow = ({ file, setFiles }: FileRowProps) => {
 	const onNameSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		
+		if (!name)
+			return
+		
 		setFiles(files =>
 			files.map(_file => ({
 				..._file,
@@ -32,28 +40,62 @@ const FileRow = ({ file, setFiles }: FileRowProps) => {
 		nameInput.current.blur()
 	}, [setFiles, file.id, name])
 	
+	const copyUrl = useCallback(() => {
+		copy(file.url)
+		toast.success('Copied URL to clipboard')
+	}, [file.url])
+	
+	const deleteFile = useCallback(() => {
+		deleteFileFromStorage(file.id)
+		
+		setFiles(files =>
+			files.filter(({ id }) => id !== file.id)
+		)
+		
+		toast.success('Deleted file')
+	}, [setFiles, file.id])
+	
 	return (
-		<tr>
-			<td
+		<div className={styles.root}>
+			<a
+				href={file.url}
 				className={cx(styles.icon, {
 					[styles.noImage]: !file.image
 				})}
 				style={
 					file.image
-						? { background: `url(${file.url})` }
+						? { backgroundImage: `url(${file.url})` }
 						: undefined
 				}
 			/>
-			<td className={styles.name}>
-				<form onSubmit={onNameSubmit}>
-					<input
-						ref={nameInput}
-						value={name}
-						onChange={onNameChange}
-					/>
-				</form>
-			</td>
-		</tr>
+			<form className={styles.name} onSubmit={onNameSubmit}>
+				<input
+					ref={nameInput}
+					className={styles.nameInput}
+					value={name}
+					onChange={onNameChange}
+				/>
+			</form>
+			<button
+				className={cx(styles.action, styles.copyUrlButton)}
+				onClick={copyUrl}
+			>
+				<FontAwesomeIcon icon={faLink} width={20} />
+			</button>
+			<a
+				className={cx(styles.action, styles.downloadButton)}
+				href={`/download/${file.id}`}
+				download={file.name}
+			>
+				<FontAwesomeIcon icon={faDownload} width={20} />
+			</a>
+			<button
+				className={cx(styles.action, styles.deleteButton)}
+				onClick={deleteFile}
+			>
+				<FontAwesomeIcon icon={faTrash} width={16} />
+			</button>
+		</div>
 	)
 }
 

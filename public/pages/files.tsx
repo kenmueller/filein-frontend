@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { ToastContainer } from 'react-toastify'
 
 import useFiles from 'hooks/useFiles'
 import Navbar from 'components/Navbar'
@@ -30,6 +31,7 @@ const Files = () => {
 					<FileList files={files} setFiles={setFiles} />
 				</div>
 			</div>
+			<ToastContainer className="toast" />
 		</>
 	)
 }
