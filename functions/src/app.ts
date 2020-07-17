@@ -37,6 +37,7 @@ app.get('/download/:id', async ({ params: { id } }, res) => {
 		
 		res
 			.header('Content-Type', contentType)
+			.header('Cache-Control', 'public, max-age=31536000, s-maxage=31536000')
 			.send(data)
 	} catch (error) {
 		console.error(error)
