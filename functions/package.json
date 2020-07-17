@@ -26,7 +26,7 @@
 	"devDependencies": {
 		"@types/cors": "^2.8.6",
 		"@types/uuid": "^8.0.0",
-		"typescript": "^3.9.6"
+		"typescript": "^3.9.7"
 	},
 	"private": true
 }
