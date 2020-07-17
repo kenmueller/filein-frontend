@@ -23,7 +23,7 @@ const Files = () => {
 				</title>
 			</Head>
 			<div className={styles.root}>
-				<Navbar fileCount={null} />
+				<Navbar className={styles.navbar} fixed fileCount={null} />
 				<div className={styles.content}>
 					<h1 className={styles.title}>
 						My Files ({files.length})

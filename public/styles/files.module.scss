@@ -2,7 +2,13 @@
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
+	padding-top: 104px;
+	overflow-y: auto;
 	background: linear-gradient(to bottom, #a548e2, #5893eb);
+}
+
+.navbar {
+	z-index: 1;
 }
 
 .content {
@@ -11,7 +17,6 @@
 	padding: 30px;
 	background: #051e34;
 	border-radius: 15px;
-	overflow-y: auto;
 }
 
 .title {

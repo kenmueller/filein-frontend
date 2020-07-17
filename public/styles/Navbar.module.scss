@@ -7,6 +7,14 @@
 	background: transparentize(white, 0.9);
 }
 
+.fixed {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	backdrop-filter: blur(10px);
+}
+
 .title {
 	text-decoration: none;
 	font-size: 35px;
