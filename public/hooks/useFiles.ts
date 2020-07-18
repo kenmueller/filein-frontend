@@ -15,7 +15,12 @@ const getFiles = (): File[] => {
 	
 	const value = localStorage.getItem(KEY)
 	
-	return value ? JSON.parse(value) : []
+	return value
+		? JSON.parse(value).map((file: any) => ({
+			...file,
+			url: `https://storage.googleapis.com/file-in.appspot.com/files/${file.id}`
+		}))
+		: []
 }
 
 export default () => {
@@ -28,7 +33,12 @@ export default () => {
 				: files
 			
 			if (process.browser)
-				localStorage.setItem(KEY, JSON.stringify(newFiles))
+				localStorage.setItem(
+					KEY,
+					JSON.stringify(
+						newFiles.map(({ id, name, image }) => ({ id, name, image }))
+					)
+				)
 			
 			return newFiles
 		})
