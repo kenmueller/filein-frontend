@@ -15,7 +15,7 @@ const app = express()
 
 export default functions.https.onRequest(app)
 
-app.use(({ headers }, _, next) => {
+app.use(({ headers }, _res, next) => {
 	headers['content-type'] = headers['content-type'] ?? DEFAULT_CONTENT_TYPE
 	next()
 })
@@ -29,11 +29,10 @@ app.get('/download/:id', async ({ params: { id } }, res) => {
 	try {
 		const file = storage.file(`files/${id}`)
 		
-		const [[{ contentType }], [data]] =
-			await Promise.all([
-				file.getMetadata(),
-				file.download()
-			])
+		const [[{ contentType }], [data]] = await Promise.all([
+			file.getMetadata(),
+			file.download()
+		])
 		
 		res
 			.header('Content-Type', contentType)
