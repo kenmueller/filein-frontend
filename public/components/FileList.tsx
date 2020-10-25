@@ -2,6 +2,7 @@ import { SetStateAction, useState, useMemo } from 'react'
 import Link from 'next/link'
 import cx from 'classnames'
 
+import normalize from 'lib/normalize'
 import { File } from 'hooks/useFiles'
 import Search from './Search'
 import FileRow from './FileRow'
@@ -13,9 +14,6 @@ export interface FileListProps {
 	files: File[]
 	setFiles(files: SetStateAction<File[]>): void
 }
-
-const normalize = (str: string) =>
-	str.toLowerCase().replace(/\s+/g, '')
 
 const FileList = ({ className, files, setFiles }: FileListProps) => {
 	const [query, setQuery] = useState('')

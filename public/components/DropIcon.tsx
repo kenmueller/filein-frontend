@@ -2,7 +2,11 @@ import cx from 'classnames'
 
 import styles from 'styles/DropIcon.module.scss'
 
-const DropIcon = ({ isDragging }: { isDragging: boolean }) => (
+export interface DropIconProps {
+	isDragging: boolean
+}
+
+const DropIcon = ({ isDragging }: DropIconProps) => (
 	<div className={cx(styles.root, {
 		[styles.dragging]: isDragging
 	})} />

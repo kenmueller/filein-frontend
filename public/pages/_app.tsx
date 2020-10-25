@@ -1,9 +1,14 @@
+import { NextPage } from 'next'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { ToastContainer } from 'react-toastify'
+import { config } from '@fortawesome/fontawesome-svg-core'
 
 import 'styles/global.scss'
 
-const App = ({ Component, pageProps }: AppProps) => (
+config.autoAddCss = false
+
+const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 	<>
 		<Head>
 			<link
@@ -18,6 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => (
 			/>
 		</Head>
 		<Component {...pageProps} />
+		<ToastContainer />
 	</>
 )
 

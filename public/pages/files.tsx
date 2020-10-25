@@ -1,5 +1,5 @@
+import { NextPage } from 'next'
 import Head from 'next/head'
-import { ToastContainer } from 'react-toastify'
 
 import useFiles from 'hooks/useFiles'
 import Navbar from 'components/Navbar'
@@ -7,11 +7,11 @@ import FileList from 'components/FileList'
 
 import styles from 'styles/files.module.scss'
 
-const Files = () => {
+const Files: NextPage = () => {
 	const [files, setFiles] = useFiles()
 	
 	return (
-		<>
+		<div className={styles.root}>
 			<Head>
 				<meta
 					key="description"
@@ -22,21 +22,18 @@ const Files = () => {
 					My Files | Filein
 				</title>
 			</Head>
-			<div className={styles.root}>
-				<Navbar className={styles.navbar} fixed fileCount={null} />
-				<div className={styles.content}>
-					<h1 className={styles.title}>
-						My Files ({files.length})
-					</h1>
-					<FileList
-						className={styles.files}
-						files={files}
-						setFiles={setFiles}
-					/>
-				</div>
+			<Navbar className={styles.navbar} fixed fileCount={null} />
+			<div className={styles.content}>
+				<h1 className={styles.title}>
+					My Files ({files.length})
+				</h1>
+				<FileList
+					className={styles.files}
+					files={files}
+					setFiles={setFiles}
+				/>
 			</div>
-			<ToastContainer className="toast" />
-		</>
+		</div>
 	)
 }
 

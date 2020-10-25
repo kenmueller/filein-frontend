@@ -19,11 +19,7 @@ const Search = ({ className, placeholder, value, setValue }: SearchProps) => {
 	
 	return (
 		<div className={cx(styles.root, className)}>
-			<FontAwesomeIcon
-				className={styles.icon}
-				icon={faSearch}
-				width={20}
-			/>
+			<FontAwesomeIcon className={styles.icon} icon={faSearch} />
 			<input
 				className={styles.input}
 				placeholder={placeholder}

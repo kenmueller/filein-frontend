@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react'
+import { NextPage } from 'next'
 import Head from 'next/head'
 import { useDropzone } from 'react-dropzone'
 import copy from 'copy-to-clipboard'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import cx from 'classnames'
 
 import sleep from 'lib/sleep'
@@ -16,7 +17,7 @@ import styles from 'styles/index.module.scss'
 
 const SWAP_ANIMATION_DURATION = 400
 
-const Home = () => {
+const Home: NextPage = () => {
 	const [files, setFiles] = useFiles()
 	
 	const [isSwapping, setIsSwapping] = useState(false)
@@ -66,7 +67,7 @@ const Home = () => {
 	} = useDropzone({ onDrop })
 	
 	return (
-		<>
+		<div {...getRootProps()} className={styles.root}>
 			<Head>
 				<meta
 					key="description"
@@ -77,28 +78,25 @@ const Home = () => {
 					Filein
 				</title>
 			</Head>
-			<div {...getRootProps()} className={styles.root}>
-				<input {...getInputProps({ multiple: false })} />
-				<Navbar fileCount={files.length} />
-				<div className={cx(styles.content, {
-					[styles.contentSwapping]: isSwapping,
-					[styles.contentReady]: !isLoading
-				})}>
-					{isLoading
-						? <Loader />
-						: (
-							<>
-								<DropIcon isDragging={isDragActive} />
-								<h2 className={styles.contentTitle}>
-									Click or drag
-								</h2>
-							</>
-						)
-					}
-				</div>
+			<input {...getInputProps({ multiple: false })} />
+			<Navbar fileCount={files.length} />
+			<div className={cx(styles.content, {
+				[styles.contentSwapping]: isSwapping,
+				[styles.contentReady]: !isLoading
+			})}>
+				{isLoading
+					? <Loader />
+					: (
+						<>
+							<DropIcon isDragging={isDragActive} />
+							<h2 className={styles.contentTitle}>
+								Click or drag
+							</h2>
+						</>
+					)
+				}
 			</div>
-			<ToastContainer className="toast" />
-		</>
+		</div>
 	)
 }
 

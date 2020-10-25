@@ -16,8 +16,7 @@ export interface FileRowProps {
 }
 
 const FileRow = ({ file, setFiles }: FileRowProps) => {
-	const nameInput = useRef(null as HTMLInputElement | null)
-	
+	const nameInput = useRef<HTMLInputElement | null>(null)
 	const [name, setName] = useState(file.name)
 	
 	const onNameChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -80,20 +79,20 @@ const FileRow = ({ file, setFiles }: FileRowProps) => {
 				className={cx(styles.action, styles.copyUrlButton)}
 				onClick={copyUrl}
 			>
-				<FontAwesomeIcon icon={faLink} width={20} />
+				<FontAwesomeIcon icon={faLink} />
 			</button>
 			<a
 				className={cx(styles.action, styles.downloadButton)}
 				href={`/download/${file.id}`}
 				download={file.name}
 			>
-				<FontAwesomeIcon icon={faDownload} width={20} />
+				<FontAwesomeIcon icon={faDownload} />
 			</a>
 			<button
 				className={cx(styles.action, styles.deleteButton)}
 				onClick={deleteFile}
 			>
-				<FontAwesomeIcon icon={faTrash} width={16} />
+				<FontAwesomeIcon icon={faTrash} />
 			</button>
 		</div>
 	)

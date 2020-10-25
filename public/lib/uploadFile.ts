@@ -15,7 +15,7 @@ const newId = () =>
 const fileUrl = (id: string) =>
 	`https://storage.googleapis.com/file-in.appspot.com/files/${id}`
 
-export default async (file: File) => {
+const uploadFile = async (file: File) => {
 	const { name, type, size } = file
 	
 	const indexOfDot = name.lastIndexOf('.')
@@ -40,3 +40,5 @@ export default async (file: File) => {
 		image: type.startsWith('image/')
 	}
 }
+
+export default uploadFile
