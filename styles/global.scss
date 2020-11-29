@@ -1,13 +1,15 @@
 @use '~@fortawesome/fontawesome-svg-core/styles';
 @use '~react-toastify/dist/ReactToastify';
 
+@use 'colors';
+
 *,
 ::before,
 ::after {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: Muli, Arial, Helvetica, sans-serif;
+	font-family: Roboto, Arial, Helvetica, sans-serif;
 	border: none;
 }
 
@@ -15,12 +17,12 @@ body {
 	overscroll-behavior: none;
 }
 
-button {
-	cursor: pointer;
-}
-
 .Toastify__toast {
 	font-weight: bold;
 	padding-left: 16px;
 	border-radius: 5px;
+	
+	&--dark {
+		border: 1px solid colors.$dark-border;
+	}
 }

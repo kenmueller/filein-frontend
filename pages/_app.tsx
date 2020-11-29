@@ -11,15 +11,12 @@ config.autoAddCss = false
 const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 	<>
 		<Head>
+			<link key="fonts-googleapis-preconnect" rel="preconnect" href="https://fonts.googleapis.com" />
+			<link key="fonts-gstatic-preconnect" rel="preconnect" href="https://fonts.gstatic.com" />
 			<link
-				key="font-preconnect"
-				rel="preconnect"
-				href="https://fonts.gstatic.com"
-			/>
-			<link
-				key="muli-font"
+				key="roboto-stylesheet"
 				rel="stylesheet"
-				href="https://fonts.googleapis.com/css2?family=Muli:wght@400;700;900&display=swap"
+				href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
 			/>
 		</Head>
 		<Component {...pageProps} />
