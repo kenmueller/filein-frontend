@@ -1,0 +1,24 @@
+@use 'colors';
+
+.root {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 440px;
+	background: colors.$gradient;
+	z-index: -1;
+	transform: skewY(6deg);
+	transform-origin: top right;
+	
+	@media (min-width: 375px) { height: 450px; }
+	@media (min-width: 400px) { height: 475px; }
+	@media (min-width: 430px) { height: 500px; }
+	@media (min-width: 500px) { height: 550px; }
+	@media (min-width: 600px) { height: 600px; }
+	@media (min-width: 1075px) { height: 650px; }
+	@media (min-width: 1300px) { height: 730px; }
+	@media (min-width: 2000px) { height: 760px; }
+	@media (min-width: 2400px) { height: 820px; }
+	@media (min-width: 2800px) { height: 860px; }
+}

@@ -1,0 +1,31 @@
+@use 'sizes';
+@use 'colors';
+
+.header {
+	display: flex;
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	margin: 200px auto 0;
+}
+
+.article {
+	margin-right: 60px;
+	color: white;
+}
+
+.title {
+	line-height: 56px;
+	font-size: 50px;
+	font-weight: 900;
+}
+
+.subtitle {
+	margin-top: 12px;
+	line-height: 30px;
+	font-size: 24px;
+	font-weight: 900;
+}
+
+.recentlyUploadedFiles {
+	flex-grow: 1;
+}

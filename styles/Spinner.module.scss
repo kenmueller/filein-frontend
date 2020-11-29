@@ -1,0 +1,11 @@
+.root {
+	display: inline-block;
+	border-radius: 50%;
+	animation: spin 0.3s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(1turn);
+	}
+}

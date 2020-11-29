@@ -15,6 +15,7 @@
 
 body {
 	overscroll-behavior: none;
+	background: colors.$light;
 }
 
 .Toastify__toast {
@@ -23,6 +24,6 @@ body {
 	border-radius: 5px;
 	
 	&--dark {
-		border: 1px solid colors.$dark-border;
+		background: colors.$dark;
 	}
 }

@@ -1,0 +1,7 @@
+@mixin spinner($size, $thickness, $color) {
+	width: $size;
+	height: $size;
+	border: $thickness solid transparent;
+	border-top: $thickness solid $color;
+	border-right: $thickness solid $color;
+}

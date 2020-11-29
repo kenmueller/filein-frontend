@@ -1,0 +1,44 @@
+@use 'sizes';
+@use 'colors';
+
+.root {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	transition: background 0.3s;
+}
+
+.active {
+	background: white;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	height: sizes.$navbar-height;
+	margin: 0 auto;
+}
+
+.home {
+	text-decoration: none;
+	font-size: 30px;
+	font-weight: 900;
+	color: white;
+	transition: color 0.3s, transform 0.3s;
+	
+	.active & {
+		color: colors.$blue;
+	}
+	
+	&:hover {
+		text-decoration: underline;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}

@@ -4,6 +4,8 @@ import Head from 'next/head'
 import { ToastContainer } from 'react-toastify'
 import { config } from '@fortawesome/fontawesome-svg-core'
 
+import Navbar from 'components/Navbar'
+
 import 'styles/global.scss'
 
 config.autoAddCss = false
@@ -19,6 +21,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 				href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
 			/>
 		</Head>
+		<Navbar />
 		<Component {...pageProps} />
 		<ToastContainer />
 	</>
