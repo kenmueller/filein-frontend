@@ -8,7 +8,7 @@ import Footer from 'components/Footer'
 import styles from 'styles/Home.module.scss'
 
 const Home: NextPage = () => (
-	<>
+	<div className={styles.root}>
 		<Head>
 			<title key="title">filein</title>
 		</Head>
@@ -24,8 +24,8 @@ const Home: NextPage = () => (
 			</article>
 			<RecentlyUploadedFiles className={styles.recentlyUploadedFiles} />
 		</header>
-		<Footer />
-	</>
+		<Footer className={styles.footer} />
+	</div>
 )
 
 export default Home

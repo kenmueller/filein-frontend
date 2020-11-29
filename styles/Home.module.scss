@@ -1,6 +1,13 @@
 @use 'sizes';
 @use 'colors';
 
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+}
+
 .header {
 	display: flex;
 	max-width: sizes.$large-max-width;
@@ -28,4 +35,8 @@
 
 .recentlyUploadedFiles {
 	flex-grow: 1;
+}
+
+.footer {
+	margin-top: 30px;
 }
