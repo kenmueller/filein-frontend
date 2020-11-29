@@ -4,6 +4,8 @@ import cx from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 
+import UploadButton from './UploadButton'
+
 import styles from 'styles/Navbar.module.scss'
 
 const Navbar = () => {
@@ -24,10 +26,10 @@ const Navbar = () => {
 				<Link href="/">
 					<a className={styles.home}>filein</a>
 				</Link>
-				<button className={styles.upload}>
-					<FontAwesomeIcon className={styles.uploadIcon} icon={faUpload} />
+				<UploadButton className={styles.upload}>
+					<FontAwesomeIcon icon={faUpload} />
 					<p className={styles.uploadMessage}>Drag anywhere</p>
-				</button>
+				</UploadButton>
 			</nav>
 		</div>
 	)
