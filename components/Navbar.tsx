@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 
 import UploadButton from './UploadButton'
+import AuthButton from './AuthButton'
 
 import styles from 'styles/Navbar.module.scss'
 
@@ -30,6 +31,7 @@ const Navbar = () => {
 					<FontAwesomeIcon icon={faUpload} />
 					<p className={styles.uploadMessage}>Drag anywhere</p>
 				</UploadButton>
+				<AuthButton className={styles.auth} />
 			</nav>
 		</div>
 	)

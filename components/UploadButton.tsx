@@ -1,5 +1,5 @@
 import { PropsWithChildren, useCallback } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { useDropzone } from 'react-dropzone'
 
 import uploadFileState from 'state/uploadFile'
@@ -9,7 +9,7 @@ export interface UploadButtonProps extends PropsWithChildren<{}> {
 }
 
 const UploadButton = ({ className, children }: UploadButtonProps) => {
-	const [, uploadFile] = useRecoilState(uploadFileState)
+	const uploadFile = useSetRecoilState(uploadFileState)
 	
 	const onDrop = useCallback((files: File[]) => {
 		const file = files[0]

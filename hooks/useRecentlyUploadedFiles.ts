@@ -1,19 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 import { toast } from 'react-toastify'
 
-import FileMeta from 'models/FileMeta'
 import firebase from 'lib/firebase'
 import snapshotToFileMeta from 'lib/snapshotToFileMeta'
+import recentlyUploadedFilesState from 'state/recentlyUploadedFiles'
 
 import 'firebase/firestore'
 
 const firestore = firebase.firestore()
 
-const useRecentlyUploadedFiles = (limit: number = 50) => {
-	const [files, setFiles] = useState<FileMeta[] | null>(null)
+const useRecentlyUploadedFiles = () => {
+	const [files, setFiles] = useRecoilState(recentlyUploadedFilesState)
 	
-	useEffect(() => (
-		firestore.collection('files').limit(limit).onSnapshot(
+	useEffect(() => {
+		if (files !== undefined)
+			return
+		
+		setFiles(null)
+		
+		firestore.collection('files').limit(50).onSnapshot(
 			snapshot => {
 				setFiles(files => files ?? [])
 				
@@ -41,7 +47,7 @@ const useRecentlyUploadedFiles = (limit: number = 50) => {
 			},
 			({ message }) => toast.error(message)
 		)
-	), [limit, setFiles])
+	}, [files, setFiles])
 	
 	return files
 }
