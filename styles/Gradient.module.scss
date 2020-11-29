@@ -1,10 +1,16 @@
 @use 'colors';
 
 .root {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+	display: grid;
+}
+
+.background,
+.foreground {
+	grid-row: 1;
+	grid-column: 1;
+}
+
+.background {
 	height: 440px;
 	background: colors.$gradient;
 	z-index: -1;

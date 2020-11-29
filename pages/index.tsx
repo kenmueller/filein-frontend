@@ -12,8 +12,7 @@ const Home: NextPage = () => (
 		<Head>
 			<title key="title">filein</title>
 		</Head>
-		<Gradient />
-		<header className={styles.header}>
+		<Gradient className={styles.header}>
 			<article className={styles.article}>
 				<h1 className={styles.title}>
 					The best way to share files
@@ -23,7 +22,7 @@ const Home: NextPage = () => (
 				</p>
 			</article>
 			<RecentlyUploadedFiles className={styles.recentlyUploadedFiles} />
-		</header>
+		</Gradient>
 		<Footer className={styles.footer} />
 	</div>
 )

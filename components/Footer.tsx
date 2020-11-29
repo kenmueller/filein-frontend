@@ -9,14 +9,21 @@ export interface FooterProps {
 }
 
 const Footer = ({ className }: FooterProps) => (
-	<footer className={cx(styles.root, className)}>
-		<a href="https://github.com/kenmueller/filein" rel="noopener noreferrer" target="_blank">
-			<FontAwesomeIcon icon={faGithub} />
-		</a>
-		<p className={styles.copyright}>
-			Copyright &copy; 2020 filein Inc. All rights reserved.
-		</p>
-	</footer>
+	<div className={cx(styles.root, className)}>
+		<footer className={styles.content}>
+			<a
+				className={styles.link}
+				href="https://github.com/kenmueller/filein"
+				rel="noopener noreferrer"
+				target="_blank"
+			>
+				<FontAwesomeIcon className={styles.icon} icon={faGithub} />
+			</a>
+			<p className={styles.copyright}>
+				Copyright &copy; 2020 <b>filein</b>. All rights reserved.
+			</p>
+		</footer>
+	</div>
 )
 
 export default Footer

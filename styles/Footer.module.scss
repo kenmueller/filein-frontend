@@ -1,0 +1,37 @@
+@use 'sizes';
+@use 'colors';
+
+.root {
+	padding: 20px 0;
+	background: colors.$dark;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	margin: 0 auto;
+}
+
+.link {
+	margin-right: 20px;
+	transition: opacity 0.3s, transform 0.3s;
+	
+	&:hover {
+		opacity: 0.7;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+
+.icon {
+	font-size: 2em;
+	color: white;
+}
+
+.copyright {
+	color: white;
+}
