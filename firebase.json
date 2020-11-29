@@ -5,50 +5,5 @@
 	},
 	"storage": {
 		"rules": "rules/storage.rules"
-	},
-	"functions": {
-		"predeploy": [
-			"npm run build -C \"$RESOURCE_DIR\""
-		]
-	},
-	"hosting": {
-		"public": "public/out",
-		"cleanUrls": true,
-		"trailingSlash": false,
-		"ignore": [
-			"firebase.json",
-			"**/.*",
-			"**/node_modules/**"
-		],
-		"rewrites": [
-			{
-				"source": "/upload",
-				"function": "app"
-			},
-			{
-				"source": "/download/*",
-				"function": "app"
-			}
-		],
-		"headers": [
-			{
-				"source": "**",
-				"headers": [
-					{
-						"key": "Cache-Control",
-						"value": "public, max-age=86400, s-maxage=86400"
-					}
-				]
-			},
-			{
-				"source": "/_next/static/**",
-				"headers": [
-					{
-						"key": "Cache-Control",
-						"value": "public, max-age=31536000, s-maxage=31536000"
-					}
-				]
-			}
-		]
 	}
 }
