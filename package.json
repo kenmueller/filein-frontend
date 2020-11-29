@@ -21,6 +21,7 @@
 		"react-dom": "^17.0.1",
 		"react-dropzone": "^11.2.4",
 		"react-toastify": "^6.1.0",
+		"recoil": "^0.1.2",
 		"sass": "^1.29.0"
 	},
 	"devDependencies": {
