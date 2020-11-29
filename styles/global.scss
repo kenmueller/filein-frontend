@@ -19,6 +19,14 @@ body {
 	background: colors.$light;
 }
 
+button {
+	cursor: pointer;
+	
+	&:disabled {
+		cursor: default;
+	}
+}
+
 .Toastify__toast {
 	font-weight: bold;
 	padding-left: 16px;

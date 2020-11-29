@@ -24,6 +24,7 @@
 }
 
 .home {
+	margin-right: auto;
 	text-decoration: none;
 	font-size: 30px;
 	font-weight: 900;
@@ -41,4 +42,42 @@
 	&:active {
 		transform: translateY(-2px);
 	}
+}
+
+.upload {
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+	margin: 16px 0;
+	padding: 0 16px;
+	color: white;
+	background: transparent;
+	border-radius: 8px;
+	transition: color 0.3s, background 0.3s, transform 0.3s;
+	
+	.active & {
+		color: colors.$blue;
+		
+		&:hover {
+			background: transparentize(colors.$dark, 0.9);
+		}
+	}
+	
+	&:hover {
+		background: transparentize(white, 0.8);
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+
+.uploadIcon {
+	margin-right: 8px;
+	font-size: 1.5em;
+}
+
+.uploadMessage {
+	font-size: 16px;
+	font-weight: 900;
 }
