@@ -19,7 +19,7 @@ const UploadFile = () => {
 	
 	const [file, setFile] = useRecoilState(uploadFileState)
 	const [fileMeta, setFileMeta] = useState<FileMeta | null>(null)
-	const [progress, setProgress] = useState<number | null>(0)
+	const [progress, setProgress] = useState(0)
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {
 		setFile(file => isShowing ? file : null)
@@ -29,7 +29,15 @@ const UploadFile = () => {
 		setFile(null)
 	}, [setFile])
 	
-	useEffect(() => {
+	useEffect(() => { // Reset
+		if (file)
+			return
+		
+		setFileMeta(null)
+		setProgress(0)
+	}, [file, setFileMeta, setProgress])
+	
+	useEffect(() => { // Upload
 		if (!file || currentUser === undefined)
 			return
 		

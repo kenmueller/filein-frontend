@@ -10,17 +10,20 @@ export interface UploadDropProps {
 }
 
 const UploadDrop = ({ children }: UploadDropProps) => {
-	const uploadFile = useSetRecoilState(uploadFileState)
+	const setFile = useSetRecoilState(uploadFileState)
 	
 	const onDrop = useCallback((files: File[]) => {
 		const file = files[0]
-		
-		if (file)
-			uploadFile(file)
-	}, [uploadFile])
+		if (file) setFile(file)
+	}, [setFile])
+	
+	const onDragEnter = useCallback(() => {
+		setFile(null)
+	}, [setFile])
 	
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,
+		onDragEnter,
 		noClick: true,
 		multiple: false
 	})
