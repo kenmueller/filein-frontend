@@ -27,7 +27,7 @@ const ProgressCircle = ({ className, value }: ProgressCircleProps) => {
 				textAnchor="middle"
 				dominantBaseline="middle"
 			>
-				{value}%
+				{Math.floor(value)}%
 			</text>
 		</svg>
 	)

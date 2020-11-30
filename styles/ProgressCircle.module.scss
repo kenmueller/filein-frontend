@@ -14,6 +14,7 @@
 	stroke: colors.$blue;
 	stroke-dashoffset: 66;
 	stroke-linecap: round;
+	transition: stroke-dasharray 0.3s;
 }
 
 .value {
