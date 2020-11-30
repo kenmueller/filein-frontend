@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShareSquare } from '@fortawesome/free-solid-svg-icons'
 
 import FileMeta from 'models/FileMeta'
 import getFileUrl from 'lib/getFileUrl'
@@ -20,6 +21,7 @@ const FilePreview = ({ file }: FilePreviewProps) => {
 				? <img className={styles.image} src={url} alt={file.name} />
 				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
 			}
+			<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
 		</a>
 	)
 }

@@ -1,0 +1,47 @@
+@use 'colors';
+
+.root {
+	max-width: 95%;
+	width: 1000px;
+	max-height: 95%;
+	background: colors.$dark;
+	border-radius: 8px;
+	box-shadow: 0 0 10px 2px transparentize(black, 0.9);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px;
+	border-bottom: 2px solid #333;
+}
+
+.name {
+	font-weight: 900;
+	color: white;
+}
+
+.close {
+	font-size: 20px;
+	color: white;
+	background: transparent;
+	transition: opacity 0.3s, transform 0.3s;
+	
+	&:hover {
+		opacity: 0.7;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+
+.closeIcon {
+	display: block !important;
+}
+
+.content {
+	height: 500px;
+	padding: 16px;
+}

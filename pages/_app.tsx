@@ -7,6 +7,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 
 import UploadDrop from 'components/UploadDrop'
 import UploadFile from 'components/UploadFile'
+import CurrentFile from 'components/CurrentFile'
 import Navbar from 'components/Navbar'
 
 import 'styles/global.scss'
@@ -27,6 +28,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 		<RecoilRoot>
 			<UploadDrop>
 				<UploadFile />
+				<CurrentFile />
 				<Navbar />
 				<Component {...pageProps} />
 				<ToastContainer />
