@@ -1,11 +1,13 @@
-import { useCallback } from 'react'
+import { useState, useCallback } from 'react'
+import { toast } from 'react-toastify'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import cx from 'classnames'
 
+import signIn from 'lib/signIn'
 import Spinner from './Spinner'
 
 import styles from 'styles/SignInButton.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 export interface SignInButtonProps {
 	className?: string
@@ -13,17 +15,30 @@ export interface SignInButtonProps {
 }
 
 const SignInButton = ({ className, disabled }: SignInButtonProps) => {
-	const onClick = useCallback(() => {
+	const [isLoading, setIsLoading] = useState(false)
+	
+	const onClick = useCallback(async () => {
+		if (disabled || isLoading)
+			return
 		
-	}, [])
+		setIsLoading(true)
+		
+		try {
+			if (!await signIn())
+				setIsLoading(false)
+		} catch ({ message }) {
+			setIsLoading(false)
+			toast.error(message)
+		}
+	}, [disabled, isLoading, setIsLoading])
 	
 	return (
 		<button
 			className={cx(styles.root, className)}
-			disabled={disabled}
+			disabled={disabled || isLoading}
 			onClick={onClick}
 		>
-			{disabled
+			{disabled || isLoading
 				? <Spinner className={styles.spinner} />
 				: (
 					<>

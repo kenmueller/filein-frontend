@@ -6,7 +6,8 @@ import 'firebase/auth'
 
 const currentUserState = atom<firebase.User | null | undefined>({
 	key: 'currentUser',
-	default: undefined
+	default: undefined,
+	dangerouslyAllowMutability: true
 })
 
 export default currentUserState
