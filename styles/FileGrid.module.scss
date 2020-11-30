@@ -1,8 +1,20 @@
 @use 'sizes';
+@use 'spinner' as *;
 
 .root {
 	display: grid;
 	grid: none / repeat(sizes.$file-grid-columns, sizes.$file-cell-dimension);
 	gap: sizes.$file-grid-gap;
 	max-width: max-content;
+}
+
+.loading {
+	grid: none;
+	max-width: none;
+}
+
+.spinner {
+	@include spinner(30px, 5px, white);
+	
+	margin: 60px auto;
 }

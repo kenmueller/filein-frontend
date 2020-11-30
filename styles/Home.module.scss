@@ -8,11 +8,14 @@
 	min-height: 100vh;
 }
 
-.header {
-	display: flex;
+.container {
 	max-width: sizes.$large-max-width;
 	width: 95%;
 	margin: 200px auto 0;
+}
+
+.header {
+	display: flex;
 }
 
 .article {
@@ -34,7 +37,7 @@
 }
 
 .recentlyUploadedFiles {
-	flex-grow: 1;
+	margin: 60px auto 0;
 }
 
 .footer {

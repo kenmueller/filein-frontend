@@ -1,6 +1,12 @@
-import getFileUrl from 'lib/getFileUrl'
+import { useCallback } from 'react'
+import { useRouter } from 'next/router'
+import cx from 'classnames'
+
+import getFilePredicate from 'lib/getFilePredicate'
 import useRecentlyUploadedFiles from 'hooks/useRecentlyUploadedFiles'
-import Spinner from './Spinner'
+import Search from './Search'
+import FileGrid from './FileGrid'
+import FileCell from './FileCell'
 
 import styles from 'styles/RecentlyUploadedFiles.module.scss'
 
@@ -9,21 +15,30 @@ export interface RecentlyUploadedFilesProps {
 }
 
 const RecentlyUploadedFiles = ({ className }: RecentlyUploadedFilesProps) => {
+	const router = useRouter()
 	const files = useRecentlyUploadedFiles()
+	const query = (router.query.q ?? '') as string
+	
+	const setQuery = useCallback((query: string) => {
+		router.replace(
+			`/${query ? `?q=${encodeURIComponent(query)}` : ''}`,
+			undefined,
+			{ shallow: true }
+		)
+	}, [router])
 	
 	return (
-		<div className={className}>
-			<p className={styles.label}>recently uploaded</p>
-			<div className={styles.files}>
-				{files
-					? files.map(file => (
-						<a key={file.id} className={styles.file} href={getFileUrl(file)}>
-							<p className={styles.fileName}>{file.name}</p>
-						</a>
-					))
-					: <Spinner className={styles.spinner} />
-				}
-			</div>
+		<div className={cx(styles.root, className)}>
+			<Search
+				placeholder="Recently uploaded files"
+				value={query}
+				setValue={setQuery}
+			/>
+			<FileGrid className={styles.files} loading={!files}>
+				{files?.filter(getFilePredicate(query)).map(file => (
+					<FileCell key={file.id} file={file} />
+				))}
+			</FileGrid>
 		</div>
 	)
 }

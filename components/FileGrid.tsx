@@ -12,7 +12,9 @@ export interface FilesProps {
 }
 
 const FileGrid = ({ className, loading, children }: FilesProps) => (
-	<div className={cx(styles.root, className)}>
+	<div className={cx(styles.root, className, {
+		[styles.loading]: loading
+	})}>
 		{loading
 			? <Spinner className={styles.spinner} />
 			: children

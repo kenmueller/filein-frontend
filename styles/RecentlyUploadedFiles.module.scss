@@ -1,24 +1,9 @@
-@use 'colors';
-@use 'spinner' as *;
+@use 'sizes';
 
-.label {
-	font-weight: 900;
-	color: white;
-	opacity: 0.7;
+.root {
+	max-width: sizes.$file-grid-columns * sizes.$file-cell-dimension + (sizes.$file-grid-columns - 1) * sizes.$file-grid-gap;
 }
 
 .files {
-	margin-top: 4px;
-	background: colors.$dark;
-	border-radius: 8px;
-}
-
-.file {
-	& + & {
-		
-	}
-}
-
-.spinner {
-	@include spinner(40px, 6px, white);
+	margin-top: sizes.$file-grid-gap;
 }

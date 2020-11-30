@@ -12,15 +12,17 @@ const Home: NextPage = () => (
 		<Head>
 			<title key="title">filein</title>
 		</Head>
-		<Gradient className={styles.header}>
-			<article className={styles.article}>
-				<h1 className={styles.title}>
-					The best way to share files
-				</h1>
-				<p className={styles.subtitle}>
-					Super fast file hosting. Free forever.
-				</p>
-			</article>
+		<Gradient className={styles.container}>
+			<header className={styles.header}>
+				<article className={styles.article}>
+					<h1 className={styles.title}>
+						The best way to share files
+					</h1>
+					<p className={styles.subtitle}>
+						Super fast file hosting. Free forever.
+					</p>
+				</article>
+			</header>
 			<RecentlyUploadedFiles className={styles.recentlyUploadedFiles} />
 		</Gradient>
 		<Footer className={styles.footer} />
