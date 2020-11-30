@@ -1,0 +1,15 @@
+$dimension: 150px;
+
+.root {
+	display: block;
+	width: $dimension;
+	height: $dimension;
+	overflow: hidden;
+	border-radius: 8px;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

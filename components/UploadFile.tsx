@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
+import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,11 +11,14 @@ import Modal from './Modal'
 import ProgressCircle from './ProgressCircle'
 
 import styles from 'styles/UploadFile.module.scss'
+import FilePreview from './FilePreview'
+import FileMeta from 'models/FileMeta'
 
 const UploadFile = () => {
 	const currentUser = useCurrentUser()
 	
 	const [file, setFile] = useRecoilState(uploadFileState)
+	const [fileMeta, setFileMeta] = useState<FileMeta | null>(null)
 	const [progress, setProgress] = useState<number | null>(0)
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {
@@ -26,11 +30,13 @@ const UploadFile = () => {
 	}, [setFile])
 	
 	useEffect(() => {
-		if (!file)
+		if (!file || currentUser === undefined)
 			return
 		
 		uploadFile(file, currentUser ? currentUser.uid : null, setProgress)
-	}, [currentUser, file, setProgress])
+			.then(setFileMeta)
+			.catch(({ message }) => toast.error(message))
+	}, [currentUser, file, setFileMeta, setProgress])
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
@@ -40,8 +46,15 @@ const UploadFile = () => {
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
 			</header>
-			<div className={styles.progressContainer}>
-				<ProgressCircle className={styles.progress} value={progress} />
+			<div className={styles.content}>
+				<ProgressCircle
+					className={styles.progress}
+					value={progress}
+					aria-hidden={progress === 100}
+				/>
+				<div className={styles.summary} aria-hidden={progress !== 100}>
+					{fileMeta && <FilePreview file={fileMeta} />}
+				</div>
 			</div>
 		</Modal>
 	)

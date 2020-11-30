@@ -1,7 +1,5 @@
 @use 'colors';
 
-$progress-margin: 12px;
-
 .root {
 	display: flex;
 	flex-direction: column;
@@ -46,12 +44,28 @@ $progress-margin: 12px;
 	display: block !important;
 }
 
-.progressContainer {
-	width: 100%;
-	max-width: 200px + $progress-margin * 2;
-	margin: auto;
+.content {
+	flex-grow: 1;
+	display: grid;
+	padding: 16px;
+}
+
+.progress,
+.summary {
+	grid-row: 1;
+	grid-column: 1;
+	transition: opacity 0.3s;
+	
+	&[aria-hidden='true'] {
+		opacity: 0;
+	}
 }
 
 .progress {
-	margin: $progress-margin;
+	max-width: 200px;
+	margin: auto;
+}
+
+.summary {
+	
 }
