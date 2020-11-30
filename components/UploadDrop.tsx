@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil'
 import { useDropzone } from 'react-dropzone'
 
 import uploadFileState from 'state/uploadFile'
+import UploadDropOverlay from './UploadDropOverlay'
 
 export interface UploadDropProps {
 	children?: ReactNode
@@ -18,7 +19,7 @@ const UploadDrop = ({ children }: UploadDropProps) => {
 			uploadFile(file)
 	}, [uploadFile])
 	
-	const { getRootProps, getInputProps } = useDropzone({
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,
 		noClick: true,
 		multiple: false
@@ -27,6 +28,7 @@ const UploadDrop = ({ children }: UploadDropProps) => {
 	return (
 		<div {...getRootProps()}>
 			<input {...getInputProps()} />
+			<UploadDropOverlay active={isDragActive} />
 			{children}
 		</div>
 	)
