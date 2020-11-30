@@ -1,0 +1,27 @@
+@use 'sizes';
+@use 'colors';
+
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+}
+
+.name {
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	margin: 200px auto 0;
+	line-height: 56px;
+	font-size: 50px;
+	font-weight: 900;
+	color: white;
+}
+
+.files {
+	margin: 30px auto 0;
+}
+
+.footer {
+	margin-top: 30px;
+}

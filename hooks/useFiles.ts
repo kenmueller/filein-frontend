@@ -4,25 +4,26 @@ import { toast } from 'react-toastify'
 
 import firebase from 'lib/firebase'
 import snapshotToFileMeta from 'lib/snapshotToFileMeta'
-import recentlyUploadedFilesState from 'state/recentlyUploadedFiles'
+import filesState from 'state/files'
 
 import 'firebase/firestore'
 
 const firestore = firebase.firestore()
+const queue = new Set<string>()
 
-const useRecentlyUploadedFiles = () => {
-	const [files, setFiles] = useRecoilState(recentlyUploadedFilesState)
+const useFiles = (uid: string) => {
+	const [files, setFiles] = useRecoilState(filesState)
 	
 	useEffect(() => {
-		if (files !== undefined)
+		if (queue.has(uid))
 			return
 		
-		setFiles(null)
+		queue.add(uid)
 		
-		firestore.collection('files').limit(50).onSnapshot(
+		firestore.collection('files').where('owner', '==', uid).onSnapshot(
 			snapshot => {
 				setFiles(_files => {
-					let files = _files ?? []
+					let files = _files[uid] ?? []
 					
 					for (const { type, doc } of snapshot.docChanges())
 						switch (type) {
@@ -46,14 +47,14 @@ const useRecentlyUploadedFiles = () => {
 								break
 						}
 					
-					return files
+					return { ..._files, [uid]: files }
 				})
 			},
 			({ message }) => toast.error(message)
 		)
-	}, [files, setFiles])
+	}, [uid, setFiles])
 	
-	return files
+	return files[uid]
 }
 
-export default useRecentlyUploadedFiles
+export default useFiles

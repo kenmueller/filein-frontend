@@ -11,12 +11,10 @@ const NotFound = () => (
 			<title key="title">404 - filein</title>
 		</Head>
 		<Gradient className={styles.header}>
-			<article className={styles.article}>
-				<h1 className={styles.title}>404</h1>
-				<p className={styles.subtitle}>
-					Oh no! Are you lost?
-				</p>
-			</article>
+			<h1 className={styles.title}>404</h1>
+			<p className={styles.subtitle}>
+				Oh no! Are you lost?
+			</p>
 		</Gradient>
 		<Footer className={styles.footer} />
 	</div>

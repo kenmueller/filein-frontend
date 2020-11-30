@@ -1,8 +1,9 @@
 import { useState, useCallback, useEffect } from 'react'
 import Link from 'next/link'
-import cx from 'classnames'
+import ProgressBar from 'nextjs-progressbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
+import cx from 'classnames'
 
 import UploadButton from './UploadButton'
 import AuthButton from './AuthButton'
@@ -23,6 +24,7 @@ const Navbar = () => {
 	
 	return (
 		<div className={cx(styles.root, { [styles.active]: isActive })}>
+			<ProgressBar color={isActive ? '#08f' : 'white'} />
 			<nav className={styles.content}>
 				<Link href="/">
 					<a className={styles.home}>filein</a>
