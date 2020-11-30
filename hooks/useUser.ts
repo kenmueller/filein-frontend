@@ -11,11 +11,11 @@ import 'firebase/firestore'
 const firestore = firebase.firestore()
 const queue = new Set<string>()
 
-const useUser = (id: string) => {
+const useUser = (id: string | undefined) => {
 	const [users, setUsers] = useRecoilState(usersState)
 	
 	useEffect(() => {
-		if (queue.has(id))
+		if (!id || queue.has(id))
 			return
 		
 		queue.add(id)
@@ -30,7 +30,7 @@ const useUser = (id: string) => {
 			.catch(({ message }) => toast.error(message))
 	}, [id, setUsers])
 	
-	return users[id]
+	return id && users[id]
 }
 
 export default useUser

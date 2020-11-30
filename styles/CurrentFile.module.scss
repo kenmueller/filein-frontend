@@ -1,4 +1,5 @@
 @use 'colors';
+@use 'spinner' as *;
 
 .root {
 	max-width: 95%;
@@ -17,7 +18,7 @@
 	border-bottom: 2px solid #333;
 }
 
-.name {
+.headerName {
 	font-weight: 900;
 	color: white;
 }
@@ -42,6 +43,51 @@
 }
 
 .content {
+	display: flex;
 	height: 500px;
 	padding: 16px;
+}
+
+.preview {
+	flex-shrink: 0;
+	margin-right: 16px;
+}
+
+.info {
+	color: white;
+}
+
+.name {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.user {
+	margin-top: 8px;
+	opacity: 0.7;
+}
+
+.userLink {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	color: white;
+	
+	&:hover > .userName {
+		margin-right: 10px;
+		text-decoration: underline;
+	}
+}
+
+.userName {
+	margin-right: 6px;
+	font-weight: 900;
+	transition: margin-right 0.3s;
+}
+
+.spinner {
+	@include spinner(16px, 3px, white);
+	
+	margin-left: 4px;
+	vertical-align: middle;
 }
