@@ -17,6 +17,10 @@
 body {
 	overscroll-behavior: none;
 	background: colors.$light;
+	
+	&.clipped {
+		overflow: hidden;
+	}
 }
 
 button {

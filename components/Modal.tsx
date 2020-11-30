@@ -1,6 +1,8 @@
 import { ReactNode, useRef, useCallback, useEffect } from 'react'
 import cx from 'classnames'
 
+import clipBody from 'lib/clipBody'
+
 import styles from 'styles/Modal.module.scss'
 
 export interface ModalProps {
@@ -30,6 +32,10 @@ const Modal = ({ className, isShowing, setIsShowing, children }: ModalProps) => 
 		current.addEventListener('click', onClick)
 		return () => current.removeEventListener('click', onClick)
 	}, [root, onClick])
+	
+	useEffect(() => {
+		clipBody(isShowing)
+	}, [isShowing])
 	
 	return (
 		<div
