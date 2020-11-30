@@ -1,4 +1,5 @@
 import useCurrentUser from 'hooks/useCurrentUser'
+import SignInButton from './SignInButton'
 
 export interface AuthButtonProps {
 	className?: string
@@ -7,7 +8,9 @@ export interface AuthButtonProps {
 const AuthButton = ({ className }: AuthButtonProps) => {
 	const currentUser = useCurrentUser()
 	
-	return <p>{currentUser?.displayName ?? 'not signed in'}</p>
+	return currentUser
+		? <p>{currentUser.displayName}</p>
+		: <SignInButton className={className} disabled={currentUser === undefined} />
 }
 
 export default AuthButton
