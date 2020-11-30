@@ -1,5 +1,7 @@
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import cx from 'classnames'
 
 import firebase from 'lib/firebase'
 import SignOutButton from './SignOutButton'
@@ -14,11 +16,18 @@ export interface AuthDropdownContentProps {
 
 const AuthDropdownContent = ({ currentUser }: AuthDropdownContentProps) => (
 	<>
-		<SignOutButton>
+		<Link href={`/${currentUser.uid}`}>
+			<a className={styles.action}>
+				<FontAwesomeIcon icon={faUser} />
+				<p className={styles.actionMessage}>My files</p>
+			</a>
+		</Link>
+		<SignOutButton className={cx(styles.action, styles.danger)}>
 			<FontAwesomeIcon icon={faSignOutAlt} />
-			<p>Sign out</p>
+			<p className={styles.actionMessage}>Sign out</p>
 		</SignOutButton>
 	</>
 )
 
+export const authDropdownContentClassName = styles.root
 export default AuthDropdownContent

@@ -1,0 +1,42 @@
+@use 'colors';
+
+.root {
+	min-width: 300px;
+	padding: 12px;
+	background: colors.$dark;
+	border-radius: 8px;
+	box-shadow:
+		0 0 0 100vmax transparentize(black, 0.7),
+		0 0 10px 2px transparentize(black, 0.9);
+}
+
+.action {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 8px 12px;
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	background: transparent;
+	border-radius: 8px;
+	transition: background 0.3s;
+	
+	& + & {
+		margin-top: 12px;
+	}
+	
+	&:hover {
+		background: transparentize(white, 0.9);
+	}
+}
+
+.danger {
+	color: colors.$red;
+}
+
+.actionMessage {
+	margin-left: 12px;
+	font-size: 16px;
+	font-weight: 900;
+}
