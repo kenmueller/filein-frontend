@@ -7,6 +7,7 @@ import newId from './newId'
 import 'firebase/firestore'
 import 'firebase/storage'
 
+const { FieldValue } = firebase.firestore
 const firestore = firebase.firestore()
 const storage = firebase.storage().ref()
 
@@ -39,12 +40,13 @@ const uploadFile = async (
 		name,
 		type,
 		size,
-		owner
+		owner,
+		uploaded: FieldValue.serverTimestamp()
 	})
 	
 	setProgress(100)
 	
-	return { id, name, type, size, owner }
+	return { id, name, type, size, owner, uploaded: Date.now() }
 }
 
 export default uploadFile

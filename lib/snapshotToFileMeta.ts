@@ -5,7 +5,11 @@ import 'firebase/firestore'
 
 const snapshotToFileMeta = (snapshot: firebase.firestore.DocumentSnapshot) =>
 	snapshot.exists
-		? { id: snapshot.id, ...snapshot.data() } as FileMeta
+		? {
+			...snapshot.data(),
+			id: snapshot.id,
+			uploaded: snapshot.get('uploaded')?.toMillis()
+		} as FileMeta
 		: null
 
 export default snapshotToFileMeta

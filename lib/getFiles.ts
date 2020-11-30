@@ -11,7 +11,9 @@ const getFiles = async (uid: string) => {
 		.where('owner', '==', uid)
 		.get()
 	
-	return docs.map(snapshotToFileMeta)
+	return docs
+		.map(snapshotToFileMeta)
+		.sort((a, b) => b.uploaded - a.uploaded)
 }
 
 export default getFiles

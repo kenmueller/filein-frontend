@@ -47,7 +47,10 @@ const useFiles = (uid: string) => {
 								break
 						}
 					
-					return { ..._files, [uid]: files }
+					return {
+						..._files,
+						[uid]: files.sort((a, b) => b.uploaded - a.uploaded)
+					}
 				})
 			},
 			({ message }) => toast.error(message)
