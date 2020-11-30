@@ -1,0 +1,22 @@
+@use 'colors';
+
+.track,
+.thumb {
+	fill: transparent;
+	stroke-width: 10px;
+}
+
+.track {
+	stroke: transparentize(white, 0.8);
+}
+
+.thumb {
+	stroke: colors.$blue;
+	stroke-dashoffset: 66;
+	stroke-linecap: round;
+}
+
+.value {
+	font-weight: 900;
+	fill: white;
+}
