@@ -2,7 +2,7 @@
 
 .root {
 	display: grid;
-	grid: none / repeat(sizes.$file-grid-columns, auto);
+	grid: none / repeat(sizes.$file-grid-columns, sizes.$file-cell-dimension);
 	gap: sizes.$file-grid-gap;
 	max-width: max-content;
 }

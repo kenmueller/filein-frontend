@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useCallback } from 'react'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import User from 'models/User'
@@ -26,8 +27,17 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 	if (!user)
 		return <NotFound />
 	
+	const router = useRouter()
 	const files = useFiles(user.id) ?? _files
-	const [query, setQuery] = useState('')
+	const query = (router.query.q ?? '') as string
+	
+	const setQuery = useCallback((query: string) => {
+		router.replace(
+			`/${user.slug}${query ? `?q=${encodeURIComponent(query)}` : ''}`,
+			undefined,
+			{ shallow: true }
+		)
+	}, [user.slug, router])
 	
 	return (
 		<div className={styles.root}>
