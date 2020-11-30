@@ -1,4 +1,5 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
+import { useSetRecoilState } from 'recoil'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -8,6 +9,7 @@ import FileMeta from 'models/FileMeta'
 import getUserFromSlug from 'lib/getUserFromSlug'
 import getFiles from 'lib/getFiles'
 import getFilePredicate from 'lib/getFilePredicate'
+import usersState from 'state/users'
 import useFiles from 'hooks/useFiles'
 import NotFound from 'components/NotFound'
 import Gradient from 'components/Gradient'
@@ -27,6 +29,8 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 	if (!user)
 		return <NotFound />
 	
+	const setUsers = useSetRecoilState(usersState)
+	
 	const router = useRouter()
 	const files = useFiles(user.id) ?? _files
 	const query = (router.query.q ?? '') as string
@@ -38,6 +42,10 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 			{ shallow: true }
 		)
 	}, [user.slug, router])
+	
+	useEffect(() => {
+		setUsers(users => ({ ...users, [user.id]: user }))
+	}, [user, setUsers])
 	
 	return (
 		<div className={styles.root}>
