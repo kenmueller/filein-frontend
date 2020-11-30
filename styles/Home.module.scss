@@ -8,18 +8,10 @@
 	min-height: 100vh;
 }
 
-.container {
+.header {
 	max-width: sizes.$large-max-width;
 	width: 95%;
-	margin: 200px auto 0;
-}
-
-.header {
-	display: flex;
-}
-
-.article {
-	margin-right: 60px;
+	margin: 150px auto 0;
 	color: white;
 }
 
