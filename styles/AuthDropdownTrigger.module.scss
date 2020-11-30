@@ -1,34 +1,26 @@
-@use 'spinner' as *;
-
 .root {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	padding: 0 16px;
-	font-size: 20px;
+	font-size: 18px;
 	color: var(--color);
 	background: transparent;
 	border: 2px solid var(--color);
 	border-radius: 8px;
 	transition: color 0.3s, background 0.3s, border-color 0.3s, transform 0.3s;
 	
-	&:not(:disabled) {
-		&:hover {
-			background: var(--background-hover);
-		}
-		
-		&:active {
-			transform: translateY(-2px);
-		}
+	&:hover {
+		background: var(--background-hover);
+	}
+	
+	&:active {
+		transform: translateY(-2px);
 	}
 }
 
-.spinner {
-	@include spinner(18px, 3px, var(--color));
-}
-
-.message {
-	margin-left: 8px;
+.name {
+	flex-grow: 1;
+	margin-right: 8px;
 	font-size: 16px;
 	font-weight: 900;
 }
