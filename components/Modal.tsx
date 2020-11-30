@@ -1,12 +1,13 @@
-import { PropsWithChildren, useRef, useCallback, useEffect } from 'react'
+import { ReactNode, useRef, useCallback, useEffect } from 'react'
 import cx from 'classnames'
 
 import styles from 'styles/Modal.module.scss'
 
-export interface ModalProps extends PropsWithChildren<{}> {
+export interface ModalProps {
 	className?: string
 	isShowing: boolean
 	setIsShowing(isShowing: boolean): void
+	children?: ReactNode
 }
 
 const Modal = ({ className, isShowing, setIsShowing, children }: ModalProps) => {

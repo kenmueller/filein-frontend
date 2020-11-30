@@ -1,11 +1,12 @@
-import { PropsWithChildren, useCallback } from 'react'
+import { ReactNode, useCallback } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { useDropzone } from 'react-dropzone'
 
 import uploadFileState from 'state/uploadFile'
 
-export interface UploadButtonProps extends PropsWithChildren<{}> {
+export interface UploadButtonProps {
 	className?: string
+	children?: ReactNode
 }
 
 const UploadButton = ({ className, children }: UploadButtonProps) => {

@@ -1,6 +1,7 @@
 import firebase from 'lib/firebase'
 import Dropdown from './Dropdown'
 import AuthDropdownTrigger, { authDropdownTriggerClassName } from './AuthDropdownTrigger'
+import AuthDropdownContent from './AuthDropdownContent'
 
 import 'firebase/auth'
 
@@ -16,7 +17,7 @@ const AuthDropdown = ({ className, currentUser }: AuthDropdownProps) => {
 			triggerClassName={authDropdownTriggerClassName}
 			trigger={<AuthDropdownTrigger currentUser={currentUser} />}
 		>
-			AuthDropdownContent
+			<AuthDropdownContent currentUser={currentUser} />
 		</Dropdown>
 	)
 }

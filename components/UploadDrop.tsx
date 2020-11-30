@@ -1,10 +1,12 @@
-import { PropsWithChildren, useCallback } from 'react'
+import { ReactNode, useCallback } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { useDropzone } from 'react-dropzone'
 
 import uploadFileState from 'state/uploadFile'
 
-export interface UploadDropProps extends PropsWithChildren<{}> {}
+export interface UploadDropProps {
+	children?: ReactNode
+}
 
 const UploadDrop = ({ children }: UploadDropProps) => {
 	const uploadFile = useSetRecoilState(uploadFileState)
