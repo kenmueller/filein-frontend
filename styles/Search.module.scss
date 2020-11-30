@@ -1,0 +1,36 @@
+.root {
+	position: relative;
+	width: 100%;
+}
+
+.input {
+	width: 100%;
+	padding: 12px 16px 12px 36px;
+	font-size: 16px;
+	color: white;
+	background: transparentize(white, 0.9);
+	border-radius: 8px;
+	transition: background 0.3s;
+	
+	&::placeholder {
+		color: transparentize(white, 0.5);
+	}
+	
+	&:hover,
+	&:focus {
+		background: transparentize(white, 0.8);
+		
+		+ .icon {
+			opacity: 1;
+		}
+	}
+}
+
+.icon {
+	position: absolute;
+	top: 13px;
+	left: 12px;
+	color: white;
+	opacity: 0.7;
+	transition: opacity 0.3s;
+}

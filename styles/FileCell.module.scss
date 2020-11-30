@@ -1,9 +1,22 @@
-$dimension: 300px;
+@use 'sizes';
+@use 'colors';
 
 .root {
 	position: relative;
-	width: $dimension;
-	height: $dimension;
+	width: sizes.$file-cell-dimension;
+	height: sizes.$file-cell-dimension;
+	overflow: hidden;
+	background: colors.$dark;
+	border-radius: 8px;
+	transition: transform 0.3s;
+	
+	&:hover {
+		transform: scale(1.05);
+	}
+	
+	&:active {
+		transform: none;
+	}
 }
 
 .isImage::after {
@@ -13,7 +26,7 @@ $dimension: 300px;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: linear-gradient(to bottom, transparent, transparentize(black, 0.7));
+	background: transparentize(colors.$dark, 0.5);
 }
 
 .image {
@@ -22,13 +35,34 @@ $dimension: 300px;
 	object-fit: cover;
 }
 
-.name {
+.icon {
+	font-size: 60px;
+	color: white;
+}
+
+.info {
 	position: absolute;
 	bottom: 32px;
 	left: 12px;
 	right: 12px;
-	font-size: 16px;
-	font-weight: 900;
 	color: white;
 	z-index: 1;
+}
+
+.name {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.comments {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 8px;
+	font-size: 16px;
+}
+
+.commentCount {
+	margin-left: 5px;
+	font-weight: 900;
 }

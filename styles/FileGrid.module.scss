@@ -1,15 +1,8 @@
-$columns: 3;
-$dimension: 300px;
-$gap: 16px;
-$padding: 16px;
+@use 'sizes';
 
 .root {
 	display: grid;
-	grid: none / repeat($columns, $dimension);
-	gap: $gap;
-	width: $columns * $dimension + ($columns - 1) * $gap + $padding * 2;
-	padding: $padding;
-	background: white;
-	border: 1px solid #eee;
-	border-radius: 8px;
+	grid: none / repeat(sizes.$file-grid-columns, auto);
+	gap: sizes.$file-grid-gap;
+	max-width: max-content;
 }

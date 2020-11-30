@@ -8,18 +8,24 @@
 	min-height: 100vh;
 }
 
-.name {
-	max-width: sizes.$large-max-width;
-	width: 95%;
+.header {
+	max-width: sizes.$file-grid-columns * sizes.$file-cell-dimension + (sizes.$file-grid-columns - 1) * sizes.$file-grid-gap;
 	margin: 200px auto 0;
+}
+
+.name {
 	line-height: 56px;
 	font-size: 50px;
 	font-weight: 900;
 	color: white;
 }
 
+.search {
+	margin-top: 20px;
+}
+
 .files {
-	margin: 30px auto 0;
+	margin: sizes.$file-grid-gap auto 0;
 }
 
 .footer {

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComment } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import FileMeta from 'models/FileMeta'
@@ -21,7 +22,13 @@ const FileCell = ({ file }: FileCellProps) => {
 				? <img className={styles.image} src={getFileUrl(file)} alt={file.name} loading="lazy" />
 				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
 			}
-			<p className={styles.name}>{file.name}</p>
+			<span className={styles.info}>
+				<p className={styles.name}>{file.name}</p>
+				<span className={styles.comments}>
+					<FontAwesomeIcon icon={faComment} />
+					<p className={styles.commentCount}>50</p>
+				</span>
+			</span>
 		</button>
 	)
 }
