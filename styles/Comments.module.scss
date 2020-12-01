@@ -1,0 +1,96 @@
+@use 'colors';
+@use 'spinner' as *;
+
+.root {
+	display: flex;
+	flex-direction: column;
+}
+
+.comments {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.spinner {
+	@include spinner(20px, 4px, white);
+	
+	margin: auto;
+}
+
+.form {
+	flex-shrink: 0;
+	display: flex;
+	position: relative;
+	height: 35px;
+}
+
+.input {
+	flex-grow: 1;
+	margin-right: 8px;
+	padding: 0 10px 0 37px;
+	font-size: 16px;
+	color: white;
+	background: transparentize(white, 0.9);
+	border-radius: 8px;
+	transition: background 0.3s;
+	
+	&::placeholder {
+		color: transparentize(white, 0.5);
+	}
+	
+	&:not(:disabled) {
+		&:hover,
+		&:focus {
+			background: transparentize(white, 0.8);
+			
+			+ .inputIcon {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+.inputIcon {
+	position: absolute;
+	top: 10px;
+	left: 12px;
+	pointer-events: none;
+	color: white;
+	opacity: 0.7;
+	transition: opacity 0.3s;
+}
+
+.button {
+	--color: white;
+	
+	flex-shrink: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 72px;
+	font-size: 16px;
+	font-weight: 900;
+	color: var(--color);
+	background: colors.$blue;
+	border-radius: 8px;
+	transition: color 0.3s, background 0.3s, opacity 0.3s, transform 0.3s;
+	
+	&:disabled {
+		opacity: 0.7;
+	}
+	
+	&:not(:disabled):hover {
+		--color: #{colors.$blue};
+		
+		background: white;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+
+.buttonSpinner {
+	@include spinner(16px, 3px, var(--color));
+}
