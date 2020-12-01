@@ -66,7 +66,7 @@ const CurrentFile = () => {
 										Uploaded by {user
 											? (
 												<Link href={`/${user.slug}`}>
-													<a className={styles.userLink}>
+													<a className={styles.userLink} onClick={hide}>
 														<span className={styles.userName}>{user.name}</span>
 														<FontAwesomeIcon
 															className={styles.userIcon}
