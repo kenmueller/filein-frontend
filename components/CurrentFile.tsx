@@ -68,19 +68,21 @@ const CurrentFile = () => {
 								<div className={styles.meta}>
 									<p className={styles.name}>{file.name}</p>
 									<p className={styles.user}>
-										Uploaded by {user
-											? (
-												<Link href={`/${user.slug}`}>
-													<a className={styles.userLink} onClick={hideOverlays}>
-														<span className={styles.userName}>{user.name}</span>
-														<FontAwesomeIcon
-															className={styles.userIcon}
-															icon={faChevronRight}
-														/>
-													</a>
-												</Link>
-											)
-											: <Spinner className={styles.spinner} />
+										Uploaded by {file.owner
+											? user
+												? (
+													<Link href={`/${user.slug}`}>
+														<a className={styles.userLink} onClick={hideOverlays}>
+															<span className={styles.userName}>{user.name}</span>
+															<FontAwesomeIcon
+																className={styles.userIcon}
+																icon={faChevronRight}
+															/>
+														</a>
+													</Link>
+												)
+												: <Spinner className={styles.spinner} />
+											: <b>anonymous</b>
 										}
 									</p>
 								</div>

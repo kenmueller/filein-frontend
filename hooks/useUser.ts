@@ -11,6 +11,11 @@ import 'firebase/firestore'
 const firestore = firebase.firestore()
 const queue = new Set<string>()
 
+/**
+ * - `undefined` - loading
+ * - `null` - nonexistent
+ * - `User` - loaded
+ */
 const useUser = (id: string | undefined) => {
 	const [users, setUsers] = useRecoilState(usersState)
 	
@@ -22,10 +27,10 @@ const useUser = (id: string | undefined) => {
 		
 		firestore.doc(`users/${id}`).get()
 			.then(snapshot => {
-				const user = snapshotToUser(snapshot)
-				
-				if (user)
-					setUsers(users => ({ ...users, [id]: user }))
+				setUsers(users => ({
+					...users,
+					[id]: snapshotToUser(snapshot)
+				}))
 			})
 			.catch(({ message }) => toast.error(message))
 	}, [id, setUsers])

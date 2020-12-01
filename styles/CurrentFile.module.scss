@@ -57,6 +57,7 @@
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+	min-width: 400px;
 }
 
 .info {
@@ -70,6 +71,10 @@
 }
 
 .name {
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	font-size: 20px;
 	font-weight: 900;
 }
@@ -116,7 +121,7 @@
 .actions {
 	flex-shrink: 0;
 	display: flex;
-	margin-left: 60px;
+	margin-left: 16px;
 }
 
 .action {
