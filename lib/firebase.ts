@@ -6,7 +6,7 @@ if (!firebase.apps.length)
 		authDomain: 'file-in.firebaseapp.com',
 		databaseURL: 'https://file-in.firebaseio.com',
 		projectId: 'file-in',
-		storageBucket: 'file-in.appspot.com',
+		storageBucket: 'u.filein.io',
 		messagingSenderId: '305570645544',
 		appId: '1:305570645544:web:a59880e8e964bef3a2171d',
 		measurementId: 'G-ES7L5THM5X'
