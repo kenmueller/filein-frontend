@@ -56,16 +56,18 @@ const Comments = ({ className, file }: CommentsProps) => {
 	return (
 		<div className={cx(styles.root, className)}>
 			<div className={styles.comments}>
-				{comments
-					?.map((comment, index) => (
+				{comments && currentUser !== undefined
+					? comments.map((comment, index) => (
 						<CommentRow
 							key={comment.id}
+							currentUser={currentUser}
+							file={file}
 							comments={comments}
 							comment={comment}
 							index={index}
 						/>
 					))
-					?? <Spinner className={styles.commentsSpinner} />
+					: <Spinner className={styles.commentsSpinner} />
 				}
 			</div>
 			<form className={styles.form} onSubmit={onSubmit}>

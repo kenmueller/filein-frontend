@@ -8,9 +8,11 @@ import { faChevronRight, faDownload, faLink, faTimes, faTrash } from '@fortaweso
 import cx from 'classnames'
 
 import getFileUrl from 'lib/getFileUrl'
+import _deleteFile from 'lib/deleteFile'
 import currentFileState from 'state/currentFile'
 import useCurrentUser from 'hooks/useCurrentUser'
 import useUser from 'hooks/useUser'
+import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
 import FilePreview from './FilePreview'
 import Spinner from './Spinner'
@@ -20,6 +22,7 @@ import styles from 'styles/CurrentFile.module.scss'
 
 const CurrentFile = () => {
 	const [file, setFile] = useRecoilState(currentFileState)
+	const hideOverlays = useHideOverlays()
 	
 	const currentUser = useCurrentUser()
 	const user = useUser(file?.owner)
@@ -28,10 +31,6 @@ const CurrentFile = () => {
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {
 		setFile(file => isShowing ? file : null)
-	}, [setFile])
-	
-	const hide = useCallback(() => {
-		setFile(null)
 	}, [setFile])
 	
 	const copyLink = useCallback(() => {
@@ -43,14 +42,20 @@ const CurrentFile = () => {
 	}, [url])
 	
 	const deleteFile = useCallback(() => {
+		if (!file)
+			return
 		
-	}, [])
+		_deleteFile(file)
+			.catch(({ message }) => toast.error(message))
+		
+		hideOverlays()
+	}, [file, hideOverlays])
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
 			<header className={styles.header}>
 				<p className={styles.headerName}>{file?.name}</p>
-				<button className={styles.close} onClick={hide} title="Close">
+				<button className={styles.close} onClick={hideOverlays} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
 			</header>
@@ -66,7 +71,7 @@ const CurrentFile = () => {
 										Uploaded by {user
 											? (
 												<Link href={`/${user.slug}`}>
-													<a className={styles.userLink} onClick={hide}>
+													<a className={styles.userLink} onClick={hideOverlays}>
 														<span className={styles.userName}>{user.name}</span>
 														<FontAwesomeIcon
 															className={styles.userIcon}

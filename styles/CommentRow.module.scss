@@ -1,0 +1,66 @@
+@use 'colors';
+@use 'spinner' as *;
+
+.root {
+	max-width: 75%;
+	width: max-content;
+	word-wrap: break-word;
+	
+	& + & {
+		margin-top: 4px;
+	}
+	
+	& + .showName {
+		margin-top: 20px;
+	}
+}
+
+.fromSelf {
+	margin-left: auto;
+	
+	> .body {
+		color: white;
+		background: colors.$blue;
+	}
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	margin-bottom: 4px;
+	text-decoration: none;
+	font-size: 14px;
+	color: colors.$comment;
+	
+	&:hover {
+		> .name {
+			text-decoration: underline;
+		}
+		
+		> .icon {
+			transform: translateX(4px);
+		}
+	}
+}
+
+.name {
+	margin-right: 4px;
+	font-weight: 900;
+}
+
+.icon {
+	transition: transform 0.3s;
+}
+
+.spinner {
+	@include spinner(14px, 3px, colors.$comment);
+	
+	margin-bottom: 2px;
+}
+
+.body {
+	max-width: max-content;
+	padding: 6px 12px;
+	background: colors.$comment;
+	border-radius: 16px;
+}
