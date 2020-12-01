@@ -102,12 +102,17 @@
 }
 
 .userName {
-	margin-right: 6px;
+	display: inline-block;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
 	font-weight: 900;
-	transition: margin-right 0.3s;
 }
 
 .userIcon {
+	margin-left: 6px;
 	transition: transform 0.3s;
 }
 

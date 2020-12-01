@@ -82,7 +82,7 @@ const CurrentFile = () => {
 													</Link>
 												)
 												: <Spinner className={styles.spinner} />
-											: <b>anonymous</b>
+											: <span className={styles.userName}>anonymous</span>
 										}
 									</p>
 								</div>
