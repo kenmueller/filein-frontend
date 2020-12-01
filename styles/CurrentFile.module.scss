@@ -85,9 +85,14 @@
 	text-decoration: none;
 	color: white;
 	
-	&:hover > .userName {
-		margin-right: 10px;
-		text-decoration: underline;
+	&:hover {
+		> .userName {
+			text-decoration: underline;
+		}
+		
+		> .userIcon {
+			transform: translateX(4px);
+		}
 	}
 }
 
@@ -95,6 +100,10 @@
 	margin-right: 6px;
 	font-weight: 900;
 	transition: margin-right 0.3s;
+}
+
+.userIcon {
+	transition: transform 0.3s;
 }
 
 .spinner {

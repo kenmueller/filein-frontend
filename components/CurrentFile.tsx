@@ -68,7 +68,10 @@ const CurrentFile = () => {
 												<Link href={`/${user.slug}`}>
 													<a className={styles.userLink}>
 														<span className={styles.userName}>{user.name}</span>
-														<FontAwesomeIcon icon={faChevronRight} />
+														<FontAwesomeIcon
+															className={styles.userIcon}
+															icon={faChevronRight}
+														/>
 													</a>
 												</Link>
 											)
