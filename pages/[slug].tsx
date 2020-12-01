@@ -50,7 +50,7 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 	return (
 		<div className={styles.root}>
 			<Head>
-				<title key="title">filein</title>
+				<title key="title">{user.name} - filein</title>
 			</Head>
 			<Gradient>
 				<header className={styles.header}>
