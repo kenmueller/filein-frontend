@@ -13,7 +13,7 @@ const Footer = ({ className }: FooterProps) => (
 		<footer className={styles.content}>
 			<a
 				className={styles.link}
-				href="https://github.com/kenmueller/filein"
+				href="https://github.com/kenmueller/filein-frontend"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
