@@ -114,6 +114,7 @@
 }
 
 .actions {
+	flex-shrink: 0;
 	display: flex;
 	margin-left: 60px;
 }
