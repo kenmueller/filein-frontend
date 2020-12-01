@@ -50,7 +50,7 @@ const UploadFile = () => {
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
 			<header className={styles.header}>
 				<p className={styles.name}>{file?.name}</p>
-				<button className={styles.close} onClick={hide}>
+				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
 			</header>

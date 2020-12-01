@@ -54,6 +54,12 @@
 }
 
 .info {
+	flex-grow: 1;
+	display: flex;
+}
+
+.meta {
+	margin-right: auto;
 	color: white;
 }
 
@@ -91,3 +97,32 @@
 	margin-left: 4px;
 	vertical-align: middle;
 }
+
+.action {
+	$dimension: 40px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: $dimension;
+	height: $dimension;
+	margin-left: 12px;
+	font-size: 16px;
+	color: white;
+	background: var(--color);
+	border-radius: 8px;
+	transition: color 0.3s, background 0.3s, transform 0.3s;
+	
+	&:hover {
+		color: var(--color);
+		background: white;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+
+.download { --color: #{colors.$purple}; }
+.copy { --color: #{colors.$green}; }
+.delete { --color: #{colors.$red}; }
