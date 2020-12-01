@@ -1,10 +1,11 @@
+import FileMeta from 'models/FileMeta'
 import firebase from './firebase'
 
-import 'firebase/storage'
+import 'firebase/firestore'
 
-const storage = firebase.storage().ref()
+const firestore = firebase.firestore()
 
-const deleteFile = (id: string): Promise<void> =>
-	storage.child(`files/${id}`).delete()
+const deleteFile = (file: FileMeta) =>
+	firestore.doc(`files/${file.id}`).delete()
 
 export default deleteFile

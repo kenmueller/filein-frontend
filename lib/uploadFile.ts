@@ -25,7 +25,7 @@ const uploadFile = async (
 			: getExtension(type)
 	}`
 	
-	const task = storage.child(`files/${id}`).put(file, {
+	const task = storage.child(id).put(file, {
 		contentType: type,
 		cacheControl: 'public, max-age=31536000, s-maxage=31536000',
 		customMetadata: { name }
