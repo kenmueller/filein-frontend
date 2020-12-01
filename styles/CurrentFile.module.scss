@@ -19,11 +19,16 @@
 }
 
 .headerName {
+	margin-right: 16px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	font-weight: 900;
 	color: white;
 }
 
 .close {
+	flex-shrink: 0;
 	font-size: 20px;
 	color: white;
 	background: transparent;
