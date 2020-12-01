@@ -58,49 +58,53 @@ const CurrentFile = () => {
 				{file && (
 					<>
 						<FilePreview className={styles.preview} file={file} />
-						<div className={styles.info}>
-							<div className={styles.meta}>
-								<p className={styles.name}>{file.name}</p>
-								<p className={styles.user}>
-									Uploaded by {user
-										? (
-											<Link href={`/${user.slug}`}>
-												<a className={styles.userLink}>
-													<span className={styles.userName}>{user.name}</span>
-													<FontAwesomeIcon icon={faChevronRight} />
-												</a>
-											</Link>
-										)
-										: <Spinner className={styles.spinner} />
-									}
-								</p>
+						<div className={styles.main}>
+							<div className={styles.info}>
+								<div className={styles.meta}>
+									<p className={styles.name}>{file.name}</p>
+									<p className={styles.user}>
+										Uploaded by {user
+											? (
+												<Link href={`/${user.slug}`}>
+													<a className={styles.userLink}>
+														<span className={styles.userName}>{user.name}</span>
+														<FontAwesomeIcon icon={faChevronRight} />
+													</a>
+												</Link>
+											)
+											: <Spinner className={styles.spinner} />
+										}
+									</p>
+								</div>
+								<div className={styles.actions}>
+									<a
+										className={cx(styles.action, styles.download)}
+										href={url}
+										download={file.name}
+										title="Download"
+									>
+										<FontAwesomeIcon icon={faDownload} />
+									</a>
+									<button
+										className={cx(styles.action, styles.copy)}
+										onClick={copyLink}
+										title="Copy"
+									>
+										<FontAwesomeIcon icon={faLink} />
+									</button>
+									{currentUser && currentUser.uid === user?.id && (
+										<button
+											className={cx(styles.action, styles.delete)}
+											onClick={deleteFile}
+											title="Delete"
+										>
+											<FontAwesomeIcon icon={faTrash} />
+										</button>
+									)}
+								</div>
 							</div>
-							<a
-								className={cx(styles.action, styles.download)}
-								href={url}
-								download={file.name}
-								title="Download"
-							>
-								<FontAwesomeIcon icon={faDownload} />
-							</a>
-							<button
-								className={cx(styles.action, styles.copy)}
-								onClick={copyLink}
-								title="Copy"
-							>
-								<FontAwesomeIcon icon={faLink} />
-							</button>
-							{currentUser && currentUser.uid === user?.id && (
-								<button
-									className={cx(styles.action, styles.delete)}
-									onClick={deleteFile}
-									title="Delete"
-								>
-									<FontAwesomeIcon icon={faTrash} />
-								</button>
-							)}
+							<Comments className={styles.comments} file={file} />
 						</div>
-						<Comments className={styles.comments} file={file} />
 					</>
 				)}
 			</div>

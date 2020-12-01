@@ -34,7 +34,7 @@ const FileCell = ({ file }: FileCellProps) => {
 				<p className={styles.name}>{file.name}</p>
 				<span className={styles.comments}>
 					<FontAwesomeIcon icon={faComment} />
-					<p className={styles.commentCount}>50</p>
+					<p className={styles.commentCount}>{file.comments}</p>
 				</span>
 			</span>
 		</button>

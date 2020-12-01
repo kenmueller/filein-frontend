@@ -43,27 +43,29 @@
 }
 
 .content {
-	display: grid;
-	grid:
-		'preview info' auto
-		'preview comments' 1fr /
-		auto 1fr;
+	display: flex;
 	height: 500px;
 	padding: 16px;
 }
 
 .preview {
-	grid-area: preview;
 	margin-right: 16px;
 }
 
-.info {
-	grid-area: info;
+.main {
+	flex-shrink: 0;
+	flex-grow: 1;
 	display: flex;
+	flex-direction: column;
+}
+
+.info {
+	flex-shrink: 0;
+	display: flex;
+	justify-content: space-between;
 }
 
 .meta {
-	margin-right: auto;
 	color: white;
 }
 
@@ -102,6 +104,11 @@
 	vertical-align: middle;
 }
 
+.actions {
+	display: flex;
+	margin-left: 60px;
+}
+
 .action {
 	$dimension: 40px;
 	
@@ -110,12 +117,15 @@
 	align-items: center;
 	width: $dimension;
 	height: $dimension;
-	margin-left: 12px;
 	font-size: 16px;
 	color: white;
 	background: var(--color);
 	border-radius: 8px;
 	transition: color 0.3s, background 0.3s, transform 0.3s;
+	
+	& + & {
+		margin-left: 12px;
+	}
 	
 	&:hover {
 		color: var(--color);
@@ -132,5 +142,5 @@
 .delete { --color: #{colors.$red}; }
 
 .comments {
-	grid-area: comments;
+	flex-grow: 1;
 }
