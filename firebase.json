@@ -5,5 +5,8 @@
 	},
 	"storage": {
 		"rules": "rules/storage.rules"
+	},
+	"functions": {
+		"predeploy": ["npm run build -C \"$RESOURCE_DIR\""]
 	}
 }
