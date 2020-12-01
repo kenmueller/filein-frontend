@@ -4,5 +4,6 @@ export default interface FileMeta {
 	type: string
 	size: number
 	owner: string | null
+	comments: number
 	uploaded: number
 }

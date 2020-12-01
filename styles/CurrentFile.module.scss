@@ -43,18 +43,22 @@
 }
 
 .content {
-	display: flex;
+	display: grid;
+	grid:
+		'preview info' auto
+		'preview comments' 1fr /
+		auto 1fr;
 	height: 500px;
 	padding: 16px;
 }
 
 .preview {
-	flex-shrink: 0;
+	grid-area: preview;
 	margin-right: 16px;
 }
 
 .info {
-	flex-grow: 1;
+	grid-area: info;
 	display: flex;
 }
 
@@ -126,3 +130,7 @@
 .download { --color: #{colors.$purple}; }
 .copy { --color: #{colors.$green}; }
 .delete { --color: #{colors.$red}; }
+
+.comments {
+	grid-area: comments;
+}

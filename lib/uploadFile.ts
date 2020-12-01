@@ -41,12 +41,13 @@ const uploadFile = async (
 		type,
 		size,
 		owner,
+		comments: 0,
 		uploaded: FieldValue.serverTimestamp()
 	})
 	
 	setProgress(100)
 	
-	return { id, name, type, size, owner, uploaded: Date.now() }
+	return { id, name, type, size, owner, comments: 0, uploaded: Date.now() }
 }
 
 export default uploadFile

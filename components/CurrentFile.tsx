@@ -100,7 +100,7 @@ const CurrentFile = () => {
 								</button>
 							)}
 						</div>
-						<Comments file={file} />
+						<Comments className={styles.comments} file={file} />
 					</>
 				)}
 			</div>
