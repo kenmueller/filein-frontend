@@ -1,5 +1,7 @@
-import { useState, useCallback, ChangeEvent, FormEvent, useEffect } from 'react'
+import { useRef, useState, useCallback, useEffect, ChangeEvent, FormEvent } from 'react'
 import { toast } from 'react-toastify'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComment } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import FileMeta from 'models/FileMeta'
@@ -8,11 +10,9 @@ import submitComment from 'lib/submitComment'
 import useCurrentUser from 'hooks/useCurrentUser'
 import useComments from 'hooks/useComments'
 import CommentRow from './CommentRow'
+import Spinner from './Spinner'
 
 import styles from 'styles/Comments.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faComment } from '@fortawesome/free-solid-svg-icons'
-import Spinner from './Spinner'
 
 export interface CommentsProps {
 	className?: string
@@ -20,6 +20,8 @@ export interface CommentsProps {
 }
 
 const Comments = ({ className, file }: CommentsProps) => {
+	const commentsRef = useRef<HTMLDivElement | null>(null)
+	
 	const currentUser = useCurrentUser()
 	const comments = useComments(file)
 	
@@ -53,9 +55,16 @@ const Comments = ({ className, file }: CommentsProps) => {
 		setIsLoading(currentUser === undefined)
 	}, [currentUser, setIsLoading])
 	
+	useEffect(() => {
+		const { current } = commentsRef
+		
+		if (current)
+			current.scrollTop = current.scrollHeight
+	}, [comments, commentsRef])
+	
 	return (
 		<div className={cx(styles.root, className)}>
-			<div className={styles.comments}>
+			<div className={styles.comments} ref={commentsRef}>
 				{comments && currentUser !== undefined
 					? comments.map((comment, index) => (
 						<CommentRow
