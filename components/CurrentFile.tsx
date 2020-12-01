@@ -14,6 +14,7 @@ import useUser from 'hooks/useUser'
 import Modal from './Modal'
 import FilePreview from './FilePreview'
 import Spinner from './Spinner'
+import Comments from './Comments'
 
 import styles from 'styles/CurrentFile.module.scss'
 
@@ -65,7 +66,7 @@ const CurrentFile = () => {
 										? (
 											<Link href={`/${user.slug}`}>
 												<a className={styles.userLink}>
-													<p className={styles.userName}>{user.name}</p>
+													<span className={styles.userName}>{user.name}</span>
 													<FontAwesomeIcon icon={faChevronRight} />
 												</a>
 											</Link>
@@ -99,6 +100,7 @@ const CurrentFile = () => {
 								</button>
 							)}
 						</div>
+						<Comments file={file} />
 					</>
 				)}
 			</div>
