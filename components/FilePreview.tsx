@@ -16,15 +16,18 @@ export interface FilePreviewProps {
 
 const FilePreview = ({ className, file }: FilePreviewProps) => {
 	const url = getFileUrl(file)
+	const isImage = isFileImage(file)
 	
 	return (
 		<a
-			className={cx(styles.root, className)}
+			className={cx(styles.root, className, {
+				[styles.hasIcon]: !isImage
+			})}
 			href={url}
 			rel="noopener noreferrer"
 			target="_blank"
 		>
-			{isFileImage(file)
+			{isImage
 				? <img className={styles.image} src={url} alt={file.name} />
 				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
 			}
