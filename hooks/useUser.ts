@@ -16,7 +16,7 @@ const queue = new Set<string>()
  * - `null` - nonexistent
  * - `User` - loaded
  */
-const useUser = (id: string | undefined) => {
+const useUser = (id: string | null | undefined) => {
 	const [users, setUsers] = useRecoilState(usersState)
 	
 	useEffect(() => {
