@@ -34,7 +34,7 @@ const FilePreview = ({ className, file }: FilePreviewProps) => {
 			title="Share"
 		>
 			{isImage
-				? <img className={styles.image} src={getFileUrl(file)} alt={file.name} />
+				? <img className={styles.image} src={getFileUrl(file, true)} alt={file.name} />
 				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
 			}
 			<span className={styles.shareContainer}>

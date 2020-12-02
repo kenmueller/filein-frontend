@@ -27,7 +27,7 @@ const FileCell = ({ file }: FileCellProps) => {
 	return (
 		<button className={cx(styles.root, { [styles.isImage]: isImage })} onClick={onClick}>
 			{isImage
-				? <img className={styles.image} src={getFileUrl(file)} alt={file.name} loading="lazy" />
+				? <img className={styles.image} src={getFileUrl(file, true)} alt={file.name} loading="lazy" />
 				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
 			}
 			<span className={styles.info}>
