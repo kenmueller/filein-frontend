@@ -66,16 +66,18 @@ const Comments = ({ className, file }: CommentsProps) => {
 		<div className={cx(styles.root, className)}>
 			<div className={styles.comments} ref={commentsRef}>
 				{comments && currentUser !== undefined
-					? comments.map((comment, index) => (
-						<CommentRow
-							key={comment.id}
-							currentUser={currentUser}
-							file={file}
-							comments={comments}
-							comment={comment}
-							index={index}
-						/>
-					))
+					? comments.length
+						? comments.map((comment, index) => (
+							<CommentRow
+								key={comment.id}
+								currentUser={currentUser}
+								file={file}
+								comments={comments}
+								comment={comment}
+								index={index}
+							/>
+						))
+						: <p className={styles.empty}>Be the first one to comment</p>
 					: <Spinner className={styles.commentsSpinner} />
 				}
 			</div>

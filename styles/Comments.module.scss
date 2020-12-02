@@ -26,6 +26,14 @@ $scrollbar-width: 2px;
 	}
 }
 
+.empty {
+	margin: auto;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 900;
+	color: white;
+}
+
 .spinner {
 	@include spinner(20px, 4px, white);
 	
