@@ -50,7 +50,7 @@ const useRecentlyUploadedFiles = () => {
 									break
 							}
 						
-						return files
+						return files.sort((a, b) => b.uploaded - a.uploaded)
 					})
 				},
 				({ message }) => toast.error(message)
