@@ -33,14 +33,21 @@
 
 .home {
 	margin-right: auto;
+	padding: 6px 12px;
 	text-decoration: none;
 	font-size: 30px;
 	font-weight: 900;
 	color: var(--color);
-	transition: color 0.3s, transform 0.3s;
+	border-radius: 8px;
+	transition: color 0.3s, background 0.3s, transform 0.3s;
 	
 	&:hover {
-		text-decoration: underline;
+		color: colors.$blue;
+		background: var(--color);
+		
+		.active & {
+			color: white;
+		}
 	}
 	
 	&:active {
