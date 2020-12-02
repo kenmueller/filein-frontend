@@ -24,7 +24,7 @@ const EditFileName = ({ className, file, onEdit }: EditFileNameProps) => {
 	}, [name, input])
 	
 	const onBlur = useCallback(async () => {
-		if (!name)
+		if (!name || file.name === name)
 			return
 		
 		try {
