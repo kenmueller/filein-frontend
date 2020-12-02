@@ -9,9 +9,10 @@ import styles from 'styles/EditFileName.module.scss'
 export interface EditFileNameProps {
 	className?: string
 	file: FileMeta
+	onEdit?(file: FileMeta): void
 }
 
-const EditFileName = ({ className, file }: EditFileNameProps) => {
+const EditFileName = ({ className, file, onEdit }: EditFileNameProps) => {
 	const input = useRef<HTMLInputElement | null>(null)
 	const [name, setName] = useState(file.name)
 	
@@ -28,11 +29,13 @@ const EditFileName = ({ className, file }: EditFileNameProps) => {
 		
 		try {
 			await editFileName(file, name)
+			onEdit?.({ ...file, name })
+			
 			toast.success('Updated name')
 		} catch ({ message }) {
 			toast.error(message)
 		}
-	}, [file, name])
+	}, [file, name, onEdit])
 	
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		setName(event.target.value)

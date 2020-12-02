@@ -69,7 +69,7 @@ const CurrentFile = () => {
 							<div className={styles.info}>
 								<div className={styles.meta}>
 									{isOwner
-										? <EditFileName className={styles.editName} file={file} />
+										? <EditFileName className={styles.editName} file={file} onEdit={setFile} />
 										: <p className={styles.name}>{file.name}</p>
 									}
 									<p className={styles.user}>
