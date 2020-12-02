@@ -29,10 +29,10 @@ const PDF = dynamic(() => import('./PDF'), { ssr: false })
 const FilePreviewContent = ({ file, type }: FilePreviewContentProps) => {
 	switch (type) {
 		case FileType.Image:
-			return <img className={styles.image} src={getFileUrl(file, true)} alt={file.name} />
+			return <img className={styles.imageElement} src={getFileUrl(file, true)} alt={file.name} />
 		case FileType.Video:
 			return (
-				<video controls autoPlay>
+				<video className={styles.videoElement} controls autoPlay>
 					<source src={getFileUrl(file, true)} type={file.type} />
 					<FontAwesomeIcon className={styles.icon} icon={faVideo} />
 				</video>

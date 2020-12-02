@@ -10,6 +10,14 @@
 	background: transparentize(white, 0.9);
 	border-radius: 8px;
 	
+	&:hover > .shareContainer {
+		background: transparentize(colors.$dark, 0.5);
+		opacity: 0.5;
+	}
+}
+
+.image,
+.other {
 	&::after {
 		content: '';
 		position: absolute;
@@ -27,16 +35,20 @@
 		
 		> .shareContainer {
 			background: transparent;
+			opacity: 1;
 		}
 	}
 }
 
-.image {
-	
+.imageElement {
+	max-width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
-.video {
-	
+.videoElement {
+	width: 100%;
+	height: 100%;
 }
 
 .audio {
@@ -45,15 +57,6 @@
 
 .pdf {
 	min-width: 400px;
-	
-	&::after {
-		content: none;
-	}
-	
-	&:hover > .shareContainer {
-		opacity: 0.5;
-		background: transparentize(colors.$dark, 0.5);
-	}
 }
 
 .document {
@@ -63,18 +66,8 @@
 }
 
 .other {
-	
-}
-
-.hasIcon {
 	max-width: none;
 	width: 250px;
-}
-
-.image {
-	max-width: 100%;
-	height: 100%;
-	object-fit: contain;
 }
 
 .icon {
