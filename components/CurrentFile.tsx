@@ -15,6 +15,7 @@ import useUser from 'hooks/useUser'
 import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
 import FilePreview from './FilePreview'
+import EditFileName from './EditFileName'
 import Spinner from './Spinner'
 import Comments from './Comments'
 
@@ -28,6 +29,7 @@ const CurrentFile = () => {
 	const user = useUser(file?.owner)
 	
 	const url = file && getFileUrl(file)
+	const isOwner = currentUser && currentUser.uid === file?.owner
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {
 		setFile(file => isShowing ? file : null)
@@ -66,7 +68,10 @@ const CurrentFile = () => {
 						<div className={styles.main}>
 							<div className={styles.info}>
 								<div className={styles.meta}>
-									<p className={styles.name}>{file.name}</p>
+									{isOwner
+										? <EditFileName className={styles.editName} file={file} />
+										: <p className={styles.name}>{file.name}</p>
+									}
 									<p className={styles.user}>
 										Uploaded by {file.owner
 											? user
@@ -102,7 +107,7 @@ const CurrentFile = () => {
 									>
 										<FontAwesomeIcon icon={faLink} />
 									</button>
-									{currentUser && currentUser.uid === user?.id && (
+									{isOwner && (
 										<button
 											className={cx(styles.action, styles.delete)}
 											onClick={deleteFile}
