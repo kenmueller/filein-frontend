@@ -30,6 +30,8 @@ const signIn = async () => {
 				slug: await getSlug(name),
 				name,
 				email: user.email,
+				files: 0,
+				comments: 0,
 				joined: firebase.firestore.FieldValue.serverTimestamp()
 			})
 		}

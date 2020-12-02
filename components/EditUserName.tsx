@@ -1,8 +1,10 @@
 import { useRef, useState, useCallback, FormEvent, ChangeEvent } from 'react'
+import { useSetRecoilState } from 'recoil'
 import { toast } from 'react-toastify'
 
 import CurrentUser from 'models/CurrentUser'
-// import editUserName from 'lib/editUserName'
+import editUserName from 'lib/editUserName'
+import currentUserState from 'state/currentUser'
 
 import styles from 'styles/EditUserName.module.scss'
 
@@ -12,6 +14,9 @@ export interface EditUserNameProps {
 }
 
 const EditUserName = ({ className, user }: EditUserNameProps) => {
+	const setCurrentUser = useSetRecoilState(currentUserState)
+	
+	const uid = user.auth.uid
 	const currentName = user.data?.name ?? user.auth.displayName
 	
 	const input = useRef<HTMLInputElement | null>(null)
@@ -29,13 +34,18 @@ const EditUserName = ({ className, user }: EditUserNameProps) => {
 			return
 		
 		try {
-			// TODO: Update name
+			await editUserName(uid, name)
+			
+			setCurrentUser(currentUser => ({
+				...currentUser,
+				data: { ...currentUser.data, name }
+			}))
 			
 			toast.success('Updated name')
 		} catch ({ message }) {
 			toast.error(message)
 		}
-	}, [currentName, name])
+	}, [uid, currentName, name, setCurrentUser])
 	
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		setName(event.target.value)
