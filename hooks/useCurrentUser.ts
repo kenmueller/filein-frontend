@@ -12,25 +12,23 @@ const auth = firebase.auth()
 
 const useCurrentUser = () => {
 	const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
-	const user = useUser(currentUser?.auth.uid)
+	const user = useUser(currentUser?.auth?.uid)
 	
 	useEffect(() => {
 		if (currentUser !== undefined)
 			return
 		
 		auth.onAuthStateChanged(
-			auth => setCurrentUser(({ auth, data: null })),
+			auth => setCurrentUser(auth && { auth, data: null }),
 			({ message }) => toast.error(message)
 		)
 	}, [currentUser, setCurrentUser])
 	
 	useEffect(() => {
-		if (!user)
-			return
-		
-		setCurrentUser(currentUser =>
-			currentUser && { ...currentUser, data: user }
-		)
+		setCurrentUser(currentUser => currentUser && {
+			...currentUser,
+			data: user ?? null
+		})
 	}, [user, setCurrentUser])
 	
 	return currentUser

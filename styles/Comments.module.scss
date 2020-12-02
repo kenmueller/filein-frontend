@@ -34,7 +34,7 @@ $scrollbar-width: 2px;
 	color: white;
 }
 
-.spinner {
+.commentsSpinner {
 	@include spinner(20px, 4px, white);
 	
 	margin: auto;
