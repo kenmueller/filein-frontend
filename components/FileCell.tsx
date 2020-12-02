@@ -5,7 +5,8 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import FileMeta from 'models/FileMeta'
-import isFileImage from 'lib/isFileImage'
+import FileType from 'models/FileType'
+import getFileType from 'lib/getFileType'
 import getFileUrl from 'lib/getFileUrl'
 import getFileIcon from 'lib/getFileIcon'
 import currentFileState from 'state/currentFile'
@@ -17,7 +18,7 @@ export interface FileCellProps {
 }
 
 const FileCell = ({ file }: FileCellProps) => {
-	const isImage = isFileImage(file)
+	const isImage = getFileType(file) === FileType.Image
 	const setCurrentFile = useSetRecoilState(currentFileState)
 	
 	const onClick = useCallback(() => {

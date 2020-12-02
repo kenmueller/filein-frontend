@@ -1,24 +1,58 @@
 import { useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShareSquare } from '@fortawesome/free-solid-svg-icons'
+import { faShareSquare, faVideo, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import FileMeta from 'models/FileMeta'
+import FileType from 'models/FileType'
+import getFileType from 'lib/getFileType'
 import getFileUrl from 'lib/getFileUrl'
-import isFileImage from 'lib/isFileImage'
 import getFileIcon from 'lib/getFileIcon'
 
 import styles from 'styles/FilePreview.module.scss'
+
+interface FilePreviewContentProps {
+	file: FileMeta
+	type: FileType
+}
 
 export interface FilePreviewProps {
 	className?: string
 	file: FileMeta
 }
 
+const PDF = dynamic(() => import('./PDF'), { ssr: false })
+
+const FilePreviewContent = ({ file, type }: FilePreviewContentProps) => {
+	switch (type) {
+		case FileType.Image:
+			return <img className={styles.image} src={getFileUrl(file, true)} alt={file.name} />
+		case FileType.Video:
+			return (
+				<video controls autoPlay>
+					<source src={getFileUrl(file, true)} type={file.type} />
+					<FontAwesomeIcon className={styles.icon} icon={faVideo} />
+				</video>
+			)
+		case FileType.Audio:
+			return (
+				<audio controls autoPlay>
+					<source src={getFileUrl(file, true)} type={file.type} />
+					<FontAwesomeIcon className={styles.icon} icon={faVolumeUp} />
+				</audio>
+			)
+		case FileType.PDF:
+			return <PDF className={styles.document} url={getFileUrl(file, true)} />
+		case FileType.Other:
+			return <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
+	}
+}
+
 const FilePreview = ({ className, file }: FilePreviewProps) => {
-	const isImage = isFileImage(file)
+	const type = getFileType(file)
 	
 	const onClick = useCallback(() => {
 		copy(`https://filein.io/${file.id}`)
@@ -26,21 +60,17 @@ const FilePreview = ({ className, file }: FilePreviewProps) => {
 	}, [file.id])
 	
 	return (
-		<button
-			className={cx(styles.root, className, {
-				[styles.hasIcon]: !isImage
-			})}
+		<div
+			className={cx(styles.root, styles[type], className)}
 			onClick={onClick}
+			role="button"
 			title="Share"
 		>
-			{isImage
-				? <img className={styles.image} src={getFileUrl(file, true)} alt={file.name} />
-				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
-			}
+			<FilePreviewContent file={file} type={type} />
 			<span className={styles.shareContainer}>
 				<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
 			</span>
-		</button>
+		</div>
 	)
 }
 
