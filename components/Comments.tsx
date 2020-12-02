@@ -41,7 +41,7 @@ const Comments = ({ className, file }: CommentsProps) => {
 			return
 		}
 		
-		submitComment(currentUser.uid, file, message)
+		submitComment(currentUser.auth.uid, file, message)
 			.catch(({ message }) => toast.error(message))
 		
 		setMessage('')
@@ -89,7 +89,9 @@ const Comments = ({ className, file }: CommentsProps) => {
 						currentUser === undefined
 							? undefined
 							: currentUser
-								? `as ${currentUser.displayName}`
+								? currentUser.data
+									? `as ${currentUser.data.name}`
+									: undefined
 								: 'You must be signed in to comment'
 					}
 					value={message}

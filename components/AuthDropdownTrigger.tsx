@@ -1,19 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-import firebase from 'lib/firebase'
+import CurrentUser from 'models/CurrentUser'
 
 import styles from 'styles/AuthDropdownTrigger.module.scss'
 
-import 'firebase/auth'
-
 export interface AuthDropdownTriggerProps {
-	currentUser: firebase.User
+	currentUser: CurrentUser
 }
 
 const AuthDropdownTrigger = ({ currentUser }: AuthDropdownTriggerProps) => (
 	<>
-		<p className={styles.name}>{currentUser.displayName}</p>
+		<p className={styles.name}>
+			{currentUser.data?.name ?? currentUser.auth.displayName}
+		</p>
 		<FontAwesomeIcon icon={faChevronDown} />
 	</>
 )

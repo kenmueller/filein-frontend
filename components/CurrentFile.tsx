@@ -29,7 +29,7 @@ const CurrentFile = () => {
 	const user = useUser(file?.owner)
 	
 	const url = file && getFileUrl(file)
-	const isOwner = currentUser && currentUser.uid === file?.owner
+	const isOwner = currentUser && currentUser.auth.uid === file?.owner
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {
 		setFile(file => isShowing ? file : null)

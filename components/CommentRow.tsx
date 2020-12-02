@@ -3,19 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faCrown } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
+import CurrentUser from 'models/CurrentUser'
 import FileMeta from 'models/FileMeta'
 import Comment from 'models/Comment'
-import firebase from 'lib/firebase'
 import useUser from 'hooks/useUser'
 import useHideOverlays from 'hooks/useHideOverlays'
 import Spinner from './Spinner'
 
 import styles from 'styles/CommentRow.module.scss'
 
-import 'firebase/auth'
-
 export interface CommentRowProps {
-	currentUser: firebase.User | null
+	currentUser: CurrentUser | null
 	file: FileMeta
 	comments: Comment[]
 	comment: Comment
@@ -23,7 +21,7 @@ export interface CommentRowProps {
 }
 
 const CommentRow = ({ currentUser, file, comments, comment, index }: CommentRowProps) => {
-	const fromSelf = currentUser?.uid === comment.from
+	const fromSelf = currentUser?.auth.uid === comment.from
 	const showName = !fromSelf && comments[index - 1]?.from !== comment.from
 	
 	const user = useUser(showName ? comment.from : undefined)

@@ -66,7 +66,7 @@ const UploadFile = () => {
 		if (!file || currentUser === undefined)
 			return
 		
-		uploadFile(file, currentUser ? currentUser.uid : null, setProgress)
+		uploadFile(file, currentUser ? currentUser.auth.uid : null, setProgress)
 			.then(setFileMeta)
 			.catch(({ message }) => toast.error(message))
 	}, [currentUser, file, setFileMeta, setProgress])

@@ -1,10 +1,8 @@
 import { atom } from 'recoil'
 
-import firebase from 'lib/firebase'
+import CurrentUser from 'models/CurrentUser'
 
-import 'firebase/auth'
-
-const currentUserState = atom<firebase.User | null | undefined>({
+const currentUserState = atom<CurrentUser | null | undefined>({
 	key: 'currentUser',
 	default: undefined,
 	dangerouslyAllowMutability: true

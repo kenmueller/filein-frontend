@@ -1,15 +1,13 @@
 import { useState, useCallback } from 'react'
 
-import firebase from 'lib/firebase'
+import CurrentUser from 'models/CurrentUser'
 import Dropdown from './Dropdown'
 import AuthDropdownTrigger, { authDropdownTriggerClassName } from './AuthDropdownTrigger'
 import AuthDropdownContent, { authDropdownContentClassName } from './AuthDropdownContent'
 
-import 'firebase/auth'
-
 export interface AuthDropdownProps {
 	className?: string
-	currentUser: firebase.User
+	currentUser: CurrentUser
 }
 
 const AuthDropdown = ({ className, currentUser }: AuthDropdownProps) => {

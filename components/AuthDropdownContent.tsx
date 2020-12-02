@@ -3,27 +3,37 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
-import firebase from 'lib/firebase'
+import CurrentUser from 'models/CurrentUser'
+import EditUserName from './EditUserName'
 import SignOutButton from './SignOutButton'
 
 import styles from 'styles/AuthDropdownContent.module.scss'
 
-import 'firebase/auth'
-
 export interface AuthDropdownContentProps {
-	currentUser: firebase.User
+	currentUser: CurrentUser
 	onClick?(): void
 }
 
 const AuthDropdownContent = ({ currentUser, onClick }: AuthDropdownContentProps) => (
 	<>
-		<Link href={`/${currentUser.uid}`}>
-			<a className={styles.action} onClick={onClick}>
-				<FontAwesomeIcon icon={faUser} />
-				<p className={styles.actionMessage}>My files</p>
-			</a>
-		</Link>
-		<SignOutButton className={cx(styles.action, styles.danger)} onClick={onClick}>
+		<EditUserName className={styles.row} user={currentUser} />
+		{currentUser.data
+			? (
+				<Link href={`/${currentUser.data.slug}`}>
+					<a className={cx(styles.row, styles.action)} onClick={onClick}>
+						<FontAwesomeIcon icon={faUser} />
+						<span className={styles.actionMessage}>My files</span>
+					</a>
+				</Link>
+			)
+			: (
+				<p className={cx(styles.row, styles.action)} aria-disabled>
+					<FontAwesomeIcon icon={faUser} />
+					<span className={styles.actionMessage}>My files</span>
+				</p>
+			)
+		}
+		<SignOutButton className={cx(styles.row, styles.action, styles.danger)} onClick={onClick}>
 			<FontAwesomeIcon icon={faSignOutAlt} />
 			<p className={styles.actionMessage}>Sign out</p>
 		</SignOutButton>
