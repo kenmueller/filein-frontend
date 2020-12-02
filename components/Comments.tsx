@@ -5,8 +5,8 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import FileMeta from 'models/FileMeta'
-import signIn from 'lib/signIn'
 import submitComment from 'lib/submitComment'
+import useSignIn from 'hooks/useSignIn'
 import useCurrentUser from 'hooks/useCurrentUser'
 import useComments from 'hooks/useComments'
 import CommentRow from './CommentRow'
@@ -22,16 +22,19 @@ export interface CommentsProps {
 const Comments = ({ className, file }: CommentsProps) => {
 	const commentsRef = useRef<HTMLDivElement | null>(null)
 	
+	const signIn = useSignIn()
 	const currentUser = useCurrentUser()
 	const comments = useComments(file)
 	
 	const [message, setMessage] = useState('')
 	const [isLoading, setIsLoading] = useState(currentUser === undefined)
 	
+	const uid = currentUser?.auth?.uid ?? currentUser?.data?.id
+	
 	const onSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		
-		if (!currentUser) {
+		if (!uid) {
 			setIsLoading(true)
 			
 			signIn()
@@ -41,11 +44,11 @@ const Comments = ({ className, file }: CommentsProps) => {
 			return
 		}
 		
-		submitComment(currentUser.auth.uid, file, message)
+		submitComment(uid, file, message)
 			.catch(({ message }) => toast.error(message))
 		
 		setMessage('')
-	}, [currentUser, file, message, setMessage, setIsLoading])
+	}, [uid, file, message, signIn, setMessage, setIsLoading])
 	
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		setMessage(event.target.value)

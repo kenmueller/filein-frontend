@@ -28,7 +28,7 @@ const uploadFile = async (
 	const task = storage.child(id).put(file, {
 		contentType: type,
 		cacheControl: 'public, max-age=31536000, s-maxage=31536000',
-		customMetadata: { name }
+		customMetadata: { name, owner }
 	})
 	
 	task.on('state_changed', ({ bytesTransferred, totalBytes }) => {

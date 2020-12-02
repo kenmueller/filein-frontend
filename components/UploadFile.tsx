@@ -31,7 +31,7 @@ const UploadFile = () => {
 	const [progress, setProgress] = useState(0)
 	
 	const isComplete = progress === 100
-	const uid = currentUser && currentUser.auth.uid
+	const uid = currentUser && currentUser.auth?.uid
 	const url = fileMeta && getFileUrl(fileMeta)
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {

@@ -12,7 +12,7 @@ export interface AuthDropdownTriggerProps {
 const AuthDropdownTrigger = ({ currentUser }: AuthDropdownTriggerProps) => (
 	<>
 		<p className={styles.name}>
-			{currentUser.data?.name ?? currentUser.auth.displayName}
+			{currentUser.data?.name ?? currentUser.auth?.displayName}
 		</p>
 		<FontAwesomeIcon icon={faChevronDown} />
 	</>

@@ -21,7 +21,7 @@ export interface CommentRowProps {
 }
 
 const CommentRow = ({ currentUser, file, comments, comment, index }: CommentRowProps) => {
-	const fromSelf = currentUser?.auth.uid === comment.from
+	const fromSelf = (currentUser?.auth?.uid ?? currentUser?.data?.id) === comment.from
 	const showName = !fromSelf && comments[index - 1]?.from !== comment.from
 	
 	const user = useUser(showName ? comment.from : undefined)

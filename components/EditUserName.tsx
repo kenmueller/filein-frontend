@@ -16,8 +16,8 @@ export interface EditUserNameProps {
 const EditUserName = ({ className, user }: EditUserNameProps) => {
 	const setCurrentUser = useSetRecoilState(currentUserState)
 	
-	const uid = user.auth.uid
-	const currentName = user.data?.name ?? user.auth.displayName
+	const uid = user.auth?.uid ?? user.data?.id
+	const currentName = user.data?.name ?? user.auth?.displayName
 	
 	const input = useRef<HTMLInputElement | null>(null)
 	const [name, setName] = useState(currentName)
@@ -30,7 +30,7 @@ const EditUserName = ({ className, user }: EditUserNameProps) => {
 	}, [name, input])
 	
 	const onBlur = useCallback(async () => {
-		if (!name || currentName === name)
+		if (!(uid && name) || currentName === name)
 			return
 		
 		try {

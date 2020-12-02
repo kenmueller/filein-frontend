@@ -3,6 +3,7 @@ import getSlug from './getUserSlug'
 
 import 'firebase/auth'
 import 'firebase/firestore'
+import User from 'models/User'
 
 const auth = firebase.auth()
 const firestore = firebase.firestore()
@@ -10,7 +11,7 @@ const firestore = firebase.firestore()
 const provider = new firebase.auth.GoogleAuthProvider()
 provider.addScope('https://www.googleapis.com/auth/userinfo.email')
 
-const signIn = async () => {
+const signIn = async (): Promise<User | null | undefined> => {
 	try {
 		const {
 			user,
@@ -25,22 +26,25 @@ const signIn = async () => {
 		
 		if (additionalUserInfo.isNewUser) {
 			const name = user.displayName ?? 'Anonymous'
+			const slug = await getSlug(name)
 			
 			await firestore.doc(`users/${user.uid}`).set({
-				slug: await getSlug(name),
+				slug,
 				name,
 				email: user.email,
 				files: 0,
 				comments: 0,
 				joined: firebase.firestore.FieldValue.serverTimestamp()
 			})
+			
+			return { id: user.uid, slug, name, files: 0, comments: 0 }
 		}
 		
-		return user.uid
+		return null
 	} catch (error) {
 		switch (error.code) {
 			case 'auth/popup-closed-by-user':
-				return null
+				return
 			default:
 				throw error
 		}
