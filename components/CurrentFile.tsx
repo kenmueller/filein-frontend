@@ -44,7 +44,7 @@ const CurrentFile = () => {
 	}, [url])
 	
 	const deleteFile = useCallback(() => {
-		if (!file)
+		if (!(file && window.confirm('Are you sure? You cannot restore a deleted file.')))
 			return
 		
 		_deleteFile(file)

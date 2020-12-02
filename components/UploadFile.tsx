@@ -45,7 +45,7 @@ const UploadFile = () => {
 	}, [url])
 	
 	const deleteFile = useCallback(() => {
-		if (!fileMeta)
+		if (!(fileMeta && window.confirm('Are you sure? You cannot restore a deleted file.')))
 			return
 		
 		_deleteFile(fileMeta)
