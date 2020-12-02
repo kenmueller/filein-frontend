@@ -2,7 +2,6 @@ import { useCallback, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 
 import User from 'models/User'
 import FileMeta from 'models/FileMeta'
@@ -12,6 +11,7 @@ import getFilePredicate from 'lib/getFilePredicate'
 import usersState from 'state/users'
 import useFiles from 'hooks/useFiles'
 import NotFound from 'components/NotFound'
+import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import Search from 'components/Search'
 import FileGrid from 'components/FileGrid'
@@ -49,9 +49,12 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 	
 	return (
 		<div className={styles.root}>
-			<Head>
-				<title key="title">{user.name} - filein</title>
-			</Head>
+			<Head
+				url={`https://filein.io/u/${user.slug}`}
+				image="" // TODO: Add image
+				title={`${user.name} - filein`}
+				description={`View ${user.name}'s ${user.files} file${user.files === 1 ? '' : 's'}`}
+			/>
 			<Gradient className={styles.header}>
 				<h1 className={styles.name}>{user.name}</h1>
 				<p className={styles.filesCount}>

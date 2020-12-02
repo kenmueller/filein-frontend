@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 import Link from 'next/link'
 import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
@@ -17,6 +16,7 @@ import useCurrentUser from 'hooks/useCurrentUser'
 import useUser from 'hooks/useUser'
 import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
+import Title from './Title'
 import FilePreview from './FilePreview'
 import EditFileName from './EditFileName'
 import Spinner from './Spinner'
@@ -78,9 +78,7 @@ const CurrentFile = () => {
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
-			<Head>
-				{file && <title key="title">{file.name} - filein</title>}
-			</Head>
+			{file && <Title>{file.name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{file?.name}</p>
 				<button className={styles.close} onClick={hide} title="Close">

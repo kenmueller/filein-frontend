@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 
+import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import RecentlyUploadedFiles from 'components/RecentlyUploadedFiles'
 import Footer from 'components/Footer'
@@ -9,9 +9,12 @@ import styles from 'styles/Home.module.scss'
 
 const Home: NextPage = () => (
 	<div className={styles.root}>
-		<Head>
-			<title key="title">filein</title>
-		</Head>
+		<Head
+			url="https://filein.io"
+			image="" // TODO: Add image
+			title="filein - The best way to share files"
+			description="The best way to share files"
+		/>
 		<Gradient className={styles.header}>
 			<h1 className={styles.title}>
 				The best way to share files

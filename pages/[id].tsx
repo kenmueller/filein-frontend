@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect } from 'react'
 import { NextPage } from 'next'
 import Router from 'next/router'
 import { useSetRecoilState } from 'recoil'
-import Head from 'next/head'
 import Link from 'next/link'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
@@ -20,6 +19,7 @@ import usersState from 'state/users'
 import useCurrentUser from 'hooks/useCurrentUser'
 import useUser from 'hooks/useUser'
 import NotFound from 'components/NotFound'
+import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import FilePreview from 'components/FilePreview'
 import EditFileName from 'components/EditFileName'
@@ -44,13 +44,13 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 	const currentUser = useCurrentUser()
 	const user = _owner ?? useUser(file.owner)
 	
-	const url = file && getFileUrl(file)
+	const url = getFileUrl(file)
 	const isOwner = currentUser?.auth
 		? currentUser.auth.uid === file.owner
 		: false
 	
 	const download = useCallback(() => {
-		if (file && url)
+		if (url)
 			saveAs(url, file.name)
 	}, [file, url])
 	
@@ -63,7 +63,7 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 	}, [url])
 	
 	const deleteFile = useCallback(() => {
-		if (!(file && window.confirm('Are you sure? You cannot restore a deleted file.')))
+		if (!window.confirm('Are you sure? You cannot restore a deleted file.'))
 			return
 		
 		_deleteFile(file)
@@ -79,9 +79,12 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 	
 	return (
 		<div className={styles.root}>
-			<Head>
-				<title key="title">{file.name} - filein</title>
-			</Head>
+			<Head
+				url={`https://filein.io/${file.id}`}
+				image={url}
+				title={`${file.name} - filein`}
+				description={`View ${file.name} by ${user?.name ?? 'anonymous'}`}
+			/>
 			<Gradient className={styles.header}>
 				<FilePreview className={styles.preview} file={file} />
 				<div className={styles.main}>

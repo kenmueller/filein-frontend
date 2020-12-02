@@ -24,6 +24,13 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 				rel="stylesheet"
 				href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
 			/>
+			<meta key="theme-color" name="theme-color" content="white" />
+			<meta key="og-site-name" property="og:site_name" content="filein" />
+			<meta key="og-type" property="og:type" content="website" />
+			<meta key="twitter-card" name="twitter:card" content="summary_large_image" />
+			<meta key="twitter-site" name="twitter:site" content="@filein" />
+			<meta key="twitter-creator" name="twitter:creator" content="@filein" />
+			<meta key="twitter-domain" name="twitter:domain" content="filein.io" />
 		</Head>
 		<RecoilRoot>
 			<UploadDrop>

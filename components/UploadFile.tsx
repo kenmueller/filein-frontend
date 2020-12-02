@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
@@ -17,6 +16,7 @@ import uploadFileState from 'state/uploadFile'
 import useCurrentUser from 'hooks/useCurrentUser'
 import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
+import Title from './Title'
 import ProgressCircle from './ProgressCircle'
 import FilePreview from './FilePreview'
 import EditFileName from './EditFileName'
@@ -98,9 +98,7 @@ const UploadFile = () => {
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
-			<Head>
-				{name && <title key="title">{name} - filein</title>}
-			</Head>
+			{name && <Title>{name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{name}</p>
 				<button className={styles.close} onClick={hide} title="Close">
