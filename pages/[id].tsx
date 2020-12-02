@@ -89,7 +89,7 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 						<div className={styles.meta}>
 							{isOwner
 								? <EditFileName className={styles.editName} file={file} onEdit={setFile} />
-								: <p className={styles.name}>{file.name}</p>
+								: <h1 className={styles.name}>{file.name}</h1>
 							}
 							<p className={styles.user}>
 								Uploaded by {file.owner

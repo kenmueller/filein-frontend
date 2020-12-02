@@ -47,14 +47,18 @@
 .name,
 .editName {
 	max-width: 550px;
-	font-size: 26px;
 }
 
 .name {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	font-size: 30px;
 	font-weight: 900;
+}
+
+.editName {
+	font-size: 26px;
 }
 
 .user {
