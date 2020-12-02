@@ -52,7 +52,21 @@
 }
 
 .audio {
+	position: relative;
+	max-width: none;
+	width: 400px;
 	
+	> .icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.audioElement {
+	width: 100%;
+	margin: auto 16px 16px;
 }
 
 .pdf {

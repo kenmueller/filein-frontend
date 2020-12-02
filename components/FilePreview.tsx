@@ -39,10 +39,13 @@ const FilePreviewContent = ({ file, type }: FilePreviewContentProps) => {
 			)
 		case FileType.Audio:
 			return (
-				<audio controls autoPlay>
-					<source src={getFileUrl(file, true)} type={file.type} />
+				<>
 					<FontAwesomeIcon className={styles.icon} icon={faVolumeUp} />
-				</audio>
+					<audio className={styles.audioElement} controls autoPlay>
+						<source src={getFileUrl(file, true)} type={file.type} />
+						Audio is not supported
+					</audio>
+				</>
 			)
 		case FileType.PDF:
 			return <PDF className={styles.document} url={getFileUrl(file, true)} />
