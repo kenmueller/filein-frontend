@@ -13,8 +13,12 @@
 	display: flex;
 	max-width: sizes.$large-max-width;
 	width: 95%;
-	height: 500px;
-	margin: 150px auto 0;
+	max-height: 700px;
+	height: calc(100vh - 225px);
+	margin: 120px auto 0;
+	padding: 16px;
+	background: colors.$dark;
+	border-radius: 8px;
 }
 
 .preview {
@@ -40,22 +44,22 @@
 	color: white;
 }
 
+.name,
+.editName {
+	max-width: 550px;
+	font-size: 30px;
+}
+
 .name {
-	max-width: 400px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: 20px;
 	font-weight: 900;
-}
-
-.editName {
-	max-width: 400px;
 }
 
 .user {
 	margin-top: 8px;
-	opacity: 0.7;
+	font-size: 18px;
 }
 
 .userLink {
