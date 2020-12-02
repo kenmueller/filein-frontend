@@ -28,8 +28,12 @@ const EditFileName = ({ className, file, onEdit }: EditFileNameProps) => {
 		if (!name)
 			return setName(file.name)
 		
+		const newName = normalizeExtension(file.name, name)
+		
+		if (file.name === newName)
+			return setName(newName)
+		
 		try {
-			const newName = normalizeExtension(file.name, name)
 			await editFileName(file, newName)
 			
 			setName(newName)
