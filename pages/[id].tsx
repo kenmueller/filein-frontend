@@ -124,7 +124,7 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 							<button
 								className={cx(styles.action, styles.copy)}
 								onClick={copyLink}
-								title="Copy"
+								title="Copy source"
 							>
 								<FontAwesomeIcon icon={faLink} />
 							</button>

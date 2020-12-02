@@ -126,7 +126,7 @@ const CurrentFile = () => {
 									<button
 										className={cx(styles.action, styles.copy)}
 										onClick={copyLink}
-										title="Copy"
+										title="Copy source"
 									>
 										<FontAwesomeIcon icon={faLink} />
 									</button>
