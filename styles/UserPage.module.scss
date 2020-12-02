@@ -9,19 +9,28 @@
 }
 
 .header {
-	max-width: sizes.$file-grid-columns * sizes.$file-cell-dimension + (sizes.$file-grid-columns - 1) * sizes.$file-grid-gap;
-	margin: 200px auto 0;
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	margin: 150px auto 0;
+	color: white;
 }
 
 .name {
 	line-height: 56px;
 	font-size: 50px;
 	font-weight: 900;
-	color: white;
 }
 
-.search {
-	margin-top: 20px;
+.filesCount {
+	margin-top: 12px;
+	line-height: 30px;
+	font-size: 24px;
+	font-weight: 900;
+}
+
+.filesContainer {
+	max-width: sizes.$file-grid-columns * sizes.$file-cell-dimension + (sizes.$file-grid-columns - 1) * sizes.$file-grid-gap;
+	margin: 60px auto 0;
 }
 
 .files {

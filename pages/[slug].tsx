@@ -52,21 +52,19 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 			<Head>
 				<title key="title">{user.name} - filein</title>
 			</Head>
-			<Gradient>
-				<header className={styles.header}>
-					<h1 className={styles.name}>{user.name}</h1>
-					<Search
-						className={styles.search}
-						placeholder="Files"
-						value={query}
-						setValue={setQuery}
-					/>
-				</header>
-				<FileGrid className={styles.files} loading={!files}>
-					{files?.filter(getFilePredicate(query)).map(file => (
-						<FileCell key={file.id} file={file} />
-					))}
-				</FileGrid>
+			<Gradient className={styles.header}>
+				<h1 className={styles.name}>{user.name}</h1>
+				<p className={styles.filesCount}>
+					{user.files} file{user.files === 1 ? '' : 's'}
+				</p>
+				<div className={styles.filesContainer}>
+					<Search placeholder="Files" value={query} setValue={setQuery} />
+					<FileGrid className={styles.files} loading={!files}>
+						{files?.filter(getFilePredicate(query)).map(file => (
+							<FileCell key={file.id} file={file} />
+						))}
+					</FileGrid>
+				</div>
 			</Gradient>
 			<Footer className={styles.footer} />
 		</div>
