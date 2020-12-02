@@ -1,3 +1,6 @@
+import { useCallback } from 'react'
+import copy from 'copy-to-clipboard'
+import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareSquare } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
@@ -15,24 +18,29 @@ export interface FilePreviewProps {
 }
 
 const FilePreview = ({ className, file }: FilePreviewProps) => {
-	const url = getFileUrl(file)
 	const isImage = isFileImage(file)
 	
+	const onClick = useCallback(() => {
+		copy(`https://filein.io/${file.id}`)
+		toast.success('Copied link to clipboard')
+	}, [file.id])
+	
 	return (
-		<a
+		<button
 			className={cx(styles.root, className, {
 				[styles.hasIcon]: !isImage
 			})}
-			href={url}
-			rel="noopener noreferrer"
-			target="_blank"
+			onClick={onClick}
+			title="Share"
 		>
 			{isImage
-				? <img className={styles.image} src={url} alt={file.name} />
+				? <img className={styles.image} src={getFileUrl(file)} alt={file.name} />
 				: <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
 			}
-			<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
-		</a>
+			<span className={styles.shareContainer}>
+				<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
+			</span>
+		</button>
 	)
 }
 

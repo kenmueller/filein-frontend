@@ -25,9 +25,8 @@
 			background: transparentize(colors.$dark, 0.5);
 		}
 		
-		> .share {
-			opacity: 1;
-			transform: none;
+		> .shareContainer {
+			background: transparent;
 		}
 	}
 }
@@ -48,13 +47,24 @@
 	font-size: 60px !important;
 }
 
-.share {
+.shareContainer {
+	$dimension: 40px;
+	$offset: 8px;
+	
+	display: flex;
 	position: absolute;
-	top: 8px;
-	right: 8px;
+	width: $dimension;
+	height: $dimension;
+	top: $offset;
+	right: $offset;
 	font-size: 20px;
-	opacity: 0;
-	transform: translateY(-20px);
+	background: transparentize(colors.$dark, 0.5);
+	border-radius: 50%;
 	z-index: 1;
-	transition: opacity 0.3s, transform 0.3s;
+	transition: background 0.3s;
+}
+
+.share {
+	margin: auto;
+	transform: translate(1px, -1px);
 }
