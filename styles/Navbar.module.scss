@@ -9,8 +9,9 @@
 	top: 0;
 	left: 0;
 	right: 0;
+	border-bottom: 1px solid transparent;
 	z-index: 100;
-	transition: background 0.3s, border-bottom 0.3s;
+	transition: background 0.3s, border-bottom-color 0.3s;
 }
 
 .active {
@@ -18,7 +19,7 @@
 	--background-hover: #{transparentize(colors.$dark, 0.9)};
 	
 	background: white;
-	border-bottom: 1px solid #eee;
+	border-bottom-color: #eee;
 }
 
 .content {
