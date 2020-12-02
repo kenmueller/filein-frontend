@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useRecoilState } from 'recoil'
 import Link from 'next/link'
+import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -34,6 +35,11 @@ const CurrentFile = () => {
 	const setIsShowing = useCallback((isShowing: boolean) => {
 		setFile(file => isShowing ? file : null)
 	}, [setFile])
+	
+	const download = useCallback(() => {
+		if (file && url)
+			saveAs(url, file.name)
+	}, [file, url])
 	
 	const copyLink = useCallback(() => {
 		if (!url)
@@ -92,14 +98,13 @@ const CurrentFile = () => {
 									</p>
 								</div>
 								<div className={styles.actions}>
-									<a
+									<button
 										className={cx(styles.action, styles.download)}
-										href={url}
-										download={file.name}
+										onClick={download}
 										title="Download"
 									>
 										<FontAwesomeIcon icon={faDownload} />
-									</a>
+									</button>
 									<button
 										className={cx(styles.action, styles.copy)}
 										onClick={copyLink}
