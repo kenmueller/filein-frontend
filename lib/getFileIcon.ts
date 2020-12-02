@@ -1,4 +1,4 @@
-import { faCode, faFile, faFileAlt, faFileArchive, faFileAudio, faFileCsv, faFileExcel, faFilePdf, faFilePowerpoint, faFileVideo, faFileWord } from '@fortawesome/free-solid-svg-icons'
+import { faCode, faFile, faFileAlt, faFileArchive, faFileCsv, faFileExcel, faFilePdf, faFilePowerpoint, faFileWord, faVideo, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 
 import FileMeta from 'models/FileMeta'
 
@@ -37,8 +37,8 @@ const getFileIcon = ({ type }: FileMeta) => {
 	}
 	
 	if (type.startsWith('text/') || type.startsWith('font/')) return faFileAlt
-	if (type.startsWith('audio/')) return faFileAudio
-	if (type.startsWith('video/')) return faFileVideo
+	if (type.startsWith('audio/')) return faVolumeUp
+	if (type.startsWith('video/')) return faVideo
 	
 	return faFile
 }

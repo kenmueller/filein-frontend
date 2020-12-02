@@ -14,9 +14,16 @@ import getFileIcon from 'lib/getFileIcon'
 
 import styles from 'styles/FilePreview.module.scss'
 
+const MAX_PREVIEW_SIZE = 150 * 1024 * 1024 // 150 MB
+
+interface FilePreviewIconProps {
+	file: FileMeta
+}
+
 interface FilePreviewContentProps {
 	file: FileMeta
 	type: FileType
+	isFallback: boolean
 }
 
 export interface FilePreviewProps {
@@ -26,7 +33,14 @@ export interface FilePreviewProps {
 
 const PDF = dynamic(() => import('./PDF'), { ssr: false })
 
-const FilePreviewContent = ({ file, type }: FilePreviewContentProps) => {
+const FilePreviewIcon = ({ file }: FilePreviewIconProps) => (
+	<FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
+)
+
+const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps) => {
+	if (isFallback)
+		return <FilePreviewIcon file={file} />
+	
 	switch (type) {
 		case FileType.Image:
 			return <img className={styles.imageElement} src={getFileUrl(file, true)} alt={file.name} />
@@ -50,12 +64,13 @@ const FilePreviewContent = ({ file, type }: FilePreviewContentProps) => {
 		case FileType.PDF:
 			return <PDF className={styles.document} url={getFileUrl(file, true)} />
 		case FileType.Other:
-			return <FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
+			return <FilePreviewIcon file={file} />
 	}
 }
 
 const FilePreview = ({ className, file }: FilePreviewProps) => {
 	const type = getFileType(file)
+	const isFallback = file.size > MAX_PREVIEW_SIZE
 	
 	const onClick = useCallback(() => {
 		copy(`https://filein.io/${file.id}`)
@@ -64,12 +79,14 @@ const FilePreview = ({ className, file }: FilePreviewProps) => {
 	
 	return (
 		<div
-			className={cx(styles.root, styles[type], className)}
+			className={cx(styles.root, styles[type], className, {
+				[styles.fallback]: isFallback
+			})}
 			onClick={onClick}
 			role="button"
 			title="Share"
 		>
-			<FilePreviewContent file={file} type={type} />
+			<FilePreviewContent file={file} type={type} isFallback={isFallback} />
 			<span className={styles.shareContainer}>
 				<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
 			</span>

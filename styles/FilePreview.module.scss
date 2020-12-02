@@ -16,6 +16,11 @@
 	}
 }
 
+.fallback,
+.other {
+	min-width: 250px !important;
+}
+
 .image,
 .other {
 	&::after {
@@ -77,11 +82,6 @@
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-}
-
-.other {
-	max-width: none;
-	width: 250px;
 }
 
 .icon {

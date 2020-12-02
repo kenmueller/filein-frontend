@@ -9,10 +9,10 @@ import { toast } from 'react-toastify'
 export interface PDFProps {
 	className?: string
 	url: string
-	page?: number
+	firstPageOnly?: boolean
 }
 
-const PDF = ({ className, url, page }: PDFProps) => {
+const PDF = ({ className, url, firstPageOnly = false }: PDFProps) => {
 	const [pages, setPages] = useState<number[] | null>(null)
 	const [isLoading, setIsLoading] = useState(true)
 	
@@ -22,7 +22,9 @@ const PDF = ({ className, url, page }: PDFProps) => {
 			file={url}
 			loading={<Spinner className={styles.spinner} />}
 			onLoadSuccess={({ numPages }) => {
-				setPages(Array.from(new Array(numPages).keys()))
+				if (!firstPageOnly)
+					setPages(Array.from(new Array(numPages).keys()))
+				
 				setIsLoading(false)
 			}}
 			onLoadError={({ message }) => {
@@ -30,8 +32,8 @@ const PDF = ({ className, url, page }: PDFProps) => {
 				toast.error(message)
 			}}
 		>
-			{page
-				? <Page className={styles.page} pageNumber={page} />
+			{firstPageOnly
+				? <Page className={styles.page} pageNumber={1} />
 				: pages?.map(page => (
 					<Page key={page} className={styles.page} pageNumber={page + 1} />
 				))
