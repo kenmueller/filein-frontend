@@ -5,7 +5,6 @@
 	max-width: 75%;
 	width: max-content;
 	word-wrap: break-word;
-	animation: send 0.15s ease-in-out;
 	
 	& + & {
 		margin-top: 4px;
@@ -13,6 +12,16 @@
 	
 	& + .showName {
 		margin-top: 20px;
+	}
+}
+
+.fromSelf {
+	margin-left: auto;
+	animation: send 0.15s ease-in-out;
+	
+	> .body {
+		color: white;
+		background: colors.$blue;
 	}
 	
 	@keyframes send {
@@ -24,15 +33,6 @@
 		50% {
 			transform: scale(1.05);
 		}
-	}
-}
-
-.fromSelf {
-	margin-left: auto;
-	
-	> .body {
-		color: white;
-		background: colors.$blue;
 	}
 }
 
