@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
@@ -36,6 +37,7 @@ const UploadFile = () => {
 	const uid = currentUser && currentUser.auth?.uid
 	const id = fileMeta?.id
 	const url = fileMeta && getFileUrl(fileMeta)
+	const name = fileMeta?.name ?? file?.name
 	
 	const hide = useCallback(() => {
 		hideOverlays()
@@ -96,8 +98,11 @@ const UploadFile = () => {
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
+			<Head>
+				{name && <title key="title">{name} - filein</title>}
+			</Head>
 			<header className={styles.header}>
-				<p className={styles.headerName}>{fileMeta?.name ?? file?.name}</p>
+				<p className={styles.headerName}>{name}</p>
 				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>

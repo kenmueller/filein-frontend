@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import Link from 'next/link'
 import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
@@ -77,6 +78,9 @@ const CurrentFile = () => {
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
+			<Head>
+				{file && <title key="title">{file.name} - filein</title>}
+			</Head>
 			<header className={styles.header}>
 				<p className={styles.headerName}>{file?.name}</p>
 				<button className={styles.close} onClick={hide} title="Close">
