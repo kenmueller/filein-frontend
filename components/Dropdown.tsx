@@ -1,11 +1,11 @@
-import { ReactNode, useCallback, useEffect, useRef } from 'react'
+import { ReactNode, SetStateAction, useCallback, useEffect, useRef } from 'react'
 import cx from 'classnames'
 
 import styles from 'styles/Dropdown.module.scss'
 
 export interface DropdownProps {
 	isShowing: boolean
-	setIsShowing(isShowing: boolean): void
+	setIsShowing(isShowing: SetStateAction<boolean>): void
 	rootClassName?: string
 	triggerClassName?: string
 	contentClassName?: string
