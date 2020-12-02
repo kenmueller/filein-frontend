@@ -13,9 +13,9 @@ const normalizeExtension = (from: string, to: string) => {
 	const toExtension = getExtension(to)
 	
 	return `${toName}${
-		!fromExtension || fromExtension === toExtension
-			? ''
-			: `.${fromExtension}`
+		fromExtension
+			? fromExtension === toExtension ? '' : `.${fromExtension}`
+			: `.${toExtension}`
 	}`
 }
 
