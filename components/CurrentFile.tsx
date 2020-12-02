@@ -49,9 +49,9 @@ const CurrentFile = () => {
 	}, [hide])
 	
 	const download = useCallback(() => {
-		if (file && url)
-			saveAs(url, file.name)
-	}, [file, url])
+		if (file)
+			saveAs(getFileUrl(file, true), file.name)
+	}, [file])
 	
 	const copyLink = useCallback(() => {
 		if (!url)

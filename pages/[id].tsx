@@ -50,9 +50,8 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 		: false
 	
 	const download = useCallback(() => {
-		if (url)
-			saveAs(url, file.name)
-	}, [file, url])
+		saveAs(getFileUrl(file, true), file.name)
+	}, [file])
 	
 	const copyLink = useCallback(() => {
 		if (!url)
