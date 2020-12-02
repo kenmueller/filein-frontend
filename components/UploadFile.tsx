@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
+import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -30,11 +31,17 @@ const UploadFile = () => {
 	const [progress, setProgress] = useState(0)
 	
 	const isComplete = progress === 100
+	const uid = currentUser && currentUser.auth.uid
 	const url = fileMeta && getFileUrl(fileMeta)
 	
 	const setIsShowing = useCallback((isShowing: boolean) => {
 		setFile(file => isShowing ? file : null)
 	}, [setFile])
+	
+	const download = useCallback(() => {
+		if (file && fileMeta)
+			saveAs(file, fileMeta.name)
+	}, [file, fileMeta])
 	
 	const copyLink = useCallback(() => {
 		if (!url)
@@ -63,13 +70,13 @@ const UploadFile = () => {
 	}, [file, setFileMeta, setProgress])
 	
 	useEffect(() => { // Upload
-		if (!file || currentUser === undefined)
+		if (!file || uid === undefined)
 			return
 		
-		uploadFile(file, currentUser ? currentUser.auth.uid : null, setProgress)
+		uploadFile(file, uid, setProgress)
 			.then(setFileMeta)
 			.catch(({ message }) => toast.error(message))
-	}, [currentUser, file, setFileMeta, setProgress])
+	}, [uid, file, setFileMeta, setProgress])
 	
 	useEffect(copyLink, [copyLink])
 	
@@ -95,14 +102,13 @@ const UploadFile = () => {
 								<div className={styles.info}>
 									<EditFileName className={styles.name} file={fileMeta} onEdit={setFileMeta} />
 									<div className={styles.actions}>
-										<a
+										<button
 											className={cx(styles.action, styles.download)}
-											href={url}
-											download={fileMeta.name}
+											onClick={download}
 											title="Download"
 										>
 											<FontAwesomeIcon icon={faDownload} />
-										</a>
+										</button>
 										<button
 											className={cx(styles.action, styles.copy)}
 											onClick={copyLink}
