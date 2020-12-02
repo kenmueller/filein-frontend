@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
+import { useRouter } from 'next/router'
 import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
@@ -23,20 +24,28 @@ import Comments from './Comments'
 import styles from 'styles/UploadFile.module.scss'
 
 const UploadFile = () => {
+	const path = useRouter().asPath
 	const currentUser = useCurrentUser()
 	const hideOverlays = useHideOverlays()
 	
-	const [file, setFile] = useRecoilState(uploadFileState)
+	const file = useRecoilValue(uploadFileState)
 	const [fileMeta, setFileMeta] = useState<FileMeta | null>(null)
 	const [progress, setProgress] = useState(0)
 	
 	const isComplete = progress === 100
 	const uid = currentUser && currentUser.auth?.uid
+	const id = fileMeta?.id
 	const url = fileMeta && getFileUrl(fileMeta)
 	
+	const hide = useCallback(() => {
+		hideOverlays()
+		history.replaceState({}, '', path)
+	}, [path, hideOverlays])
+	
 	const setIsShowing = useCallback((isShowing: boolean) => {
-		setFile(file => isShowing ? file : null)
-	}, [setFile])
+		if (!isShowing)
+			hide()
+	}, [hide])
 	
 	const download = useCallback(() => {
 		if (file && fileMeta)
@@ -58,8 +67,8 @@ const UploadFile = () => {
 		_deleteFile(fileMeta)
 			.catch(({ message }) => toast.error(message))
 		
-		hideOverlays()
-	}, [fileMeta, hideOverlays])
+		hide()
+	}, [fileMeta, hide])
 	
 	useEffect(() => { // Reset
 		if (file)
@@ -78,13 +87,18 @@ const UploadFile = () => {
 			.catch(({ message }) => toast.error(message))
 	}, [uid, file, setFileMeta, setProgress])
 	
+	useEffect(() => {
+		if (id)
+			history.replaceState({}, '', `/${id}`)
+	}, [id])
+	
 	useEffect(copyLink, [copyLink])
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
 			<header className={styles.header}>
 				<p className={styles.headerName}>{fileMeta?.name ?? file?.name}</p>
-				<button className={styles.close} onClick={hideOverlays} title="Close">
+				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
 			</header>

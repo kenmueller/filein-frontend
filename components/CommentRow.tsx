@@ -34,7 +34,7 @@ const CommentRow = ({ currentUser, file, comments, comment, index }: CommentRowP
 		})}>
 			{showName && (user
 				? (
-					<Link href={`/${user.slug}`}>
+					<Link href={`/u/${user.slug}`}>
 						<a className={styles.link} onClick={hideOverlays}>
 							<span className={styles.name}>{user.name}</span>
 							<FontAwesomeIcon

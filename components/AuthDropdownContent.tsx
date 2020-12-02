@@ -19,7 +19,7 @@ const AuthDropdownContent = ({ currentUser, onClick }: AuthDropdownContentProps)
 		<EditUserName className={styles.row} user={currentUser} />
 		{currentUser.data
 			? (
-				<Link href={`/${currentUser.data.slug}`}>
+				<Link href={`/u/${currentUser.data.slug}`}>
 					<a className={cx(styles.row, styles.action)} onClick={onClick}>
 						<FontAwesomeIcon icon={faUser} />
 						<span className={styles.actionMessage}>My files</span>

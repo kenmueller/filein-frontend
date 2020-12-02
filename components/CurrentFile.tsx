@@ -1,5 +1,6 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { saveAs } from 'file-saver'
 import copy from 'copy-to-clipboard'
@@ -26,17 +27,25 @@ const CurrentFile = () => {
 	const [file, setFile] = useRecoilState(currentFileState)
 	const hideOverlays = useHideOverlays()
 	
+	const path = useRouter().asPath
 	const currentUser = useCurrentUser()
 	const user = useUser(file?.owner)
 	
+	const id = file?.id
 	const url = file && getFileUrl(file)
 	const isOwner = currentUser?.auth
 		? currentUser.auth.uid === file?.owner
 		: false
 	
+	const hide = useCallback(() => {
+		hideOverlays()
+		history.replaceState({}, '', path)
+	}, [path, hideOverlays])
+	
 	const setIsShowing = useCallback((isShowing: boolean) => {
-		setFile(file => isShowing ? file : null)
-	}, [setFile])
+		if (!isShowing)
+			hide()
+	}, [hide])
 	
 	const download = useCallback(() => {
 		if (file && url)
@@ -58,14 +67,19 @@ const CurrentFile = () => {
 		_deleteFile(file)
 			.catch(({ message }) => toast.error(message))
 		
-		hideOverlays()
-	}, [file, hideOverlays])
+		hide()
+	}, [file, hide])
+	
+	useEffect(() => {
+		if (id)
+			history.replaceState({}, '', `/${id}`)
+	}, [id])
 	
 	return (
 		<Modal className={styles.root} isShowing={file !== null} setIsShowing={setIsShowing}>
 			<header className={styles.header}>
 				<p className={styles.headerName}>{file?.name}</p>
-				<button className={styles.close} onClick={hideOverlays} title="Close">
+				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
 			</header>
@@ -84,7 +98,7 @@ const CurrentFile = () => {
 										Uploaded by {file.owner
 											? user
 												? (
-													<Link href={`/${user.slug}`}>
+													<Link href={`/u/${user.slug}`}>
 														<a className={styles.userLink} onClick={hideOverlays}>
 															<span className={styles.userName}>{user.name}</span>
 															<FontAwesomeIcon
