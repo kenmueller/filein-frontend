@@ -1,3 +1,19 @@
 .input {
+	width: 100%;
+	padding: 4px 8px;
+	font-size: 20px;
+	font-weight: 900;
+	color: white;
+	background: transparentize(white, 0.9);
+	border-radius: 8px;
+	transition: background 0.3s;
 	
+	&::placeholder {
+		color: transparentize(white, 0.5);
+	}
+	
+	&:hover,
+	&:focus {
+		background: transparentize(white, 0.8);
+	}
 }
