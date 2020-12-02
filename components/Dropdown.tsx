@@ -1,9 +1,11 @@
-import { ReactNode, useState, useCallback, useEffect, useRef } from 'react'
+import { ReactNode, useCallback, useEffect, useRef } from 'react'
 import cx from 'classnames'
 
 import styles from 'styles/Dropdown.module.scss'
 
 export interface DropdownProps {
+	isShowing: boolean
+	setIsShowing(isShowing: boolean): void
 	rootClassName?: string
 	triggerClassName?: string
 	contentClassName?: string
@@ -11,11 +13,9 @@ export interface DropdownProps {
 	children: ReactNode
 }
 
-const Dropdown = ({ rootClassName, triggerClassName, contentClassName, trigger, children }: DropdownProps) => {
+const Dropdown = ({ isShowing, setIsShowing, rootClassName, triggerClassName, contentClassName, trigger, children }: DropdownProps) => {
 	const triggerRef = useRef<HTMLButtonElement | null>(null)
 	const contentRef = useRef<HTMLDivElement | null>(null)
-	
-	const [isShowing, setIsShowing] = useState(false)
 	
 	const onClick = useCallback((event: MouseEvent) => {
 		const trigger = triggerRef.current

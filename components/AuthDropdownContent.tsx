@@ -12,17 +12,18 @@ import 'firebase/auth'
 
 export interface AuthDropdownContentProps {
 	currentUser: firebase.User
+	onClick?(): void
 }
 
-const AuthDropdownContent = ({ currentUser }: AuthDropdownContentProps) => (
+const AuthDropdownContent = ({ currentUser, onClick }: AuthDropdownContentProps) => (
 	<>
 		<Link href={`/${currentUser.uid}`}>
-			<a className={styles.action}>
+			<a className={styles.action} onClick={onClick}>
 				<FontAwesomeIcon icon={faUser} />
 				<p className={styles.actionMessage}>My files</p>
 			</a>
 		</Link>
-		<SignOutButton className={cx(styles.action, styles.danger)}>
+		<SignOutButton className={cx(styles.action, styles.danger)} onClick={onClick}>
 			<FontAwesomeIcon icon={faSignOutAlt} />
 			<p className={styles.actionMessage}>Sign out</p>
 		</SignOutButton>

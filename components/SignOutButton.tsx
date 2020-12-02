@@ -5,10 +5,11 @@ import signOut from 'lib/signOut'
 
 export interface SignOutButtonProps {
 	className?: string
+	onClick?(): void
 	children?: ReactNode
 }
 
-const SignOutButton = (props: SignOutButtonProps) => {
+const SignOutButton = ({ className, onClick: _onClick, children }: SignOutButtonProps) => {
 	const [isLoading, setIsLoading] = useState(false)
 	
 	const onClick = useCallback(async () => {
@@ -16,16 +17,20 @@ const SignOutButton = (props: SignOutButtonProps) => {
 			return
 		
 		try {
+			_onClick()
+			
 			setIsLoading(true)
 			await signOut()
 		} catch ({ message }) {
 			setIsLoading(false)
 			toast.error(message)
 		}
-	}, [isLoading, setIsLoading])
+	}, [isLoading, setIsLoading, _onClick])
 	
 	return (
-		<button {...props} disabled={isLoading} onClick={onClick} />
+		<button className={className} disabled={isLoading} onClick={onClick}>
+			{children}
+		</button>
 	)
 }
 
