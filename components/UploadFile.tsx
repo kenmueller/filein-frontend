@@ -16,6 +16,7 @@ import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
 import ProgressCircle from './ProgressCircle'
 import FilePreview from './FilePreview'
+import EditFileName from './EditFileName'
 import Comments from './Comments'
 
 import styles from 'styles/UploadFile.module.scss'
@@ -92,7 +93,7 @@ const UploadFile = () => {
 							<FilePreview className={styles.preview} file={fileMeta} />
 							<div className={styles.main}>
 								<div className={styles.info}>
-									<p className={styles.name}>{fileMeta.name}</p>
+									<EditFileName className={styles.name} file={fileMeta} onEdit={setFileMeta} />
 									<div className={styles.actions}>
 										<a
 											className={cx(styles.action, styles.download)}
