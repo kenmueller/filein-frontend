@@ -2,6 +2,7 @@ import { useRef, useState, useCallback, FormEvent, ChangeEvent } from 'react'
 import { toast } from 'react-toastify'
 
 import FileMeta from 'models/FileMeta'
+import normalizeExtension from 'lib/normalizeExtension'
 import editFileName from 'lib/editFileName'
 
 import styles from 'styles/EditFileName.module.scss'
@@ -24,18 +25,21 @@ const EditFileName = ({ className, file, onEdit }: EditFileNameProps) => {
 	}, [name, input])
 	
 	const onBlur = useCallback(async () => {
-		if (!name || file.name === name)
-			return
+		if (!name)
+			return setName(file.name)
 		
 		try {
-			await editFileName(file, name)
-			onEdit?.({ ...file, name })
+			const newName = normalizeExtension(file.name, name)
+			await editFileName(file, newName)
+			
+			setName(newName)
+			onEdit?.({ ...file, name: newName })
 			
 			toast.success('Updated name')
 		} catch ({ message }) {
 			toast.error(message)
 		}
-	}, [file, name, onEdit])
+	}, [file, name, setName, onEdit])
 	
 	const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
 		setName(event.target.value)
