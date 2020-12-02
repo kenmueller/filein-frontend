@@ -114,7 +114,10 @@ const UploadFile = () => {
 							<FilePreview className={styles.preview} file={fileMeta} />
 							<div className={styles.main}>
 								<div className={styles.info}>
-									<EditFileName className={styles.name} file={fileMeta} onEdit={setFileMeta} />
+									{currentUser
+										? <EditFileName className={styles.editName} file={fileMeta} onEdit={setFileMeta} />
+										: <p className={styles.name}>{fileMeta.name}</p>
+									}
 									<div className={styles.actions}>
 										<button
 											className={cx(styles.action, styles.download)}
