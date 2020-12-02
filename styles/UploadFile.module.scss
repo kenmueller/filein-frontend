@@ -1,12 +1,9 @@
 @use 'colors';
 
 .root {
-	display: flex;
-	flex-direction: column;
 	max-width: 95%;
-	width: 600px;
+	width: 1000px;
 	max-height: 95%;
-	height: 300px;
 	background: colors.$dark;
 	border-radius: 8px;
 	box-shadow: 0 0 10px 2px transparentize(black, 0.9);
@@ -20,12 +17,17 @@
 	border-bottom: 2px solid #333;
 }
 
-.name {
+.headerName {
+	margin-right: 16px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	font-weight: 900;
 	color: white;
 }
 
 .close {
+	flex-shrink: 0;
 	font-size: 20px;
 	color: white;
 	background: transparent;
@@ -45,9 +47,10 @@
 }
 
 .content {
-	flex-grow: 1;
 	display: grid;
-	padding: 16px;
+	position: relative;
+	height: 500px;
+	margin: 16px;
 }
 
 .progress,
@@ -67,5 +70,81 @@
 }
 
 .summary {
+	display: flex;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.preview {
+	margin-right: 16px;
+}
+
+.main {
+	flex-shrink: 0;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 400px;
+}
+
+.info {
+	flex-shrink: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.name {
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 20px;
+	font-weight: 900;
+	color: white;
+}
+
+.actions {
+	flex-shrink: 0;
+	display: flex;
+	margin-left: 16px;
+}
+
+.action {
+	$dimension: 40px;
 	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: $dimension;
+	height: $dimension;
+	font-size: 16px;
+	color: white;
+	background: var(--color);
+	border-radius: 8px;
+	transition: color 0.3s, background 0.3s, transform 0.3s;
+	
+	& + & {
+		margin-left: 12px;
+	}
+	
+	&:hover {
+		color: var(--color);
+		background: white;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
+}
+
+.download { --color: #{colors.$purple}; }
+.copy { --color: #{colors.$green}; }
+.delete { --color: #{colors.$red}; }
+
+.comments {
+	flex-grow: 1;
+	margin-top: 16px;
 }
