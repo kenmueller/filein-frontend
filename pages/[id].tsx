@@ -139,10 +139,11 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 									</button>
 								)}
 							</div>
-							{isOwner && (
+							{(isOwner || !file.public) && (
 								<AccessToggle
 									className={styles.accessToggle}
 									file={file}
+									disabledMessage={isOwner ? undefined : null}
 									leftIndicator
 								/>
 							)}

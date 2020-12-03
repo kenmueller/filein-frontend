@@ -9,10 +9,15 @@ import useUpdate from 'hooks/useUpdate'
 
 import styles from 'styles/AccessToggle.module.scss'
 
+/**
+ * If the `disabledMessage` is `undefined`, the toggle is not disabled.
+ * If `null`, the toggle is disabled with no message.
+ * If it's a `string`, the message will be displayed on hover.
+ */
 export interface AccessToggleProps {
 	className?: string
 	file: FileMeta
-	disabledMessage?: string
+	disabledMessage?: string | null
 	leftIndicator?: boolean
 }
 
@@ -33,7 +38,7 @@ const AccessToggle = ({ className, file, disabledMessage, leftIndicator = false 
 		>
 			<input
 				className={styles.input}
-				disabled={Boolean(disabledMessage)}
+				disabled={disabledMessage !== undefined}
 				type="checkbox"
 				checked={isPublic}
 				onChange={onChange}
