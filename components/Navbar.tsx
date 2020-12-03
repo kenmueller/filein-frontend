@@ -18,7 +18,9 @@ const Navbar = () => {
 	}, [setIsActive])
 	
 	useEffect(() => {
+		onScroll()
 		window.addEventListener('scroll', onScroll)
+		
 		return () => window.removeEventListener('scroll', onScroll)
 	}, [onScroll])
 	
