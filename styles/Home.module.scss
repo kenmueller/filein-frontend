@@ -1,5 +1,10 @@
 @use 'sizes';
 
+@mixin font-size($font-size) {
+	line-height: $font-size + 4px;
+	font-size: $font-size;
+}
+
 .root {
 	display: flex;
 	flex-direction: column;
@@ -10,25 +15,50 @@
 .header {
 	max-width: sizes.$large-max-width;
 	width: 95%;
-	margin: 150px auto 0;
+	margin: 90px auto 0;
 	color: white;
+	
+	@media (min-width: 500px) {
+		margin: 120px auto 0;
+	}
+	
+	@media (min-width: 600px) {
+		margin: 150px auto 0;
+	}
 }
 
 .title {
-	line-height: 56px;
-	font-size: 50px;
+	@include font-size(18px);
+	
 	font-weight: 900;
+	
+	@media (min-width: 300px) { @include font-size(22px); }
+	@media (min-width: 350px) { @include font-size(26px); }
+	@media (min-width: 400px) { @include font-size(30px); }
+	@media (min-width: 450px) { @include font-size(34px); }
+	@media (min-width: 500px) { @include font-size(38px); }
+	@media (min-width: 550px) { @include font-size(42px); }
+	@media (min-width: 600px) { @include font-size(46px); }
+	@media (min-width: 650px) { @include font-size(50px); }
 }
 
 .subtitle {
+	@include font-size(14px);
+	
 	margin-top: 12px;
-	line-height: 30px;
-	font-size: 24px;
 	font-weight: 900;
+	
+	@media (min-width: 300px) { @include font-size(16px); }
+	@media (min-width: 350px) { @include font-size(20px); }
+	@media (min-width: 500px) { @include font-size(24px); }
 }
 
 .recentlyUploadedFiles {
-	margin: 60px auto 0;
+	margin: 30px auto 0;
+	
+	@media (min-width: 500px) {
+		margin: 60px auto 0;
+	}
 }
 
 .footer {
