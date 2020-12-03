@@ -57,10 +57,8 @@
 
 .upload,
 .auth {
-	$margin: 16px;
-	
 	align-self: stretch;
-	margin: $margin 0 $margin $margin;
+	margin: 16px 0;
 }
 
 .upload {
@@ -83,11 +81,21 @@
 }
 
 .uploadMessage {
+	display: none;
 	margin-left: 8px;
 	font-size: 16px;
 	font-weight: 900;
+	
+	@media (min-width: 500px) {
+		display: block;
+	}
 }
 
 .auth {
 	min-width: 115px;
+	margin-left: 8px;
+	
+	@media (min-width: 500px) {
+		margin-left: 16px;
+	}
 }
