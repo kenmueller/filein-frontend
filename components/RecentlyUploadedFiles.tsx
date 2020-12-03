@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 import cx from 'classnames'
 
+import FileMeta from 'models/FileMeta'
 import getFilePredicate from 'lib/getFilePredicate'
 import useRecentlyUploadedFiles from 'hooks/useRecentlyUploadedFiles'
 import Search from './Search'
@@ -12,11 +13,12 @@ import styles from 'styles/RecentlyUploadedFiles.module.scss'
 
 export interface RecentlyUploadedFilesProps {
 	className?: string
+	files?: FileMeta[]
 }
 
-const RecentlyUploadedFiles = ({ className }: RecentlyUploadedFilesProps) => {
+const RecentlyUploadedFiles = ({ className, files: _files }: RecentlyUploadedFilesProps) => {
 	const router = useRouter()
-	const files = useRecentlyUploadedFiles()
+	const files = useRecentlyUploadedFiles() ?? _files
 	const query = (router.query.q ?? '') as string
 	
 	const setQuery = useCallback((query: string) => {

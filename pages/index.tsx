@@ -1,5 +1,7 @@
-import { NextPage } from 'next'
+import { NextPage, GetStaticProps } from 'next'
 
+import FileMeta from 'models/FileMeta'
+import getRecentlyUploadedFiles from 'lib/getRecentlyUploadedFiles'
 import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import RecentlyUploadedFiles from 'components/RecentlyUploadedFiles'
@@ -7,7 +9,11 @@ import Footer from 'components/Footer'
 
 import styles from 'styles/Home.module.scss'
 
-const Home: NextPage = () => (
+interface HomeProps {
+	files: FileMeta[]
+}
+
+const Home: NextPage<HomeProps> = ({ files }) => (
 	<div className={styles.root}>
 		<Head
 			url="https://filein.io"
@@ -22,10 +28,18 @@ const Home: NextPage = () => (
 			<p className={styles.subtitle}>
 				Super fast file hosting. Free forever.
 			</p>
-			<RecentlyUploadedFiles className={styles.recentlyUploadedFiles} />
+			<RecentlyUploadedFiles
+				className={styles.recentlyUploadedFiles}
+				files={files}
+			/>
 		</Gradient>
 		<Footer className={styles.footer} />
 	</div>
 )
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
+	props: { files: await getRecentlyUploadedFiles() },
+	revalidate: 1
+})
 
 export default Home
