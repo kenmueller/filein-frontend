@@ -13,9 +13,10 @@ export interface AccessToggleProps {
 	className?: string
 	file: FileMeta
 	disabledMessage?: string
+	leftIndicator?: boolean
 }
 
-const AccessToggle = ({ className, file, disabledMessage }: AccessToggleProps) => {
+const AccessToggle = ({ className, file, disabledMessage, leftIndicator = false }: AccessToggleProps) => {
 	const update = useUpdate()
 	const isPublic = file.public
 	
@@ -37,7 +38,10 @@ const AccessToggle = ({ className, file, disabledMessage }: AccessToggleProps) =
 				checked={isPublic}
 				onChange={onChange}
 			/>
-			<span className={cx(styles.icon, { [styles.public]: isPublic })}>
+			<span className={cx(styles.icon, {
+				[styles.public]: isPublic,
+				[styles.leftIndicator]: leftIndicator
+			})}>
 				<FontAwesomeIcon icon={isPublic ? faEye : faEyeSlash} />
 			</span>
 		</label>

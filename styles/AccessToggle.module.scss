@@ -1,5 +1,7 @@
 @use 'colors';
 
+$indicator-padding: 10px;
+
 .root {
 	display: flex;
 	align-items: center;
@@ -27,7 +29,7 @@
 		position: absolute;
 		top: 50%;
 		left: 100%;
-		padding-left: 10px;
+		padding: 0 0 0 $indicator-padding;
 		white-space: nowrap;
 		opacity: 0;
 		transform: translateY(-50%);
@@ -53,4 +55,10 @@
 	&::after {
 		content: 'make private';
 	}
+}
+
+.leftIndicator::after {
+	left: unset;
+	right: 100%;
+	padding: 0 $indicator-padding 0 0;
 }
