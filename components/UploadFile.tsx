@@ -102,7 +102,13 @@ const UploadFile = () => {
 			{name && <Title>{name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{name}</p>
-				{fileMeta && <AccessToggle className={styles.accessToggle} file={fileMeta} />}
+				{fileMeta && (
+					<AccessToggle
+						className={styles.accessToggle}
+						file={fileMeta}
+						disabledMessage={currentUser ? undefined : 'Sign in to upload private files'}
+					/>
+				)}
 				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
@@ -119,10 +125,12 @@ const UploadFile = () => {
 							<FilePreview className={styles.preview} file={fileMeta} />
 							<div className={styles.main}>
 								<div className={styles.info}>
-									{currentUser
-										? <EditFileName className={styles.editName} file={fileMeta} onEdit={setFileMeta} />
-										: <p className={styles.name}>{fileMeta.name}</p>
-									}
+									<EditFileName
+										className={styles.editName}
+										file={fileMeta}
+										onEdit={setFileMeta}
+										disabledMessage={currentUser ? undefined : 'Sign in to edit filenames'}
+									/>
 									<div className={styles.actions}>
 										<button
 											className={cx(styles.action, styles.download)}

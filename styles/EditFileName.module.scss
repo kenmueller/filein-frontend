@@ -12,8 +12,10 @@
 		color: transparentize(white, 0.5);
 	}
 	
-	&:hover,
-	&:focus {
-		background: transparentize(white, 0.8);
+	&:not(:disabled) {
+		&:hover,
+		&:focus {
+			background: transparentize(white, 0.8);
+		}
 	}
 }

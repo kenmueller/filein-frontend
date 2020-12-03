@@ -11,9 +11,10 @@ export interface EditFileNameProps {
 	className?: string
 	file: FileMeta
 	onEdit?(file: FileMeta): void
+	disabledMessage?: string
 }
 
-const EditFileName = ({ className, file, onEdit }: EditFileNameProps) => {
+const EditFileName = ({ className, file, onEdit, disabledMessage }: EditFileNameProps) => {
 	const input = useRef<HTMLInputElement | null>(null)
 	const [name, setName] = useState(file.name)
 	
@@ -50,10 +51,16 @@ const EditFileName = ({ className, file, onEdit }: EditFileNameProps) => {
 	}, [setName])
 	
 	return (
-		<form className={className} onSubmit={onSubmit}>
+		<form
+			className={className}
+			onSubmit={onSubmit}
+			aria-label={disabledMessage}
+			data-balloon-pos={disabledMessage ? 'down-left' : undefined}
+		>
 			<input
 				className={styles.input}
 				ref={input}
+				disabled={Boolean(disabledMessage)}
 				placeholder={file.name}
 				value={name}
 				onChange={onChange}

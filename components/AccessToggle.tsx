@@ -12,9 +12,10 @@ import styles from 'styles/AccessToggle.module.scss'
 export interface AccessToggleProps {
 	className?: string
 	file: FileMeta
+	disabledMessage?: string
 }
 
-const AccessToggle = ({ className, file }: AccessToggleProps) => {
+const AccessToggle = ({ className, file, disabledMessage }: AccessToggleProps) => {
 	const update = useUpdate()
 	const isPublic = file.public
 	
@@ -24,8 +25,18 @@ const AccessToggle = ({ className, file }: AccessToggleProps) => {
 	}, [file, update])
 	
 	return (
-		<label className={className} role="button">
-			<input hidden type="checkbox" checked={isPublic} onChange={onChange} />
+		<label
+			className={className}
+			aria-label={disabledMessage}
+			data-balloon-pos={disabledMessage ? 'right' : undefined}
+		>
+			<input
+				className={styles.input}
+				disabled={Boolean(disabledMessage)}
+				type="checkbox"
+				checked={isPublic}
+				onChange={onChange}
+			/>
 			<span className={cx(styles.icon, { [styles.public]: isPublic })}>
 				<FontAwesomeIcon icon={isPublic ? faEye : faEyeSlash} />
 			</span>

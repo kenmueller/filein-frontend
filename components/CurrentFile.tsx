@@ -17,6 +17,7 @@ import useUser from 'hooks/useUser'
 import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
 import Title from './Title'
+import AccessToggle from './AccessToggle'
 import FilePreview from './FilePreview'
 import EditFileName from './EditFileName'
 import Spinner from './Spinner'
@@ -81,6 +82,7 @@ const CurrentFile = () => {
 			{file && <Title>{file.name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{file?.name}</p>
+				{file && <AccessToggle className={styles.accessToggle} file={file} />}
 				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>

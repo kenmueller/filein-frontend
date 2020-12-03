@@ -6,12 +6,17 @@
 	color: transparentize(white, 0.3);
 }
 
+.input {
+	display: none;
+}
+
 .icon {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 6px 8px;
+	cursor: default;
 	color: white;
 	background: colors.$red;
 	border-radius: 8px;
@@ -29,11 +34,15 @@
 		transition: opacity 0.3s;
 	}
 	
-	&:hover {
-		opacity: 0.7;
+	.input:not(:disabled) + & {
+		cursor: pointer;
 		
-		&::after {
-			opacity: 1;
+		&:hover {
+			opacity: 0.7;
+			
+			&::after {
+				opacity: 1;
+			}
 		}
 	}
 }
