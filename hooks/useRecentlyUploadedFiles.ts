@@ -44,11 +44,15 @@ const useRecentlyUploadedFiles = () => {
 								}
 								case 'modified': {
 									const newFile = snapshotToFileMeta(doc)
+									
+									if (!newFile)
+										break
+									
 									const hasFile = files.some(({ id }) => id === newFile.id)
 									
 									files = hasFile
 										? files.map(file =>
-											file.id === newFile.id ? newFile ?? file : file
+											file.id === newFile.id ? newFile : file
 										)
 										: [...files, newFile]
 									
