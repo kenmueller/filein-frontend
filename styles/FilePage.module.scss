@@ -106,10 +106,16 @@
 	vertical-align: middle;
 }
 
-.actions {
+.options {
 	flex-shrink: 0;
 	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 	margin-left: 16px;
+}
+
+.actions {
+	display: flex;
 }
 
 .action {
@@ -143,6 +149,10 @@
 .download { --color: #{colors.$purple}; }
 .copy { --color: #{colors.$green}; }
 .delete { --color: #{colors.$red}; }
+
+.accessToggle {
+	margin-top: 8px;
+}
 
 .comments {
 	flex-grow: 1;

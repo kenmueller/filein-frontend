@@ -24,6 +24,7 @@ import Gradient from 'components/Gradient'
 import FilePreview from 'components/FilePreview'
 import EditFileName from 'components/EditFileName'
 import Spinner from 'components/Spinner'
+import AccessToggle from 'components/AccessToggle'
 import Comments from 'components/Comments'
 import Footer from 'components/Footer'
 
@@ -112,29 +113,38 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 								}
 							</p>
 						</div>
-						<div className={styles.actions}>
-							<button
-								className={cx(styles.action, styles.download)}
-								onClick={download}
-								title="Download"
-							>
-								<FontAwesomeIcon icon={faDownload} />
-							</button>
-							<button
-								className={cx(styles.action, styles.copy)}
-								onClick={copyLink}
-								title="Copy source"
-							>
-								<FontAwesomeIcon icon={faLink} />
-							</button>
-							{isOwner && (
+						<div className={styles.options}>
+							<div className={styles.actions}>
 								<button
-									className={cx(styles.action, styles.delete)}
-									onClick={deleteFile}
-									title="Delete"
+									className={cx(styles.action, styles.download)}
+									onClick={download}
+									title="Download"
 								>
-									<FontAwesomeIcon icon={faTrash} />
+									<FontAwesomeIcon icon={faDownload} />
 								</button>
+								<button
+									className={cx(styles.action, styles.copy)}
+									onClick={copyLink}
+									title="Copy source"
+								>
+									<FontAwesomeIcon icon={faLink} />
+								</button>
+								{isOwner && (
+									<button
+										className={cx(styles.action, styles.delete)}
+										onClick={deleteFile}
+										title="Delete"
+									>
+										<FontAwesomeIcon icon={faTrash} />
+									</button>
+								)}
+							</div>
+							{isOwner && (
+								<AccessToggle
+									className={styles.accessToggle}
+									file={file}
+									leftIndicator
+								/>
 							)}
 						</div>
 					</div>
