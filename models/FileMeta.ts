@@ -7,4 +7,5 @@ export default interface FileMeta {
 	comments: number
 	uploaded: number
 	public: boolean
+	blob?: Blob
 }

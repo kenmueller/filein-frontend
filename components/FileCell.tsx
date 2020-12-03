@@ -70,7 +70,7 @@ const FileCellContent = ({ file, type, isFallback }: FileCellContentProps) => {
 				</>
 			)
 		case FileType.PDF:
-			return <PDF className={styles.document} url={getFileUrl(file, true)} firstPageOnly />
+			return <PDF className={styles.document} url={file.blob ?? getFileUrl(file, true)} firstPageOnly />
 		case FileType.Audio:
 		case FileType.Other:
 			return <FileCellIcon file={file} />

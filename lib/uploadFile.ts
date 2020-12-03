@@ -50,7 +50,7 @@ const uploadFile = async (
 	
 	setProgress(100)
 	
-	return { id, name, type, size, owner, comments: 0, uploaded: Date.now(), public: isPublic }
+	return { id, name, type, size, owner, comments: 0, uploaded: Date.now(), public: isPublic, blob: file }
 }
 
 export default uploadFile

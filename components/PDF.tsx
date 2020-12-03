@@ -9,7 +9,7 @@ import styles from 'styles/PDF.module.scss'
 
 export interface PDFProps {
 	className?: string
-	url: string
+	url: Blob | string
 	firstPageOnly?: boolean
 }
 

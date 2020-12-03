@@ -62,7 +62,7 @@ const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps)
 				</>
 			)
 		case FileType.PDF:
-			return <PDF className={styles.document} url={getFileUrl(file, true)} />
+			return <PDF className={styles.document} url={file.blob ?? getFileUrl(file, true)} />
 		case FileType.Other:
 			return <FilePreviewIcon file={file} />
 	}
