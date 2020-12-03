@@ -36,7 +36,7 @@ const RecentlyUploadedFiles = ({ className }: RecentlyUploadedFilesProps) => {
 			/>
 			<FileGrid className={styles.files} loading={!files}>
 				{files?.filter(getFilePredicate(query)).map(file => (
-					<FileCell key={file.id} file={file} />
+					<FileCell key={file.id} file={file} owner />
 				))}
 			</FileGrid>
 		</div>

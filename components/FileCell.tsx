@@ -1,8 +1,9 @@
-import { useCallback } from 'react'
-import dynamic from 'next/dynamic'
+import { MouseEvent, useCallback } from 'react'
 import { useSetRecoilState } from 'recoil'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faComment, faVideo } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faComment, faVideo } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import FileMeta from 'models/FileMeta'
@@ -11,8 +12,10 @@ import getFileType from 'lib/getFileType'
 import getFileUrl from 'lib/getFileUrl'
 import getFileIcon from 'lib/getFileIcon'
 import currentFileState from 'state/currentFile'
+import useUser from 'hooks/useUser'
 
 import styles from 'styles/FileCell.module.scss'
+import Spinner from './Spinner'
 
 const MAX_PREVIEW_SIZE = 50 * 1024 * 1024 // 50 MB
 
@@ -28,9 +31,13 @@ interface FileCellContentProps {
 
 export interface FileCellProps {
 	file: FileMeta
+	owner?: boolean
 }
 
 const PDF = dynamic(() => import('./PDF'), { ssr: false })
+
+const stopPropagation = (event: MouseEvent) =>
+	event.stopPropagation()
 
 const FileCellIcon = ({ file }: FileCellIconProps) => (
 	<FontAwesomeIcon className={styles.icon} icon={getFileIcon(file)} />
@@ -61,8 +68,9 @@ const FileCellContent = ({ file, type, isFallback }: FileCellContentProps) => {
 	}
 }
 
-const FileCell = ({ file }: FileCellProps) => {
+const FileCell = ({ file, owner = false }: FileCellProps) => {
 	const setCurrentFile = useSetRecoilState(currentFileState)
+	const user = useUser(owner ? file.owner : null)
 	
 	const type = getFileType(file)
 	const isFallback = file.size > MAX_PREVIEW_SIZE
@@ -81,6 +89,21 @@ const FileCell = ({ file }: FileCellProps) => {
 			title={`View ${file.name}`}
 		>
 			<FileCellContent file={file} type={type} isFallback={isFallback} />
+			{owner && file.owner && (
+				<div className={styles.owner}>
+					{user
+						? (
+							<Link href={`/u/${user.slug}`}>
+								<a className={styles.ownerLink} onClick={stopPropagation}>
+									<span className={styles.ownerName}>{user.name}</span>
+									<FontAwesomeIcon className={styles.ownerIcon} icon={faChevronRight} />
+								</a>
+							</Link>
+						)
+						: <Spinner className={styles.ownerSpinner} />
+					}
+				</div>
+			)}
 			<div className={styles.info}>
 				<p className={styles.name}>{file.name}</p>
 				<div className={styles.comments}>

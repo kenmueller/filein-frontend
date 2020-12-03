@@ -1,5 +1,6 @@
 @use 'sizes';
 @use 'colors';
+@use 'spinner' as *;
 
 .root {
 	display: flex;
@@ -64,6 +65,41 @@
 	margin: auto;
 	font-size: 60px !important;
 	color: white;
+}
+
+.owner {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	z-index: 1;
+}
+
+.ownerLink {
+	text-decoration: none;
+	color: white;
+	
+	&:hover {
+		> .ownerName {
+			text-decoration: underline;
+		}
+		
+		> .ownerIcon {
+			transform: translateX(4px);
+		}
+	}
+}
+
+.ownerName {
+	margin-right: 4px;
+	font-weight: 900;
+}
+
+.ownerIcon {
+	transition: transform 0.3s;
+}
+
+.ownerSpinner {
+	@include spinner(16px, 3px, white);
 }
 
 .info {
