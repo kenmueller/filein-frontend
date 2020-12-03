@@ -1,4 +1,5 @@
 @use 'sizes';
+@use 'font';
 
 .root {
 	display: flex;
@@ -10,26 +11,49 @@
 .header {
 	max-width: sizes.$large-max-width;
 	width: 95%;
-	margin: 150px auto 0;
+	margin: 90px auto 0;
 	color: white;
+	
+	@media (min-width: 500px) { margin: 120px auto 0; }
+	@media (min-width: 600px) { margin: 150px auto 0; }
+}
+
+.name,
+.filesCount {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .name {
-	line-height: 56px;
-	font-size: 50px;
+	@include font.size(26px);
+	
 	font-weight: 900;
+	
+	@media (min-width: 300px) { @include font.size(30px); }
+	@media (min-width: 350px) { @include font.size(34px); }
+	@media (min-width: 400px) { @include font.size(38px); }
+	@media (min-width: 450px) { @include font.size(42px); }
+	@media (min-width: 500px) { @include font.size(46px); }
+	@media (min-width: 550px) { @include font.size(50px); }
 }
 
 .filesCount {
+	@include font.size(20px);
+	
 	margin-top: 12px;
-	line-height: 30px;
-	font-size: 24px;
 	font-weight: 900;
+	
+	@media (min-width: 350px) { @include font.size(24px); }
 }
 
 .filesContainer {
 	max-width: sizes.$file-grid-max-width;
-	margin: 60px auto 0;
+	margin: 30px auto 0;
+	
+	@media (min-width: 500px) {
+		margin: 60px auto 0;
+	}
 }
 
 .files {
