@@ -3,7 +3,7 @@
 
 .root {
 	max-width: 75%;
-	width: max-content;
+	width: 400px;
 	word-wrap: break-word;
 	animation: send 0.15s ease-in-out;
 	
@@ -31,6 +31,7 @@
 	margin-left: auto;
 	
 	> .body {
+		margin-left: auto;
 		color: white;
 		background: colors.$blue;
 	}
