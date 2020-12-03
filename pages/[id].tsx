@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { NextPage } from 'next'
+import { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import Router from 'next/router'
 import { useSetRecoilState } from 'recoil'
 import Link from 'next/link'
@@ -11,14 +11,15 @@ import cx from 'classnames'
 
 import User from 'models/User'
 import FileMeta from 'models/FileMeta'
+import getFileIds from 'lib/getFileIds'
 import getUser from 'lib/getUser'
 import getFile from 'lib/getFile'
 import getFileUrl from 'lib/getFileUrl'
 import _deleteFile from 'lib/deleteFile'
+import { REVALIDATE } from 'lib/constants'
 import usersState from 'state/users'
 import useCurrentUser from 'hooks/useCurrentUser'
 import useUser from 'hooks/useUser'
-import NotFound from 'components/NotFound'
 import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import FilePreview from 'components/FilePreview'
@@ -31,19 +32,16 @@ import Footer from 'components/Footer'
 import styles from 'styles/FilePage.module.scss'
 
 interface FilePageProps {
-	file: FileMeta | null
+	file: FileMeta
 	owner: User | null
 }
 
 const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
-	if (!_file)
-		return <NotFound />
-	
 	const setUsers = useSetRecoilState(usersState)
 	const [file, setFile] = useState(_file)
 	
 	const currentUser = useCurrentUser()
-	const user = _owner ?? useUser(file.owner)
+	const user = file.owner && (_owner ?? useUser(file.owner))
 	
 	const url = getFileUrl(file)
 	const isOwner = currentUser?.auth
@@ -157,15 +155,22 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 	)
 }
 
-FilePage.getInitialProps = async ({ query, res }) => {
-	const file = await getFile(query.id as string)
+export const getStaticPaths: GetStaticPaths = async () => ({
+	paths: (await getFileIds()).map(id => ({
+		params: { id }
+	})),
+	fallback: 'blocking'
+})
+
+export const getStaticProps: GetStaticProps<FilePageProps> = async ({ params }) => {
+	const file = await getFile(params.id as string)
 	
-	if (!file && res)
-		res.statusCode = 404
+	if (!file)
+		return { notFound: true }
 	
 	return {
-		file,
-		owner: file?.owner && res ? await getUser(file.owner) : null
+		props: { file, owner: file.owner && await getUser(file.owner) },
+		revalidate: REVALIDATE
 	}
 }
 

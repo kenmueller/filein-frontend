@@ -2,6 +2,7 @@ import { NextPage, GetStaticProps } from 'next'
 
 import FileMeta from 'models/FileMeta'
 import getRecentlyUploadedFiles from 'lib/getRecentlyUploadedFiles'
+import { REVALIDATE } from 'lib/constants'
 import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import RecentlyUploadedFiles from 'components/RecentlyUploadedFiles'
@@ -39,7 +40,7 @@ const Home: NextPage<HomeProps> = ({ files }) => (
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
 	props: { files: await getRecentlyUploadedFiles() },
-	revalidate: 1
+	revalidate: REVALIDATE
 })
 
 export default Home

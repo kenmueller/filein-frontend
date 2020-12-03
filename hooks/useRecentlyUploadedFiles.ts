@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import firebase from 'lib/firebase'
 import snapshotToFileMeta from 'lib/snapshotToFileMeta'
+import { RECENTLY_UPLOADED_FILES_LIMIT } from 'lib/constants'
 import recentlyUploadedFilesState from 'state/recentlyUploadedFiles'
 import useCurrentUser from './useCurrentUser'
 
@@ -26,7 +27,7 @@ const useRecentlyUploadedFiles = () => {
 		firestore
 			.collection('files')
 			.orderBy('uploaded', 'desc')
-			.limit(50)
+			.limit(RECENTLY_UPLOADED_FILES_LIMIT)
 			.onSnapshot(
 				snapshot => {
 					setFiles(_files => {

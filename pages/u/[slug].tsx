@@ -9,6 +9,7 @@ import getUserSlugs from 'lib/getUserSlugs'
 import getUserFromSlug from 'lib/getUserFromSlug'
 import getFiles from 'lib/getFiles'
 import getFilePredicate from 'lib/getFilePredicate'
+import { REVALIDATE } from 'lib/constants'
 import usersState from 'state/users'
 import useFiles from 'hooks/useFiles'
 import Head from 'components/Head'
@@ -86,7 +87,7 @@ export const getStaticProps: GetStaticProps<UserPageProps> = async ({ params }) 
 	
 	return {
 		props: { user, files: await getFiles(user.id) },
-		revalidate: 1
+		revalidate: REVALIDATE
 	}
 }
 
