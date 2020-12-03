@@ -17,6 +17,7 @@ import useUser from 'hooks/useUser'
 import styles from 'styles/FileCell.module.scss'
 import Spinner from './Spinner'
 
+const DIMENSION = 300
 const MAX_PREVIEW_SIZE = 50 * 1024 * 1024 // 50 MB
 
 interface FileCellIconProps {
@@ -49,12 +50,20 @@ const FileCellContent = ({ file, type, isFallback }: FileCellContentProps) => {
 	
 	switch (type) {
 		case FileType.Image:
-			return <img className={styles.imageElement} src={getFileUrl(file, true)} alt={file.name} />
+			return (
+				<img
+					className={styles.imageElement}
+					src={getFileUrl(file, true)}
+					alt={file.name}
+					width={DIMENSION}
+					height={DIMENSION}
+				/>
+			)
 		case FileType.Video:
 			return (
 				<>
 					<FontAwesomeIcon className={styles.videoIcon} icon={faVideo} />
-					<video className={styles.videoElement}>
+					<video className={styles.videoElement} width={DIMENSION} height={DIMENSION}>
 						<source src={getFileUrl(file, true)} type={file.type} />
 						Video not supported
 					</video>
