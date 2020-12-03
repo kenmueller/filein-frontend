@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import firebase from 'lib/firebase'
 import snapshotToFileMeta from 'lib/snapshotToFileMeta'
 import recentlyUploadedFilesState from 'state/recentlyUploadedFiles'
+import useCurrentUser from './useCurrentUser'
 
 import 'firebase/firestore'
 
@@ -13,8 +14,11 @@ const firestore = firebase.firestore()
 const useRecentlyUploadedFiles = () => {
 	const [files, setFiles] = useRecoilState(recentlyUploadedFilesState)
 	
+	const currentUser = useCurrentUser()
+	const uid = currentUser && (currentUser.auth?.uid ?? currentUser.data?.id)
+	
 	useEffect(() => {
-		if (files !== undefined)
+		if (uid === undefined || files !== undefined)
 			return
 		
 		setFiles(null)
@@ -38,24 +42,31 @@ const useRecentlyUploadedFiles = () => {
 									
 									break
 								}
-								case 'modified':
-									files = files.map(file =>
-										file.id === doc.id
-											? snapshotToFileMeta(doc) ?? file
-											: file
-									)
+								case 'modified': {
+									const newFile = snapshotToFileMeta(doc)
+									const hasFile = files.some(({ id }) => id === newFile.id)
+									
+									files = hasFile
+										? files.map(file =>
+											file.id === newFile.id ? newFile ?? file : file
+										)
+										: [...files, newFile]
+									
 									break
+								}
 								case 'removed':
 									files = files.filter(({ id }) => id !== doc.id)
 									break
 							}
 						
-						return files.sort((a, b) => b.uploaded - a.uploaded)
+						return files
+							.filter(file => file.public || file.owner === uid)
+							.sort((a, b) => b.uploaded - a.uploaded)
 					})
 				},
 				({ message }) => toast.error(message)
 			)
-	}, [files, setFiles])
+	}, [uid, files, setFiles])
 	
 	return files
 }

@@ -9,6 +9,7 @@ const getFiles = async (uid: string) => {
 	const { docs } = await firestore
 		.collection('files')
 		.where('owner', '==', uid)
+		.where('public', '==', true)
 		.get()
 	
 	return docs

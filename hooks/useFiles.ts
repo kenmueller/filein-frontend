@@ -5,25 +5,34 @@ import { toast } from 'react-toastify'
 import firebase from 'lib/firebase'
 import snapshotToFileMeta from 'lib/snapshotToFileMeta'
 import filesState from 'state/files'
+import useCurrentUser from './useCurrentUser'
 
 import 'firebase/firestore'
 
 const firestore = firebase.firestore()
 const queue = new Set<string>()
 
-const useFiles = (uid: string) => {
+const useFiles = (owner: string) => {
 	const [files, setFiles] = useRecoilState(filesState)
 	
+	const currentUser = useCurrentUser()
+	const uid = currentUser && (currentUser.auth?.uid ?? currentUser.data?.id)
+	
 	useEffect(() => {
-		if (queue.has(uid))
+		if (uid === undefined || queue.has(owner))
 			return
 		
-		queue.add(uid)
+		queue.add(owner)
 		
-		firestore.collection('files').where('owner', '==', uid).onSnapshot(
+		let query = firestore.collection('files').where('owner', '==', owner)
+		
+		if (uid !== owner)
+			query = query.where('public', '==', true)
+		
+		query.onSnapshot(
 			snapshot => {
 				setFiles(_files => {
-					let files = _files[uid] ?? []
+					let files = _files[owner] ?? []
 					
 					for (const { type, doc } of snapshot.docChanges())
 						switch (type) {
@@ -49,15 +58,15 @@ const useFiles = (uid: string) => {
 					
 					return {
 						..._files,
-						[uid]: files.sort((a, b) => b.uploaded - a.uploaded)
+						[owner]: files.sort((a, b) => b.uploaded - a.uploaded)
 					}
 				})
 			},
 			({ message }) => toast.error(message)
 		)
-	}, [uid, setFiles])
+	}, [uid, owner, setFiles])
 	
-	return files[uid]
+	return files[owner]
 }
 
 export default useFiles
