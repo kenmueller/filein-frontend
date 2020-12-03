@@ -46,7 +46,7 @@ const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps)
 			return <img className={styles.imageElement} src={getFileUrl(file, true)} alt={file.name} />
 		case FileType.Video:
 			return (
-				<video className={styles.videoElement} controls autoPlay>
+				<video className={styles.videoElement} controls autoPlay controlsList="nodownload">
 					<source src={getFileUrl(file, true)} type={file.type} />
 					<FontAwesomeIcon className={styles.icon} icon={faVideo} />
 				</video>
@@ -55,7 +55,7 @@ const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps)
 			return (
 				<>
 					<FontAwesomeIcon className={styles.icon} icon={faVolumeUp} />
-					<audio className={styles.audioElement} controls autoPlay>
+					<audio className={styles.audioElement} controls autoPlay controlsList="nodownload">
 						<source src={getFileUrl(file, true)} type={file.type} />
 						Audio is not supported
 					</audio>
