@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
+import { toast } from 'react-toastify'
 import cx from 'classnames'
+
 import Spinner from './Spinner'
 
 import styles from 'styles/PDF.module.scss'
-import { toast } from 'react-toastify'
 
 export interface PDFProps {
 	className?: string
