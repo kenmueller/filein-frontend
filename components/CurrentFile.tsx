@@ -82,7 +82,7 @@ const CurrentFile = () => {
 			{file && <Title>{file.name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{file?.name}</p>
-				{file && <AccessToggle className={styles.accessToggle} file={file} />}
+				{isOwner && <AccessToggle className={styles.accessToggle} file={file} />}
 				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>

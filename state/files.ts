@@ -4,7 +4,8 @@ import FileMeta from 'models/FileMeta'
 
 const filesState = atom<Record<string, FileMeta[]>>({
 	key: 'files',
-	default: {}
+	default: {},
+	dangerouslyAllowMutability: true
 })
 
 export default filesState
