@@ -13,7 +13,7 @@ import styles from 'styles/RecentlyUploadedFiles.module.scss'
 
 export interface RecentlyUploadedFilesProps {
 	className?: string
-	files?: FileMeta[]
+	files: FileMeta[]
 }
 
 const RecentlyUploadedFiles = ({ className, files: _files }: RecentlyUploadedFilesProps) => {
@@ -36,7 +36,7 @@ const RecentlyUploadedFiles = ({ className, files: _files }: RecentlyUploadedFil
 				value={query}
 				setValue={setQuery}
 			/>
-			<FileGrid className={styles.files} loading={!files}>
+			<FileGrid className={styles.files}>
 				{files?.filter(getFilePredicate(query)).map(file => (
 					<FileCell key={file.id} file={file} owner />
 				))}

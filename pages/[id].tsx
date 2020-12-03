@@ -36,12 +36,11 @@ interface FilePageProps {
 	owner: User | null
 }
 
-const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
+const FilePage: NextPage<FilePageProps> = ({ file: _file, owner }) => {
 	const setUsers = useSetRecoilState(usersState)
 	const [file, setFile] = useState(_file)
 	
 	const currentUser = useCurrentUser()
-	const user = file.owner && (_owner ?? useUser(file.owner))
 	
 	const url = getFileUrl(file)
 	const isOwner = currentUser?.auth
@@ -71,9 +70,12 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 	}, [file])
 	
 	useEffect(() => {
-		if (_owner)
-			setUsers(users => ({ ...users, [_owner.id]: _owner }))
-	}, [_owner, setUsers])
+		if (owner)
+			setUsers(users => ({
+				...users,
+				[owner.id]: users[owner.id] ?? owner
+			}))
+	}, [owner, setUsers])
 	
 	return (
 		<div className={styles.root}>
@@ -81,7 +83,7 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 				url={`https://filein.io/${file.id}`}
 				image={url}
 				title={`${file.name} - filein`}
-				description={`View ${file.name} by ${user?.name ?? 'anonymous'}`}
+				description={`View ${file.name} by ${owner?.name ?? 'anonymous'}`}
 			/>
 			<Gradient className={styles.header}>
 				<FilePreview className={styles.preview} file={file} />
@@ -93,20 +95,18 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner: _owner }) => {
 								: <h1 className={styles.name}>{file.name}</h1>
 							}
 							<p className={styles.user}>
-								Uploaded by {file.owner
-									? user
-										? (
-											<Link href={`/u/${user.slug}`}>
-												<a className={styles.userLink}>
-													<span className={styles.userName}>{user.name}</span>
-													<FontAwesomeIcon
-														className={styles.userIcon}
-														icon={faChevronRight}
-													/>
-												</a>
-											</Link>
-										)
-										: <Spinner className={styles.spinner} />
+								Uploaded by {owner
+									? (
+										<Link href={`/u/${owner.slug}`}>
+											<a className={styles.userLink}>
+												<span className={styles.userName}>{owner.name}</span>
+												<FontAwesomeIcon
+													className={styles.userIcon}
+													icon={faChevronRight}
+												/>
+											</a>
+										</Link>
+									)
 									: <span className={styles.userName}>anonymous</span>
 								}
 							</p>

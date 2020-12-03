@@ -60,7 +60,7 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 				</p>
 				<div className={styles.filesContainer}>
 					<Search placeholder="Files" value={query} setValue={setQuery} />
-					<FileGrid className={styles.files} loading={!files}>
+					<FileGrid className={styles.files}>
 						{files?.filter(getFilePredicate(query)).map(file => (
 							<FileCell key={file.id} file={file} />
 						))}

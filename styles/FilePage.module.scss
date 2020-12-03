@@ -1,6 +1,5 @@
 @use 'sizes';
 @use 'colors';
-@use 'spinner' as *;
 
 .root {
 	display: flex;
@@ -97,13 +96,6 @@
 .userIcon {
 	margin-left: 6px;
 	transition: transform 0.3s;
-}
-
-.spinner {
-	@include spinner(16px, 3px, white);
-	
-	margin-left: 4px;
-	vertical-align: middle;
 }
 
 .options {
