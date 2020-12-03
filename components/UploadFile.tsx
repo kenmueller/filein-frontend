@@ -102,7 +102,7 @@ const UploadFile = () => {
 			{name && <Title>{name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{name}</p>
-				{fileMeta && <AccessToggle file={fileMeta} />}
+				{fileMeta && <AccessToggle className={styles.accessToggle} file={fileMeta} />}
 				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>

@@ -16,8 +16,12 @@
 	border-bottom: 2px solid #333;
 }
 
-.headerName {
+.headerName,
+.accessToggle {
 	margin-right: 16px;
+}
+
+.headerName {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

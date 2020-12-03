@@ -1,0 +1,47 @@
+@use 'colors';
+
+.root {
+	display: flex;
+	align-items: center;
+	color: transparentize(white, 0.3);
+}
+
+.icon {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 6px 8px;
+	color: white;
+	background: colors.$red;
+	border-radius: 8px;
+	transition: background 0.3s, opacity 0.3s;
+	
+	&::after {
+		content: 'make public';
+		position: absolute;
+		top: 50%;
+		left: 100%;
+		padding-left: 10px;
+		white-space: nowrap;
+		opacity: 0;
+		transform: translateY(-50%);
+		transition: opacity 0.3s;
+	}
+	
+	&:hover {
+		opacity: 0.7;
+		
+		&::after {
+			opacity: 1;
+		}
+	}
+}
+
+.public {
+	background: colors.$blue;
+	
+	&::after {
+		content: 'make private';
+	}
+}
