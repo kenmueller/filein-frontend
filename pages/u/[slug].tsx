@@ -1,16 +1,16 @@
 import { useCallback, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { NextPage } from 'next'
+import { NextPage, GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
 import User from 'models/User'
 import FileMeta from 'models/FileMeta'
+import getUserSlugs from 'lib/getUserSlugs'
 import getUserFromSlug from 'lib/getUserFromSlug'
 import getFiles from 'lib/getFiles'
 import getFilePredicate from 'lib/getFilePredicate'
 import usersState from 'state/users'
 import useFiles from 'hooks/useFiles'
-import NotFound from 'components/NotFound'
 import Head from 'components/Head'
 import Gradient from 'components/Gradient'
 import Search from 'components/Search'
@@ -21,14 +21,11 @@ import Footer from 'components/Footer'
 import styles from 'styles/UserPage.module.scss'
 
 interface UserPageProps {
-	user: User | null
-	files: FileMeta[] | null
+	user: User
+	files: FileMeta[]
 }
 
 const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
-	if (!user)
-		return <NotFound />
-	
 	const setUsers = useSetRecoilState(usersState)
 	
 	const router = useRouter()
@@ -74,15 +71,22 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 	)
 }
 
-UserPage.getInitialProps = async ({ query, res }) => {
-	const user = await getUserFromSlug(query.slug as string)
+export const getStaticPaths: GetStaticPaths = async () => ({
+	paths: (await getUserSlugs()).map(slug => ({
+		params: { slug }
+	})),
+	fallback: 'blocking'
+})
+
+export const getStaticProps: GetStaticProps<UserPageProps> = async ({ params }) => {
+	const user = await getUserFromSlug(params.slug as string)
 	
-	if (!user && res)
-		res.statusCode = 404
+	if (!user)
+		return { notFound: true }
 	
 	return {
-		user,
-		files: user && res ? await getFiles(user.id) : null
+		props: { user, files: await getFiles(user.id) },
+		revalidate: 1
 	}
 }
 
