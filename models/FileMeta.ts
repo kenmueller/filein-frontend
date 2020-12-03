@@ -6,4 +6,5 @@ export default interface FileMeta {
 	owner: string | null
 	comments: number
 	uploaded: number
+	public: boolean
 }

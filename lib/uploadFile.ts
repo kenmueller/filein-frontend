@@ -2,6 +2,7 @@ import { getExtension } from 'mime'
 
 import FileMeta from 'models/FileMeta'
 import firebase from './firebase'
+import { getIsPublic } from './access'
 import newId from './newId'
 
 import 'firebase/firestore'
@@ -17,6 +18,7 @@ const uploadFile = async (
 	setProgress: (progress: number) => void
 ): Promise<FileMeta> => {
 	const { name, type, size } = file
+	const isPublic = owner ? getIsPublic() : true
 	
 	const indexOfDot = name.lastIndexOf('.')
 	const id = `${newId()}.${
@@ -42,12 +44,13 @@ const uploadFile = async (
 		size,
 		owner,
 		comments: 0,
-		uploaded: FieldValue.serverTimestamp()
+		uploaded: FieldValue.serverTimestamp(),
+		public: isPublic
 	})
 	
 	setProgress(100)
 	
-	return { id, name, type, size, owner, comments: 0, uploaded: Date.now() }
+	return { id, name, type, size, owner, comments: 0, uploaded: Date.now(), public: isPublic }
 }
 
 export default uploadFile

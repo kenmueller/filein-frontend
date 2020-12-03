@@ -17,6 +17,7 @@ import useCurrentUser from 'hooks/useCurrentUser'
 import useHideOverlays from 'hooks/useHideOverlays'
 import Modal from './Modal'
 import Title from './Title'
+import AccessToggle from './AccessToggle'
 import ProgressCircle from './ProgressCircle'
 import FilePreview from './FilePreview'
 import EditFileName from './EditFileName'
@@ -101,6 +102,7 @@ const UploadFile = () => {
 			{name && <Title>{name} - filein</Title>}
 			<header className={styles.header}>
 				<p className={styles.headerName}>{name}</p>
+				{fileMeta && <AccessToggle file={fileMeta} />}
 				<button className={styles.close} onClick={hide} title="Close">
 					<FontAwesomeIcon className={styles.closeIcon} icon={faTimes} />
 				</button>
