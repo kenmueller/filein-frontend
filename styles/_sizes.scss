@@ -1,6 +1,12 @@
 $navbar-height: 74px;
 $large-max-width: 1340px;
 
-$file-grid-columns: 3;
+$file-cell-min-dimension: 250px;
+$file-cell-max-dimension: 300px;
+
+$file-grid-max-columns: 3;
 $file-grid-gap: 16px;
-$file-cell-dimension: 300px;
+
+$file-grid-max-width:
+	$file-grid-max-columns * $file-cell-max-dimension +
+	($file-grid-max-columns - 1) * $file-grid-gap;

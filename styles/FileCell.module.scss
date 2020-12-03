@@ -1,16 +1,19 @@
-@use 'sizes';
 @use 'colors';
 @use 'spinner' as *;
 
 .root {
 	display: flex;
 	position: relative;
-	width: sizes.$file-cell-dimension;
-	height: sizes.$file-cell-dimension;
 	overflow: hidden;
 	background: colors.$dark;
 	border-radius: 8px;
 	transition: transform 0.3s;
+	
+	&::before {
+		content: '';
+		display: block;
+		padding-bottom: 100%;
+	}
 	
 	&:hover {
 		transform: scale(1.05);
@@ -36,6 +39,7 @@
 }
 
 .imageElement {
+	position: absolute;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -50,6 +54,7 @@
 }
 
 .videoElement {
+	position: absolute;
 	width: 100%;
 	height: 100%;
 }
@@ -75,6 +80,8 @@
 }
 
 .ownerLink {
+	display: flex;
+	align-items: center;
 	text-decoration: none;
 	color: white;
 	
@@ -90,7 +97,11 @@
 }
 
 .ownerName {
+	max-width: 200px;
 	margin-right: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	font-weight: 900;
 }
 

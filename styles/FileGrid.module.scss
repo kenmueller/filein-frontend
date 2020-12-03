@@ -3,9 +3,8 @@
 
 .root {
 	display: grid;
-	grid: none / repeat(sizes.$file-grid-columns, sizes.$file-cell-dimension);
+	grid: none / repeat(auto-fill, minmax(sizes.$file-cell-min-dimension, 1fr));
 	gap: sizes.$file-grid-gap;
-	max-width: max-content;
 }
 
 .loading {

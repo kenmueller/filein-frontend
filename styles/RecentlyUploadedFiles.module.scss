@@ -1,7 +1,7 @@
 @use 'sizes';
 
 .root {
-	max-width: sizes.$file-grid-columns * sizes.$file-cell-dimension + (sizes.$file-grid-columns - 1) * sizes.$file-grid-gap;
+	max-width: sizes.$file-grid-max-width;
 }
 
 .files {
