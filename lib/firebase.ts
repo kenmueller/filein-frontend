@@ -2,14 +2,14 @@ import firebase from 'firebase/app'
 
 if (!firebase.apps.length)
 	firebase.initializeApp({
-		apiKey: 'AIzaSyB13_2StV6vQhUx4aPAcZI75ROMqV8sewM',
-		authDomain: 'file-in.firebaseapp.com',
-		databaseURL: 'https://file-in.firebaseio.com',
-		projectId: 'file-in',
-		storageBucket: 'u.filein.io',
-		messagingSenderId: '305570645544',
-		appId: '1:305570645544:web:a59880e8e964bef3a2171d',
-		measurementId: 'G-ES7L5THM5X'
+		apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+		authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+		databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+		projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+		storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+		messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+		appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+		measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 	})
 
 export default firebase
