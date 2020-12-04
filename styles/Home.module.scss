@@ -39,9 +39,9 @@
 	margin-top: 12px;
 	font-weight: 900;
 	
-	@media (min-width: 300px) { @include font.size(16px); }
-	@media (min-width: 350px) { @include font.size(20px); }
-	@media (min-width: 500px) { @include font.size(24px); }
+	@media (min-width: 350px) { @include font.size(16px); }
+	@media (min-width: 450px) { @include font.size(20px); }
+	@media (min-width: 770px) { @include font.size(24px); }
 }
 
 .recentlyUploadedFiles {

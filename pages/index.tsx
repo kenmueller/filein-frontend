@@ -27,7 +27,7 @@ const Home: NextPage<HomeProps> = ({ files }) => (
 				The best way to share files
 			</h1>
 			<p className={styles.subtitle}>
-				Super fast file hosting. Free forever.
+				Super fast file hosting. Free forever. Upload public or private files.
 			</p>
 			<RecentlyUploadedFiles
 				className={styles.recentlyUploadedFiles}
