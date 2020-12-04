@@ -3,6 +3,7 @@
 
 .root {
 	--color: white;
+	--color-inverted: #{colors.$blue};
 	--background-hover: #{transparentize(white, 0.8)};
 	
 	position: fixed;
@@ -16,6 +17,7 @@
 
 .active {
 	--color: #{colors.$blue};
+	--color-inverted: white;
 	--background-hover: #{transparentize(colors.$dark, 0.9)};
 	
 	background: white;
@@ -32,27 +34,49 @@
 }
 
 .home {
+	display: flex;
+	align-items: center;
 	margin-right: auto;
 	padding: 6px 12px;
 	text-decoration: none;
-	font-size: 30px;
-	font-weight: 900;
 	color: var(--color);
 	border-radius: 8px;
 	transition: color 0.3s, background 0.3s, transform 0.3s;
 	
+	:global(.icon-background),
+	:global(.icon-foreground) {
+		transition: fill 0.3s;
+	}
+	
+	:global(.icon-background) { fill: var(--color); }
+	:global(.icon-foreground) { fill: var(--color-inverted); }
+	
 	&:hover {
-		color: colors.$blue;
+		color: var(--color-inverted);
 		background: var(--color);
 		
-		.active & {
-			color: white;
-		}
+		:global(.icon-background) { fill: var(--color-inverted); }
+		:global(.icon-foreground) { fill: var(--color); }
 	}
 	
 	&:active {
 		transform: translateY(-2px);
 	}
+}
+
+.homeIcon {
+	display: none;
+	height: 30px;
+	margin-right: 10px;
+	
+	@media (min-width: 350px) {
+		display: block;
+	}
+}
+
+.homeMessage {
+	font-size: 30px;
+	font-weight: 900;
 }
 
 .upload,

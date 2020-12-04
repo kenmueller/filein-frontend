@@ -30,6 +30,8 @@
 		"sass": "^1.29.0"
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.12.7",
+		"@babel/preset-react": "^7.12.7",
 		"@types/classnames": "^2.2.11",
 		"@types/file-saver": "^2.0.1",
 		"@types/mime": "^2.0.3",

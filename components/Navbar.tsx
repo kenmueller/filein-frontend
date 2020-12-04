@@ -1,12 +1,15 @@
 import { useState, useCallback, useEffect } from 'react'
 import Link from 'next/link'
 import ProgressBar from 'nextjs-progressbar'
+import { Svg } from 'react-optimized-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import cx from 'classnames'
 
 import UploadButton from './UploadButton'
 import AuthButton from './AuthButton'
+
+import logo from 'images/logo.svg'
 
 import styles from 'styles/Navbar.module.scss'
 
@@ -29,7 +32,10 @@ const Navbar = () => {
 			<ProgressBar color={isActive ? '#08f' : 'white'} />
 			<nav className={styles.content}>
 				<Link href="/">
-					<a className={styles.home}>filein</a>
+					<a className={styles.home}>
+						<Svg className={styles.homeIcon} src={logo} />
+						<span className={styles.homeMessage}>filein</span>
+					</a>
 				</Link>
 				<UploadButton className={styles.upload}>
 					<FontAwesomeIcon icon={faUpload} />
