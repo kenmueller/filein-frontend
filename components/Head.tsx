@@ -17,9 +17,19 @@ export interface HeadProps {
 	title: string
 	description: string
 	data?: any[]
+	firestorePreconnect?: boolean
+	storagePreconnect?: boolean
 }
 
-const Head = ({ url, image, title, description, data = [] }: HeadProps) => {
+const Head = ({
+	url,
+	image,
+	title,
+	description,
+	data = [],
+	firestorePreconnect = true,
+	storagePreconnect = true
+}: HeadProps) => {
 	const html = useMemo(() => ({
 		__html: JSON.stringify({
 			'@context': 'https://schema.org',
@@ -40,6 +50,13 @@ const Head = ({ url, image, title, description, data = [] }: HeadProps) => {
 			<meta key="twitter-description" name="twitter:description" content={description} />
 			<script key="data" type="application/ld+json" dangerouslySetInnerHTML={html} />
 			<title key="title">{title}</title>
+			
+			{firestorePreconnect && (
+				<link key="firestore-preconnect" rel="preconnect" href="https://firestore.googleapis.com" />
+			)}
+			{storagePreconnect && (
+				<link key="storage-preconnect" rel="preconnect" href="https://storage.googleapis.com" />
+			)}
 		</NextHead>
 	)
 }
