@@ -9,7 +9,7 @@ import cx from 'classnames'
 import UploadButton from './UploadButton'
 import AuthButton from './AuthButton'
 
-import logo from 'images/logo.svg'
+import icon from 'images/icon.svg'
 
 import styles from 'styles/Navbar.module.scss'
 
@@ -33,7 +33,7 @@ const Navbar = () => {
 			<nav className={styles.content}>
 				<Link href="/">
 					<a className={styles.home}>
-						<Svg className={styles.homeIcon} src={logo} />
+						<Svg className={styles.homeIcon} src={icon} />
 						<span className={styles.homeMessage}>filein</span>
 					</a>
 				</Link>
