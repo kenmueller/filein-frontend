@@ -10,6 +10,8 @@ import UploadFile from 'components/UploadFile'
 import CurrentFile from 'components/CurrentFile'
 import Navbar from 'components/Navbar'
 
+import { src as icon } from 'images/icon.svg'
+
 import 'styles/global.scss'
 
 config.autoAddCss = false
@@ -24,6 +26,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 				rel="stylesheet"
 				href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
 			/>
+			<link key="icon" rel="icon" href={icon} />
 			<meta key="theme-color" name="theme-color" content="white" />
 			<meta key="og-site-name" property="og:site_name" content="filein" />
 			<meta key="og-type" property="og:type" content="website" />
