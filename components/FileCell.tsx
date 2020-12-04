@@ -55,6 +55,7 @@ const FileCellContent = ({ file, type, isFallback }: FileCellContentProps) => {
 					className={styles.imageElement}
 					src={getFileUrl(file, true)}
 					alt={file.name}
+					loading="lazy"
 					width={DIMENSION}
 					height={DIMENSION}
 				/>
