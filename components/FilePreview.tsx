@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import copy from 'copy-to-clipboard'
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -86,6 +87,9 @@ const FilePreview = ({ className, file }: FilePreviewProps) => {
 			role="button"
 			title="Share"
 		>
+			<Head>
+				<link key={`${file.id}-preload`} rel="preload" href={getFileUrl(file, true)} />
+			</Head>
 			<FilePreviewContent file={file} type={type} isFallback={isFallback} />
 			<span className={styles.shareContainer}>
 				<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
