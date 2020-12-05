@@ -18,7 +18,7 @@ import styles from 'styles/FileCell.module.scss'
 import Spinner from './Spinner'
 
 const DIMENSION = 300
-const MAX_PREVIEW_SIZE = 50 * 1024 * 1024 // 50 MB
+const MAX_PREVIEW_SIZE = 100 * 1024 * 1024 // 100 MB
 
 interface FileCellIconProps {
 	file: FileMeta
