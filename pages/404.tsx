@@ -11,7 +11,6 @@ const NotFound: NextPage = () => (
 	<div className={styles.root}>
 		<Head
 			url={`https://filein.io${useRouter().asPath}`}
-			image="" // TODO: Add image
 			title="404 - filein"
 			description="Oh no! Are you lost?"
 			firestorePreconnect={false}

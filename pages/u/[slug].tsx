@@ -49,7 +49,6 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 		<div className={styles.root}>
 			<Head
 				url={`https://filein.io/u/${user.slug}`}
-				image="" // TODO: Add image
 				title={`${user.name} - filein`}
 				description={`View ${user.name}'s ${user.files} file${user.files === 1 ? '' : 's'}`}
 			/>

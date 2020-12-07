@@ -18,7 +18,6 @@ const Home: NextPage<HomeProps> = ({ files }) => (
 	<div className={styles.root}>
 		<Head
 			url="https://filein.io"
-			image="" // TODO: Add image
 			title="filein - The best way to share files"
 			description="The best way to share files"
 		/>

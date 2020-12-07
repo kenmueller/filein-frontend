@@ -20,6 +20,7 @@ import { REVALIDATE } from 'lib/constants'
 import usersState from 'state/users'
 import useCurrentUser from 'hooks/useCurrentUser'
 import Head from 'components/Head'
+import FileHead from 'components/FileHead'
 import Gradient from 'components/Gradient'
 import FilePreview from 'components/FilePreview'
 import EditFileName from 'components/EditFileName'
@@ -79,10 +80,10 @@ const FilePage: NextPage<FilePageProps> = ({ file: _file, owner }) => {
 		<div className={styles.root}>
 			<Head
 				url={`https://filein.io/${file.id}`}
-				image={url}
 				title={`${file.name} - filein`}
 				description={`View ${file.name} by ${owner?.name ?? 'anonymous'}`}
 			/>
+			<FileHead file={file} />
 			<Gradient className={styles.header}>
 				<FilePreview className={styles.preview} file={file} />
 				<div className={styles.main}>

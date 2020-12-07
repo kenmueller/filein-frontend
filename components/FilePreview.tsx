@@ -11,11 +11,10 @@ import FileType from 'models/FileType'
 import getFileType from 'lib/getFileType'
 import getFileUrl from 'lib/getFileUrl'
 import getFileIcon from 'lib/getFileIcon'
-import FilePreload from './FilePreload'
 
 import styles from 'styles/FilePreview.module.scss'
 
-const MAX_PREVIEW_SIZE = 150 * 1024 * 1024 // 150 MB
+export const MAX_FILE_PREVIEW_SIZE = 150 * 1024 * 1024 // 150 MB
 
 interface FilePreviewIconProps {
 	file: FileMeta
@@ -71,7 +70,7 @@ const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps)
 
 const FilePreview = ({ className, file }: FilePreviewProps) => {
 	const type = getFileType(file)
-	const isFallback = file.size > MAX_PREVIEW_SIZE
+	const isFallback = file.size > MAX_FILE_PREVIEW_SIZE
 	
 	const onClick = useCallback(() => {
 		copy(`https://filein.io/${file.id}`)
@@ -87,7 +86,6 @@ const FilePreview = ({ className, file }: FilePreviewProps) => {
 			role="button"
 			title="Share"
 		>
-			<FilePreload file={file} type={type} maxSize={MAX_PREVIEW_SIZE} />
 			<FilePreviewContent file={file} type={type} isFallback={isFallback} />
 			<span className={styles.shareContainer}>
 				<FontAwesomeIcon className={styles.share} icon={faShareSquare} />
