@@ -13,9 +13,9 @@ import getFileUrl from 'lib/getFileUrl'
 import getFileIcon from 'lib/getFileIcon'
 import currentFileState from 'state/currentFile'
 import useUser from 'hooks/useUser'
+import Spinner from './Spinner'
 
 import styles from 'styles/FileCell.module.scss'
-import Spinner from './Spinner'
 
 const DIMENSION = 300
 const MAX_PREVIEW_SIZE = 100 * 1024 * 1024 // 100 MB
