@@ -1,5 +1,5 @@
-# filein
+# [filein](https://filein.io)
 
-> Super fast file hosting, one drag away
+> The best way to share files
 
 <https://filein.io>
