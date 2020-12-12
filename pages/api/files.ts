@@ -66,8 +66,8 @@ const uploadFile: NextApiHandler<string | void> = async ({ method, body }, res) 
 		})
 		
 		res.send(id)
-	} catch (error) {
-		res.status(500).send(error)
+	} catch ({ message }) {
+		res.status(500).send(message)
 	}
 }
 
