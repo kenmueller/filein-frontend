@@ -1,2 +1,2 @@
-export const RECENTLY_UPLOADED_FILES_LIMIT = 50
+export const RECENTLY_UPLOADED_FILES_LIMIT = 100
 export const REVALIDATE = 1

@@ -12,6 +12,9 @@ import 'firebase/firestore'
 
 const firestore = firebase.firestore()
 
+let isListeningToAll = false
+let isListeningToUser = false
+
 const useRecentlyUploadedFiles = () => {
 	const [files, setFiles] = useRecoilState(recentlyUploadedFilesState)
 	
@@ -19,13 +22,14 @@ const useRecentlyUploadedFiles = () => {
 	const uid = currentUser && (currentUser.auth?.uid ?? currentUser.data?.id)
 	
 	useEffect(() => {
-		if (uid === undefined || files !== undefined)
+		if (isListeningToAll)
 			return
 		
-		setFiles(null)
+		isListeningToAll = true
 		
 		firestore
 			.collection('files')
+			.where('public', '==', true)
 			.orderBy('uploaded', 'desc')
 			.limit(RECENTLY_UPLOADED_FILES_LIMIT)
 			.onSnapshot(
@@ -46,32 +50,81 @@ const useRecentlyUploadedFiles = () => {
 								case 'modified': {
 									const newFile = snapshotToFileMeta(doc)
 									
-									if (!newFile)
-										break
-									
-									const hasFile = files.some(({ id }) => id === newFile.id)
-									
-									files = hasFile
-										? files.map(file =>
+									if (newFile)
+										files = files.map(file =>
 											file.id === newFile.id ? newFile : file
 										)
-										: [...files, newFile]
 									
 									break
 								}
 								case 'removed':
-									files = files.filter(({ id }) => id !== doc.id)
+									for (const file of files)
+										if (file.id === doc.id) {
+											files = files.filter(_file => _file !== file)
+											break
+										}
+									
 									break
 							}
 						
-						return files
-							.filter(file => file.public || file.owner === uid)
-							.sort((a, b) => b.uploaded - a.uploaded)
+						return files.sort((a, b) => b.uploaded - a.uploaded)
 					})
 				},
 				({ message }) => toast.error(message)
 			)
-	}, [uid, files, setFiles])
+	}, [setFiles])
+	
+	useEffect(() => {
+		if (isListeningToUser || !uid)
+			return
+		
+		isListeningToUser = true
+		
+		firestore
+			.collection('files')
+			.where('owner', '==', uid)
+			.where('public', '==', false)
+			.onSnapshot(
+				snapshot => {
+					setFiles(_files => {
+						let files = _files ?? []
+						
+						for (const { type, doc } of snapshot.docChanges())
+							switch (type) {
+								case 'added': {
+									const file = snapshotToFileMeta(doc)
+									
+									if (file)
+										files = [...files, file]
+									
+									break
+								}
+								case 'modified': {
+									const newFile = snapshotToFileMeta(doc)
+									
+									if (newFile)
+										files = files.map(file =>
+											file.id === newFile.id ? newFile : file
+										)
+									
+									break
+								}
+								case 'removed':
+									for (const file of files)
+										if (file.id === doc.id) {
+											files = files.filter(_file => _file !== file)
+											break
+										}
+									
+									break
+							}
+						
+						return files.sort((a, b) => b.uploaded - a.uploaded)
+					})
+				},
+				({ message }) => toast.error(message)
+			)
+	}, [uid, setFiles])
 	
 	return files
 }

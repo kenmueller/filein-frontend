@@ -2,9 +2,9 @@ import { atom } from 'recoil'
 
 import FileMeta from 'models/FileMeta'
 
-const recentlyUploadedFilesState = atom<FileMeta[] | null | undefined>({
+const recentlyUploadedFilesState = atom<FileMeta[] | null>({
 	key: 'recentlyUploadedFiles',
-	default: undefined,
+	default: null,
 	dangerouslyAllowMutability: true
 })
 

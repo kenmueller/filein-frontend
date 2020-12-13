@@ -9,13 +9,12 @@ const firestore = firebase.firestore()
 const getRecentlyUploadedFiles = async () => {
 	const { docs } = await firestore
 		.collection('files')
+		.where('public', '==', true)
 		.orderBy('uploaded', 'desc')
 		.limit(RECENTLY_UPLOADED_FILES_LIMIT)
 		.get()
 	
-	return docs
-		.map(snapshotToFileMeta)
-		.filter(file => file.public)
+	return docs.map(snapshotToFileMeta)
 }
 
 export default getRecentlyUploadedFiles
