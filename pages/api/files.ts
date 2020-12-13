@@ -1,6 +1,7 @@
 import { NextApiHandler } from 'next'
 import { getExtension } from 'mime'
 
+import { MAX_FILE_SIZE } from 'lib/constants'
 import firebase from 'lib/firebase/admin'
 import newId from 'lib/newId'
 
@@ -44,6 +45,10 @@ const uploadFile: NextApiHandler<string | void> = async ({ method, body }, res) 
 		
 		const id = `${newId()}.${extension}`
 		const file = Buffer.from(data, 'binary')
+		const size = file.byteLength
+		
+		if (size > MAX_FILE_SIZE)
+			return res.status(400).send('File too large, maximum is 10 GB')
 		
 		await storage.file(id).save(file, {
 			public: true,
@@ -58,7 +63,7 @@ const uploadFile: NextApiHandler<string | void> = async ({ method, body }, res) 
 		await firestore.doc(`files/${id}`).set({
 			name,
 			type,
-			size: file.byteLength,
+			size,
 			owner: null,
 			comments: 0,
 			uploaded: FieldValue.serverTimestamp(),
