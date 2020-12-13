@@ -146,13 +146,15 @@ const UploadFile = () => {
 										>
 											<FontAwesomeIcon icon={faLink} />
 										</button>
-										<button
-											className={cx(styles.action, styles.delete)}
-											onClick={deleteFile}
-											title="Delete"
-										>
-											<FontAwesomeIcon icon={faTrash} />
-										</button>
+										{uid && (
+											<button
+												className={cx(styles.action, styles.delete)}
+												onClick={deleteFile}
+												title="Delete"
+											>
+												<FontAwesomeIcon icon={faTrash} />
+											</button>
+										)}
 									</div>
 								</div>
 								<Comments className={styles.comments} file={fileMeta} />
