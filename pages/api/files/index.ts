@@ -1,6 +1,7 @@
 import { NextApiHandler } from 'next'
 import { getExtension } from 'mime'
 
+import FileMeta from 'models/FileMeta'
 import { MAX_FILE_SIZE } from 'lib/constants'
 import firebase from 'lib/firebase/admin'
 import newId from 'lib/newId'
@@ -10,7 +11,7 @@ const { FieldValue } = firebase.firestore
 const firestore = firebase.firestore()
 const storage = firebase.storage().bucket()
 
-const handler: NextApiHandler<string | void> = async ({ method, body }, res) => {
+const handler: NextApiHandler<FileMeta | string | void> = async ({ method, body }, res) => {
 	try {
 		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.setHeader('Access-Control-Allow-Methods', 'POST')
@@ -70,7 +71,7 @@ const handler: NextApiHandler<string | void> = async ({ method, body }, res) => 
 			public: isPublic
 		})
 		
-		res.send(id)
+		res.send({ id, name, type, size, owner: null, comments: 0, uploaded: Date.now(), public: isPublic })
 	} catch ({ message }) {
 		res.status(500).send(message)
 	}
