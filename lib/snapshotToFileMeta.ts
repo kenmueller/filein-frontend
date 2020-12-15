@@ -1,9 +1,7 @@
 import FileMeta from 'models/FileMeta'
 import firebase from './firebase'
 
-import 'firebase/firestore'
-
-const snapshotToFileMeta = (snapshot: firebase.firestore.DocumentSnapshot) =>
+const snapshotToFileMeta = (snapshot: firebase.firestore.DocumentSnapshot | FirebaseFirestore.DocumentSnapshot) =>
 	snapshot.exists
 		? {
 			...snapshot.data(),

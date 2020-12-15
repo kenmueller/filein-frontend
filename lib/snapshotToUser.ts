@@ -1,9 +1,7 @@
 import User from 'models/User'
 import firebase from './firebase'
 
-import 'firebase/firestore'
-
-const snapshotToUser = (snapshot: firebase.firestore.DocumentSnapshot): User | null =>
+const snapshotToUser = (snapshot: firebase.firestore.DocumentSnapshot | FirebaseFirestore.DocumentSnapshot): User | null =>
 	snapshot.exists
 		? {
 			id: snapshot.id,
