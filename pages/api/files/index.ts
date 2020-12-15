@@ -10,7 +10,7 @@ const { FieldValue } = firebase.firestore
 const firestore = firebase.firestore()
 const storage = firebase.storage().bucket()
 
-const uploadFile: NextApiHandler<string | void> = async ({ method, body }, res) => {
+const handler: NextApiHandler<string | void> = async ({ method, body }, res) => {
 	try {
 		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.setHeader('Access-Control-Allow-Methods', 'POST')
@@ -76,4 +76,4 @@ const uploadFile: NextApiHandler<string | void> = async ({ method, body }, res) 
 	}
 }
 
-export default uploadFile
+export default handler
