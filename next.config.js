@@ -23,7 +23,7 @@ module.exports = require('next-optimized-images')({
 				].join(';') },
 				{ key: 'Expect-CT', value: '0' },
 				{ key: 'Referrer-Policy', value: 'no-referrer' },
-				{ key: 'Strict-Transport-Security', value: 'max-age=15552000; includeSubDomains' },
+				{ key: 'Strict-Transport-Security', value: 'max-age=15552000' },
 				{ key: 'X-Content-Type-Options', value: 'nosniff' },
 				{ key: 'X-DNS-Prefetch-Control', value: 'off' },
 				{ key: 'X-Download-Options', value: 'noopen' },
