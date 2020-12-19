@@ -17,7 +17,7 @@ module.exports = require('next-optimized-images')({
 					`script-src 'self'${IS_PRODUCTION ? '' : " 'unsafe-eval'"}`,
 					"script-src-attr 'none'",
 					"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-					"connect-src 'self' https://*.googleapis.com",
+					"connect-src 'self' https://*.googleapis.com https://vitals.vercel-insights.com",
 					'block-all-mixed-content',
 					'upgrade-insecure-requests'
 				].join(';') },
