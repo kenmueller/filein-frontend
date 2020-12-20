@@ -29,6 +29,7 @@ const uploadFile = async (
 	
 	const task = storage.child(id).put(file, {
 		contentType: type,
+		contentDisposition: `inline; filename=${JSON.stringify(name)}`,
 		cacheControl: 'public, max-age=31536000, s-maxage=31536000',
 		customMetadata: { name, owner }
 	})

@@ -56,6 +56,7 @@ const handler: NextApiHandler<FileMeta | string | void> = async ({ method, body 
 			gzip: true,
 			metadata: {
 				contentType: type,
+				contentDisposition: `inline; filename=${JSON.stringify(name)}`,
 				cacheControl: 'public, max-age=31536000, s-maxage=31536000',
 				metadata: { name, owner: null }
 			}
