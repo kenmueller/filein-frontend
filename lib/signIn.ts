@@ -30,6 +30,7 @@ const signIn = async (): Promise<User | null | undefined> => {
 			
 			await firestore.doc(`users/${user.uid}`).set({
 				slug,
+				apiKey: null,
 				name,
 				email: user.email,
 				files: 0,

@@ -15,7 +15,7 @@ const handler: NextApiHandler<FileMeta | string | void> = async ({ method, body 
 	try {
 		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.setHeader('Access-Control-Allow-Methods', 'POST')
-		res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+		res.setHeader('Access-Control-Allow-Headers', ['Authorization', 'Content-Type'])
 		
 		if (method === 'OPTIONS')
 			return res.send()
