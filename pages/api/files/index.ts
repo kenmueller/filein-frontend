@@ -45,7 +45,7 @@ const handler: NextApiHandler<FileMeta | string | void> = async ({ method, body 
 			return res.status(400).send('Invalid type')
 		
 		const id = `${newId()}.${extension}`
-		const file = Buffer.from(data, 'binary')
+		const file = Buffer.from(data, 'base64')
 		const size = file.byteLength
 		
 		if (size > MAX_FILE_SIZE)
