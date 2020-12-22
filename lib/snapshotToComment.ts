@@ -1,13 +1,14 @@
 import Comment from 'models/Comment'
 import firebase from './firebase'
 
-const snapshotToComment = (snapshot: firebase.firestore.DocumentSnapshot | FirebaseFirestore.DocumentSnapshot) =>
+const snapshotToComment = (snapshot: firebase.firestore.DocumentSnapshot | FirebaseFirestore.DocumentSnapshot): Comment | null =>
 	snapshot.exists
 		? {
-			...snapshot.data(),
 			id: snapshot.id,
+			from: snapshot.get('from'),
+			body: snapshot.get('body'),
 			date: snapshot.get('date')?.toMillis()
-		} as Comment
+		}
 		: null
 
 export default snapshotToComment
