@@ -15,6 +15,7 @@ import getFileIcon from 'lib/getFileIcon'
 import styles from 'styles/FilePreview.module.scss'
 
 export const MAX_FILE_PREVIEW_SIZE = 150 * 1024 * 1024 // 150 MB
+export const CONTENT_CLASS_NAME = 'file-preview-content'
 
 interface FilePreviewIconProps {
 	file: FileMeta
@@ -43,10 +44,10 @@ const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps)
 	
 	switch (type) {
 		case FileType.Image:
-			return <img className={styles.imageElement} src={getFileUrl(file, true)} alt={file.name} />
+			return <img className={cx(styles.imageElement, CONTENT_CLASS_NAME)} src={getFileUrl(file, true)} alt={file.name} />
 		case FileType.Video:
 			return (
-				<video className={styles.videoElement} controls autoPlay controlsList="nodownload">
+				<video className={cx(styles.videoElement, CONTENT_CLASS_NAME)} controls autoPlay controlsList="nodownload">
 					<source src={getFileUrl(file, true)} type={file.type} />
 					<FontAwesomeIcon className={styles.icon} icon={faVideo} />
 				</video>
@@ -55,14 +56,14 @@ const FilePreviewContent = ({ file, type, isFallback }: FilePreviewContentProps)
 			return (
 				<>
 					<FontAwesomeIcon className={styles.icon} icon={faVolumeUp} />
-					<audio className={styles.audioElement} controls autoPlay controlsList="nodownload">
+					<audio className={cx(styles.audioElement, CONTENT_CLASS_NAME)} controls autoPlay controlsList="nodownload">
 						<source src={getFileUrl(file, true)} type={file.type} />
 						Audio is not supported
 					</audio>
 				</>
 			)
 		case FileType.PDF:
-			return <PDF className={styles.document} url={file.blob ?? getFileUrl(file, true)} />
+			return <PDF className={cx(styles.document, CONTENT_CLASS_NAME)} url={file.blob ?? getFileUrl(file, true)} />
 		case FileType.Other:
 			return <FilePreviewIcon file={file} />
 	}
@@ -84,7 +85,6 @@ const FilePreview = ({ className, file }: FilePreviewProps) => {
 			})}
 			onClick={onClick}
 			role="button"
-			title="Share"
 		>
 			<FilePreviewContent file={file} type={type} isFallback={isFallback} />
 			<span className={styles.shareContainer}>

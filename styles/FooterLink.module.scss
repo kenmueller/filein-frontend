@@ -17,6 +17,11 @@
 }
 
 .icon {
+	display: none;
 	margin-right: 8px;
 	font-size: 2em;
+	
+	@media (min-width: 550px) {
+		display: block;
+	}
 }
