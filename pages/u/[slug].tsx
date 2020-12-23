@@ -35,7 +35,7 @@ const UserPage: NextPage<UserPageProps> = ({ user, files: _files }) => {
 	
 	const setQuery = useCallback((query: string) => {
 		router.replace(
-			`/${user.slug}${query ? `?q=${encodeURIComponent(query)}` : ''}`,
+			`/u/${user.slug}${query ? `?q=${encodeURIComponent(query)}` : ''}`,
 			undefined,
 			{ shallow: true }
 		)
