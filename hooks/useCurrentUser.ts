@@ -30,7 +30,6 @@ const useCurrentUser = () => {
 	}, [currentUser, setCurrentUser])
 	
 	useEffect(() => {
-		console.log(user)
 		setCurrentUser(currentUser => currentUser && {
 			...currentUser,
 			data: user ?? null
