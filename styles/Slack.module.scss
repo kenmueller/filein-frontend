@@ -9,18 +9,17 @@
 }
 
 .header {
-	max-width: sizes.$large-max-width;
-	width: 95%;
-	margin: 200px auto 0;
-	color: white;
-}
-
-.hero {
 	display: grid;
 	grid:
 		'icon title' auto
-		'_ subtitle' auto /
+		'_ subtitle' auto
+		'_ install' auto /
 		auto 1fr;
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	height: max-content;
+	margin: 200px auto 0;
+	color: white;
 }
 
 .titleIcon {
@@ -28,7 +27,6 @@
 	align-self: center;
 	margin-right: 16px;
 	font-size: 65px;
-	animation: titleIcon 1s ease-in-out;
 }
 
 .title {
@@ -47,10 +45,22 @@
 	font-weight: 900;
 }
 
-.footer {
-	margin-top: 30px;
+.install {
+	grid-area: install;
+	display: flex;
+	max-width: max-content;
+	margin-top: 20px;
+	transition: opacity 0.3s, transform 0.3s;
+	
+	&:hover {
+		opacity: 0.7;
+	}
+	
+	&:active {
+		transform: translateY(-2px);
+	}
 }
 
-@keyframes titleIcon {
-	to { transform: rotate(2turn); }
+.footer {
+	margin-top: 30px;
 }

@@ -7,6 +7,7 @@ import Gradient from 'components/Gradient'
 import Footer from 'components/Footer'
 
 import styles from 'styles/Slack.module.scss'
+import SlackInstallButton from 'components/SlackInstallButton'
 
 const Slack: NextPage = () => (
 	<div className={styles.root}>
@@ -17,15 +18,14 @@ const Slack: NextPage = () => (
 			storagePreconnect={false}
 		/>
 		<Gradient className={styles.header}>
-			<article className={styles.hero}>
-				<FontAwesomeIcon className={styles.titleIcon} icon={faSlack} />
-				<h1 className={styles.title}>
-					Slack + filein
-				</h1>
-				<p className={styles.subtitle}>
-					Upload files without leaving your workspace
-				</p>
-			</article>
+			<FontAwesomeIcon className={styles.titleIcon} icon={faSlack} />
+			<h1 className={styles.title}>
+				Slack + filein
+			</h1>
+			<p className={styles.subtitle}>
+				Upload files without leaving your workspace
+			</p>
+			<SlackInstallButton className={styles.install} />
 		</Gradient>
 		<Footer className={styles.footer} />
 	</div>
