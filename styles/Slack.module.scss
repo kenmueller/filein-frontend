@@ -1,0 +1,56 @@
+@use 'sizes';
+@use 'colors';
+
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+}
+
+.header {
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	margin: 200px auto 0;
+	color: white;
+}
+
+.hero {
+	display: grid;
+	grid:
+		'icon title' auto
+		'_ subtitle' auto /
+		auto 1fr;
+}
+
+.titleIcon {
+	grid-area: icon;
+	align-self: center;
+	margin-right: 16px;
+	font-size: 65px;
+	animation: titleIcon 1s ease-in-out;
+}
+
+.title {
+	grid-area: title;
+	align-self: center;
+	line-height: 56px;
+	font-size: 50px;
+	font-weight: 900;
+}
+
+.subtitle {
+	grid-area: subtitle;
+	margin-top: 4px;
+	line-height: 30px;
+	font-size: 24px;
+	font-weight: 900;
+}
+
+.footer {
+	margin-top: 30px;
+}
+
+@keyframes titleIcon {
+	to { transform: rotate(2turn); }
+}
