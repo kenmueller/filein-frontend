@@ -1,0 +1,60 @@
+@use 'sizes';
+@use 'colors';
+
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+}
+
+.header {
+	max-width: sizes.$large-max-width;
+	width: 95%;
+	margin: 200px auto 0;
+	color: white;
+}
+
+.title {
+	line-height: 56px;
+	font-size: 50px;
+	font-weight: 900;
+}
+
+.document {
+	padding: 16px 20px;
+	margin-top: 20px;
+	line-height: 1.5;
+	background: colors.$dark;
+	border-radius: 8px;
+	
+	:not(:last-child) {
+		margin-bottom: 16px;
+	}
+	
+	li,
+	ul ul,
+	ul ol,
+	ol ol,
+	ol ul {
+		margin-bottom: 0;
+	}
+	
+	ul,
+	ol {
+		padding-left: 1.5em;
+	}
+	
+	li:not(:first-child) {
+		margin-top: 0.25em;
+	}
+	
+	a {
+		font-weight: bold;
+		color: colors.$blue;
+	}
+}
+
+.footer {
+	margin-top: 30px;
+}

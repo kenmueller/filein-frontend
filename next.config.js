@@ -3,7 +3,12 @@ const { getCSP, SELF, DATA, INLINE, NONE } = require('csp-header')
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 const ORIGIN = IS_PRODUCTION ? 'https://filein.io' : 'http://localhost:3000'
 
-module.exports = require('next-optimized-images')({
+const plugins = [
+	[require('next-optimized-images')],
+	[require('@next/mdx')()]
+]
+
+const config = {
 	headers: () => [
 		{
 			source: '/(.*)',
@@ -85,4 +90,6 @@ module.exports = require('next-optimized-images')({
 			statusCode: 302
 		}
 	]
-})
+}
+
+module.exports = require('next-compose-plugins')(plugins, config)

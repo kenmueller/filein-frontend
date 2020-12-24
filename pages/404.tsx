@@ -13,7 +13,6 @@ const NotFound: NextPage = () => (
 			url={`https://filein.io${useRouter().asPath}`}
 			title="404 - filein"
 			description="Oh no! Are you lost?"
-			firestorePreconnect={false}
 			storagePreconnect={false}
 		/>
 		<Gradient className={styles.header}>

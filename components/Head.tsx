@@ -16,7 +16,6 @@ export interface HeadProps {
 	title: string
 	description: string
 	data?: any[]
-	firestorePreconnect?: boolean
 	storagePreconnect?: boolean
 }
 
@@ -25,7 +24,6 @@ const Head = ({
 	title,
 	description,
 	data = [],
-	firestorePreconnect = true,
 	storagePreconnect = true
 }: HeadProps) => {
 	const html = useMemo(() => ({
@@ -47,12 +45,8 @@ const Head = ({
 			<script key="data" type="application/ld+json" dangerouslySetInnerHTML={html} />
 			<title key="title">{title}</title>
 			
-			{firestorePreconnect && (
-				<link key="firestore-preconnect" rel="preconnect" href="https://firestore.googleapis.com" />
-			)}
-			{storagePreconnect && (
-				<link key="storage-preconnect" rel="preconnect" href="https://storage.googleapis.com" />
-			)}
+			<link key="firestore-preconnect" rel="preconnect" href="https://firestore.googleapis.com" />
+			{storagePreconnect && <link key="storage-preconnect" rel="preconnect" href="https://storage.googleapis.com" />}
 		</NextHead>
 	)
 }
