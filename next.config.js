@@ -13,7 +13,7 @@ module.exports = require('next-optimized-images')({
 					"font-src 'self' https://fonts.gstatic.com",
 					"frame-src 'self' https://file-in.firebaseapp.com",
 					"frame-ancestors 'self'",
-					"img-src 'self' data: https://storage.googleapis.com",
+					"img-src 'self' data: https://storage.googleapis.com https://platform.slack-edge.com",
 					"media-src 'self' data: https://storage.googleapis.com",
 					`script-src 'self'${IS_PRODUCTION ? '' : " 'unsafe-eval'"} https://apis.google.com`,
 					"script-src-attr 'none'",

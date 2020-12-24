@@ -15,8 +15,19 @@
 }
 
 .copyright {
+	display: none;
+	margin-right: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	color: white;
+	
+	@media (min-width: 475px) {
+		display: block;
+	}
+}
+
+.slack {
+	display: flex;
+	margin-left: auto;
 }
