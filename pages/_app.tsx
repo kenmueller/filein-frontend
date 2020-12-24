@@ -40,6 +40,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => (
 			<link key="manifest" rel="manifest" href="/site.webmanifest" />
 			<meta key="msapplication-tilecolor" name="msapplication-TileColor" content="#ffffff" />
 			<meta key="theme-color" name="theme-color" content="#ffffff" />
+			<meta key="slack-app-id" name="slack-app-id" content={process.env.NEXT_PUBLIC_SLACK_APP_ID} />
 		</Head>
 		<RecoilRoot>
 			<UploadDrop>
