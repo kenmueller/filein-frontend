@@ -7,6 +7,7 @@ export default class CustomDocument extends Document {
 			<body>
 				<Main />
 				<NextScript />
+				<script id="hs-script-loader" src={process.env.NEXT_PUBLIC_HUBSPOT_URL} async />
 			</body>
 		</Html>
 	)
