@@ -7,21 +7,24 @@ module.exports = require('next-optimized-images')({
 			source: '/(.*)',
 			headers: [
 				{ key: 'Access-Control-Allow-Origin', value: ORIGIN },
-				{ key: 'Content-Security-Policy', value: [
-					"default-src 'self'",
-					"base-uri 'self'",
-					"font-src 'self' https://fonts.gstatic.com",
-					"frame-src 'self' https://file-in.firebaseapp.com",
-					"frame-ancestors 'self'",
-					"img-src 'self' data: https://storage.googleapis.com https://platform.slack-edge.com",
-					"media-src 'self' data: https://storage.googleapis.com",
-					`script-src 'self'${IS_PRODUCTION ? '' : " 'unsafe-eval'"} https://apis.google.com`,
-					"script-src-attr 'none'",
-					"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-					"connect-src 'self' https://*.googleapis.com https://vitals.vercel-insights.com",
-					'block-all-mixed-content',
-					'upgrade-insecure-requests'
-				].join(';') },
+				{
+					key: 'Content-Security-Policy',
+					value: [
+						"default-src 'self'",
+						"base-uri 'self'",
+						"font-src 'self' https://fonts.gstatic.com",
+						"frame-src 'self' https://file-in.firebaseapp.com",
+						"frame-ancestors 'self'",
+						"img-src 'self' data: https://storage.googleapis.com https://platform.slack-edge.com",
+						"media-src 'self' data: https://storage.googleapis.com",
+						`script-src 'self'${IS_PRODUCTION ? '' : " 'unsafe-eval'"} https://apis.google.com`,
+						"script-src-attr 'none'",
+						"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+						"connect-src 'self' https://*.googleapis.com https://vitals.vercel-insights.com",
+						'block-all-mixed-content',
+						'upgrade-insecure-requests'
+					].join(';')
+				},
 				{ key: 'Expect-CT', value: '0' },
 				{ key: 'Referrer-Policy', value: 'no-referrer' },
 				{ key: 'Strict-Transport-Security', value: 'max-age=15552000' },
@@ -32,6 +35,13 @@ module.exports = require('next-optimized-images')({
 				{ key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
 				{ key: 'X-XSS-Protection', value: '0' }
 			]
+		}
+	],
+	redirects: () => [
+		{
+			source: '/slack/install',
+			destination: process.env.NEXT_PUBLIC_SLACK_INSTALL_URL,
+			statusCode: 302
 		}
 	]
 })
