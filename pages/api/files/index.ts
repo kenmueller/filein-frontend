@@ -1,4 +1,4 @@
-import { NextApiHandler } from 'next'
+import { NextApiHandler, PageConfig } from 'next'
 import { getExtension } from 'mime'
 
 import FileMeta from 'models/FileMeta'
@@ -23,60 +23,62 @@ const getUserFromApiKey = async (apiKey: string) => {
 		.where('apiKey', '==', apiKey)
 		.limit(1)
 		.get()
-	
+
 	return empty ? null : snapshotToUser(docs[0], true)
 }
 
-const handler: NextApiHandler<FileMeta | string | void> = async ({ method, headers, body }, res) => {
+const handler: NextApiHandler<FileMeta | string | void> = async (
+	{ method, headers, body },
+	res
+) => {
 	try {
 		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.setHeader('Access-Control-Allow-Methods', 'POST')
-		res.setHeader('Access-Control-Allow-Headers', ['Authorization', 'Content-Type'])
-		
-		if (method === 'OPTIONS')
-			return res.send()
-		
-		if (method !== 'POST')
-			return res.status(400).send('Invalid method')
-		
-		if (typeof body !== 'object')
-			return res.status(400).send('Invalid body')
-		
+		res.setHeader('Access-Control-Allow-Headers', [
+			'Authorization',
+			'Content-Type'
+		])
+
+		if (method === 'OPTIONS') return res.send()
+		if (method !== 'POST') return res.status(400).send('Invalid method')
+
+		if (typeof body !== 'object') return res.status(400).send('Invalid body')
+
 		const apiKey = getApiKey(headers.authorization)
-		
-		if (!apiKey)
-			return res.status(400).send('Missing API key')
-		
+		if (!apiKey) return res.status(400).send('Missing API key')
+
 		const { name, type, public: isPublic, data } = body
-		
-		if (!(
-			typeof name === 'string' && name &&
-			typeof type === 'string' && type &&
-			typeof isPublic === 'boolean' &&
-			typeof data === 'string' && data
-		))
+
+		if (
+			!(
+				typeof name === 'string' &&
+				name &&
+				typeof type === 'string' &&
+				type &&
+				typeof isPublic === 'boolean' &&
+				typeof data === 'string' &&
+				data
+			)
+		)
 			return res.status(400).send('Invalid body')
-		
+
 		const indexOfDot = name.lastIndexOf('.')
 		const extension = ~indexOfDot
 			? name.slice(indexOfDot + 1)
 			: getExtension(type)
-		
-		if (!extension)
-			return res.status(400).send('Invalid type')
-		
+
+		if (!extension) return res.status(400).send('Invalid type')
+
 		const id = `${newId()}.${extension}`
 		const file = Buffer.from(data, 'base64')
 		const size = file.byteLength
-		
+
 		if (size > MAX_FILE_SIZE)
 			return res.status(400).send('File too large, maximum is 10 GB')
-		
+
 		const user = await getUserFromApiKey(apiKey)
-		
-		if (!user)
-			return res.status(400).send('Invalid API key')
-		
+		if (!user) return res.status(400).send('Invalid API key')
+
 		await storage.file(id).save(file, {
 			public: true,
 			gzip: true,
@@ -87,7 +89,7 @@ const handler: NextApiHandler<FileMeta | string | void> = async ({ method, heade
 				metadata: { name, owner: user.id }
 			}
 		})
-		
+
 		await firestore.doc(`files/${id}`).set({
 			name,
 			type,
@@ -97,7 +99,7 @@ const handler: NextApiHandler<FileMeta | string | void> = async ({ method, heade
 			uploaded: FieldValue.serverTimestamp(),
 			public: isPublic
 		})
-		
+
 		res.send({
 			id,
 			name,
@@ -110,6 +112,12 @@ const handler: NextApiHandler<FileMeta | string | void> = async ({ method, heade
 		})
 	} catch ({ message }) {
 		res.status(500).send(message)
+	}
+}
+
+export const config: PageConfig = {
+	api: {
+		bodyParser: { sizeLimit: MAX_FILE_SIZE }
 	}
 }
 
